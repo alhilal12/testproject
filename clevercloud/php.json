@@ -1,0 +1,5 @@
+{
+    "deployment": {
+        "documentRoot": "public"
+    }
+}
