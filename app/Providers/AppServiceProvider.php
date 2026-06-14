@@ -19,8 +19,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        if (config('app.env') === 'production') {
-            URL::forceScheme('https');
+        \Log::info('APP_ENV value from config: ' . config('app.env'));
+      if (config('app.env') === 'production' || env('CC_WEBROOT')) {
+        \Illuminate\Support\Facades\URL::forceScheme('https');
     }
 }
 }

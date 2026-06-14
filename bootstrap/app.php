@@ -15,7 +15,9 @@ return Application::configure(basePath: dirname(__DIR__))
     ->withMiddleware(function (Middleware $middleware) {
         $middleware->alias([
             'role' => RoleMiddleware::class,
+           
         ]);
+         $middleware->trustProxies(at:'*');
     })
     ->withSchedule(function (Schedule $schedule) {
         $schedule->command('import:university-quotas')->everySixHours();
