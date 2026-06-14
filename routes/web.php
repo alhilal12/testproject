@@ -188,5 +188,14 @@ Route::post('/universities/{id}/colleges', [App\Http\Controllers\Admin\Universit
 Route::post('/universities/{id}/institutes', [App\Http\Controllers\Admin\UniversityManagementController::class, 'saveInstitutes']);
 Route::delete('/colleges/{collegeId}/majors/{majorId}', [App\Http\Controllers\Admin\UniversityManagementController::class, 'removeMajorFromCollege']);
 Route::delete('/institutes/{instituteId}/majors/{majorId}', [App\Http\Controllers\Admin\UniversityManagementController::class, 'removeMajorFromInstitute']);
-
+// 
+Route::get('/storage-link', function () {
+    $target = storage_path('app/public');
+    $link = public_path('storage');
+    if (file_exists($link)) {
+        return 'Storage link already exists.';
+    }
+    symlink($target, $link);
+    return 'Storage link created successfully!';
+});
 require __DIR__.'/auth.php';
