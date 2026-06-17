@@ -93,7 +93,7 @@ public function postgraduate(Request $request)
         $query->where('city', 'LIKE', '%' . $request->city . '%');
     }
     
-    $quotas = $query->orderBy('registration_end', 'asc')->paginate(20);
+    $quotas = $query->orderBy('registration_start', 'asc')->paginate(20);
     $cities = PostgraduateQuota::distinct('city')->whereNotNull('city')->pluck('city');
     $colleges = College::orderBy('name_ar')->get();
     $institutes = Institute::orderBy('name_ar')->get();
