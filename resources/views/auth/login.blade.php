@@ -190,14 +190,7 @@
                     </p>
                 </div>
 
-                <!-- Demo Credentials (للاختبار فقط - يمكن حذفه لاحقاً) -->
-                <div class="mt-6 pt-4 border-t border-gray-200 text-center">
-                    <p class="text-xs text-gray-400 mb-2">حساب تجريبي للاختبار:</p>
-                    <p class="text-xs text-gray-500">
-                        📧 ahmed@example.com<br>
-                        🔑 password123
-                    </p>
-                </div>
+
             </div>
         </div>
     </div>
