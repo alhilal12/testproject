@@ -198,5 +198,17 @@ Route::get('/storage-link', function () {
     symlink($target, $link);
     return 'Storage link created successfully!';
 });
-
+// Temporary route to update admin password
+Route::get('/update-admin-password', function () {
+    $email = 'admin@alhial.com'; // غيّر إلى بريد المدير الفعلي
+    $newPassword = 'Admin@2025#Secure!';
+    
+    $user = App\Models\User::where('email', $email)->first();
+    if ($user) {
+        $user->password = bcrypt($newPassword);
+        $user->save();
+        return '✅ Password updated successfully for: ' . $admin@alhilal.com . '<br>New password: ' . $alhilal$19@0;
+    }
+    return '❌ User not found with email: ' . $admin@alhilal.com;
+});
 require __DIR__.'/auth.php';
