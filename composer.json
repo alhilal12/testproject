@@ -78,7 +78,9 @@
             "php artisan view:clear",
             "php artisan route:clear",
             "php artisan optimize:clear",
-            "@php artisan storage:link"
+            "@php artisan storage:link",
+            "@php artisan import:university-quotas",
+            "@php artisan import:postgraduate-quotas"
         ],
         "postinstall": "php artisan optimize",
         "build": "vite build"
