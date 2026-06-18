@@ -251,13 +251,13 @@
         <tr>
             <td colspan="{{ $viewType == 'postgraduate' ? 12 : 11 }}" class="text-center py-16 text-gray-500">
                 <div class="text-lg">📭 لا توجد بيانات حالياً</div>
-                <div class="text-sm mt-2">
+                {{-- <div class="text-sm mt-2">
                     @if($viewType == 'postgraduate')
                         قم بتشغيل الأمر: <code class="bg-gray-100 px-2 py-1 rounded">php artisan import:postgraduate-quotas</code>
                     @else
                         قم بتشغيل الأمر: <code class="bg-gray-100 px-2 py-1 rounded">php artisan import:university-quotas</code>
                     @endif
-                </div>
+                </div> --}}
             </td>
         </tr>
     @endforelse

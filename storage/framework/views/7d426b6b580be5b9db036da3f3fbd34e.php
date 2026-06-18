@@ -361,9 +361,15 @@
                                         <span class="font-bold text-gray-800 text-lg">المفاضلة <?php echo e($quota->competition_number); ?></span>
                                         <span class="text-xs bg-gray-200 text-gray-600 px-2 py-1 rounded-full"><?php echo e($quota->application_method); ?></span>
                                     </div>
-                                    <?php if($quota->local_rank && $quota->local_rank != '**'): ?>
-                                        <span class="bg-yellow-100 text-yellow-700 px-2 py-1 rounded-full text-xs">📊 الترتيب: <?php echo e($quota->local_rank); ?></span>
-                                    <?php endif; ?>
+                                  <?php
+    $whatsapp = \App\Models\Setting::where('key', 'whatsapp_number')->value('value');
+?>
+
+<a href="https://wa.me/<?php echo e($whatsapp); ?>?text=أرغب%20في%20التسجيل%20في%20المفاضلة%20التالي:%0A📅%20التاريخ:%20<?php echo e($quota->date ?? 'غير محدد'); ?>%0A🏛️%20الجامعة:%20<?php echo e($university->name_ar); ?>%0A📚%20التخصص:%20<?php echo e($quota->major_name ?? 'غير محدد'); ?>"
+   target="_blank"
+   class="inline-block mt-3 px-4 py-2 bg-green-500 hover:bg-green-600 text-white font-semibold rounded-lg transition duration-200 shadow-md hover:shadow-lg">
+  للتسجيل عن طريقنا  
+</a>
                                 </div>
                                 <div class="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm">
                                     <div><span class="text-gray-500 block text-xs">📅 بدء التسجيل</span><span class="font-semibold"><?php echo e(\Carbon\Carbon::parse($quota->registration_start)->format('d/m/Y')); ?></span></div>
@@ -411,9 +417,15 @@
                                         <span class="font-bold text-gray-800 text-lg">المفاضلة <?php echo e($quota->competition_number); ?></span>
                                         <span class="text-xs bg-gray-200 text-gray-600 px-2 py-1 rounded-full"><?php echo e($quota->application_method); ?></span>
                                     </div>
-                                    <?php if($quota->local_rank && $quota->local_rank != '**'): ?>
-                                        <span class="bg-yellow-100 text-yellow-700 px-2 py-1 rounded-full text-xs">📊 الترتيب: <?php echo e($quota->local_rank); ?></span>
-                                    <?php endif; ?>
+                                   <?php
+    $whatsapp = \App\Models\Setting::where('key', 'whatsapp_number')->value('value');
+?>
+
+<a href="https://wa.me/<?php echo e($whatsapp); ?>?text=أرغب%20في%20التسجيل%20في%20المفاضلة%20التالي:%0A📅%20التاريخ:%20<?php echo e($quota->date ?? 'غير محدد'); ?>%0A🏛️%20الجامعة:%20<?php echo e($university->name_ar); ?>%0A📚%20التخصص:%20<?php echo e($quota->major_name ?? 'غير محدد'); ?>"
+   target="_blank"
+   class="inline-block mt-3 px-4 py-2 bg-green-500 hover:bg-green-600 text-white font-semibold rounded-lg transition duration-200 shadow-md hover:shadow-lg">
+   للتسجيل عن طريقنا
+</a>
                                 </div>
                                 <?php if($quota->institute): ?>
                                     <div class="mb-3">
