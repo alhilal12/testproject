@@ -6,3 +6,9 @@ use Illuminate\Support\Facades\Artisan;
 Artisan::command('inspire', function () {
     $this->comment(Inspiring::quote());
 })->purpose('Display an inspiring quote');
+
+use Illuminate\Support\Facades\Log;
+
+Schedule::call(function () {
+    Log::info('✅ جدولة Clever Cloud تعمل بنجاح!');
+})->everyMinute();
