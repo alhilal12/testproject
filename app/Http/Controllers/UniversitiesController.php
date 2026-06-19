@@ -7,7 +7,7 @@ use App\Models\Major;
 use App\Models\College;
 use App\Models\Institute;
 use Illuminate\Http\Request;
-
+use App\Models\CountryRecognition;
 class UniversitiesController extends Controller
 {
     public function index(Request $request)
@@ -138,25 +138,35 @@ public function show($id)
     
     return view('universities.ranking', compact('universities'));
 }
+
+
 public function recognitions(Request $request)
 {
-    $query = University::with('recognitions')->whereHas('recognitions', function($q) {
-        $q->where('is_active', true);
-    });
-    
-    if ($request->filled('country')) {
-        $query->whereHas('recognitions', function($q) use ($request) {
-            $q->where('country_code', $request->country);
+    // جلب جميع الدول التي لديها جامعات معترف بها
+    $countriesQuery = CountryRecognition::with('university')
+        ->whereHas('university', function($q) {
+            $q->where('is_active', true);
         });
+
+    // فلترة حسب الدولة
+    if ($request->filled('country')) {
+        $countriesQuery->where('country_code', $request->country);
     }
-    
-    $universities = $query->paginate(12);
-    
-    // جلب قائمة الدول للفلتر
-    $countries = \App\Models\CountryRecognition::select('country_code', 'country_name_ar')
-        ->distinct()
-        ->get();
-    
-    return view('universities.recognitions', compact('universities', 'countries'));
+
+    $countries = $countriesQuery->get()
+        ->groupBy('country_code')
+        ->map(function($group) {
+            return [
+                'country_name_ar' => $group->first()->country_name_ar,
+                'country_code' => $group->first()->country_code,
+                'universities' => $group->map(function($item) {
+                    return $item->university;
+                })->unique('id')->values()
+            ];
+        })
+        ->sortBy('country_name_ar')
+        ->values();
+
+    return view('universities.recognitions', compact('countries'));
 }
 }
