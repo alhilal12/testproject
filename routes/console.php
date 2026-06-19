@@ -9,6 +9,3 @@ Artisan::command('inspire', function () {
 
 use Illuminate\Support\Facades\Log;
 
-Schedule::call(function () {
-    Log::info('✅ جدولة Clever Cloud تعمل بنجاح!');
-})->everyMinute();

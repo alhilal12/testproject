@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="{{ $title ?? 'تقويم المفاضلات' }} - مواعيد التقديم للجامعات التركية">
-<meta property="og:title" content="{{ $title ?? 'تقويم المفاضلات' }}">
+    <meta property="og:title" content="{{ $title ?? 'تقويم المفاضلات' }}">
     <title>{{ $title ?? 'تقويم الجامعات التركية' }} | الهلال للاستشارات التعليمية</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -58,15 +58,15 @@
                     <!-- بحث -->
                     <div class="flex-1 min-w-[200px]">
                         <label class="block text-sm font-semibold text-gray-700 mb-1">🔍 بحث</label>
-                        <input type="text" name="search" value="{{ request('search') }}" 
-                               placeholder="ابحث عن جامعة..."
-                               class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:border-yellow-500 focus:outline-none">
+                        <input type="text" name="search" value="{{ request('search') }}" placeholder="ابحث عن جامعة..."
+                            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:border-yellow-500 focus:outline-none">
                     </div>
 
                     <!-- فلترة المدينة -->
                     <div class="w-48">
                         <label class="block text-sm font-semibold text-gray-700 mb-1">📍 المدينة</label>
-                        <select name="city" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:border-yellow-500 focus:outline-none">
+                        <select name="city"
+                            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:border-yellow-500 focus:outline-none">
                             <option value="all">جميع المدن</option>
                             @foreach($cities as $city)
                                 <option value="{{ $city }}" {{ request('city') == $city ? 'selected' : '' }}>
@@ -78,48 +78,50 @@
 
                     <!-- فلترة الكلية (للمفاضلات العادية فقط) -->
                     @if($viewType == 'undergraduate')
-                    <div class="w-56">
-                        <label class="block text-sm font-semibold text-gray-700 mb-1">🏛️ الكلية</label>
-                        <select name="college" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:border-yellow-500 focus:outline-none">
-                            <option value="">جميع الكليات</option>
-                            @foreach($colleges as $college)
-                                <option value="{{ $college->name_ar }}" {{ request('college') == $college->name_ar ? 'selected' : '' }}>
-                                    {{ $college->name_ar }}
-                                </option>
-                            @endforeach
-                        </select>
-                    </div>
+                        <div class="w-56">
+                            <label class="block text-sm font-semibold text-gray-700 mb-1">🏛️ الكلية</label>
+                            <select name="college"
+                                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:border-yellow-500 focus:outline-none">
+                                <option value="">جميع الكليات</option>
+                                @foreach($colleges as $college)
+                                    <option value="{{ $college->name_ar }}" {{ request('college') == $college->name_ar ? 'selected' : '' }}>
+                                        {{ $college->name_ar }}
+                                    </option>
+                                @endforeach
+                            </select>
+                        </div>
 
-                    <!-- فلترة المعهد (للمفاضلات العادية فقط) -->
-                    <div class="w-56">
-                        <label class="block text-sm font-semibold text-gray-700 mb-1">📚 المعهد</label>
-                        <select name="institute" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:border-yellow-500 focus:outline-none">
-                            <option value="">جميع المعاهد</option>
-                            @foreach($institutes as $institute)
-                                <option value="{{ $institute->name_ar }}" {{ request('institute') == $institute->name_ar ? 'selected' : '' }}>
-                                    {{ $institute->name_ar }}
-                                </option>
-                            @endforeach
-                        </select>
-                    </div>
+                        <!-- فلترة المعهد (للمفاضلات العادية فقط) -->
+                        <div class="w-56">
+                            <label class="block text-sm font-semibold text-gray-700 mb-1">📚 المعهد</label>
+                            <select name="institute"
+                                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:border-yellow-500 focus:outline-none">
+                                <option value="">جميع المعاهد</option>
+                                @foreach($institutes as $institute)
+                                    <option value="{{ $institute->name_ar }}" {{ request('institute') == $institute->name_ar ? 'selected' : '' }}>
+                                        {{ $institute->name_ar }}
+                                    </option>
+                                @endforeach
+                            </select>
+                        </div>
                     @endif
 
                     <!-- إخفاء المفاضلات المنتهية -->
-                     <div class="flex items-center h-[50px]">
-        <label class="flex items-center gap-2 cursor-pointer">
-            <input type="checkbox" name="hide_expired" value="true" 
-                   {{ request('hide_expired') == 'true' ? 'checked' : '' }}
-                   onchange="this.form.submit()"
-                   class="w-5 h-5 text-yellow-500 rounded focus:ring-yellow-500">
-            <span class="text-sm text-gray-700">📅 إخفاء المفاضلات المنتهية</span>
-        </label>
-    </div>
+                    <div class="flex items-center h-[50px]">
+                        <label class="flex items-center gap-2 cursor-pointer">
+                            <input type="checkbox" name="hide_expired" value="true" {{ $hideExpired == 'true' ? 'checked' : '' }} onchange="this.form.submit()"
+                                class="w-5 h-5 text-yellow-500 rounded focus:ring-yellow-500">
+                            <span class="text-sm text-gray-700">📅 إخفاء المفاضلات المنتهية</span>
+                        </label>
+                    </div>
 
                     <div>
-                        <button type="submit" class="bg-yellow-500 text-white px-6 py-2 rounded-lg hover:bg-yellow-600 transition">
+                        <button type="submit"
+                            class="bg-yellow-500 text-white px-6 py-2 rounded-lg hover:bg-yellow-600 transition">
                             تطبيق الفلتر
                         </button>
-                        <a href="{{ route('university-quotas.index', ['type' => $viewType]) }}" class="bg-gray-200 text-gray-700 px-4 py-2 rounded-lg hover:bg-gray-300 transition ml-2">
+                        <a href="{{ route('university-quotas.index', ['type' => $viewType]) }}"
+                            class="bg-gray-200 text-gray-700 px-4 py-2 rounded-lg hover:bg-gray-300 transition ml-2">
                             إعادة تعيين
                         </a>
                     </div>
@@ -131,141 +133,140 @@
         <div class="bg-white rounded-xl shadow-lg overflow-hidden">
             <div class="overflow-x-auto">
                 <table class="w-full text-right border-collapse">
-<thead>
-    <tr class="table-header text-white">
-        <th class="px-3 py-3 text-center w-20">#</th>
-        <th class="px-4 py-3 text-right">اسم الجامعة</th>
-        <th class="px-4 py-3 text-right">اسم الجامعة (عربي)</th>
-        
-        {{-- عمود البرنامج/المعهد يظهر فقط للدراسات العليا --}}
-        @if($viewType == 'postgraduate')
-            <th class="px-4 py-3 text-right">البرنامج / المعهد</th>
-        @endif
-        
-        <th class="px-4 py-3 text-center">الرسوم</th>
-        <th class="px-4 py-3 text-center">المدينة</th>
-        <th class="px-4 py-3 text-center">بدء التسجيل</th>
-        <th class="px-4 py-3 text-center">انتهاء التسجيل</th>
-        <th class="px-4 py-3 text-center">النتائج</th>
-        <th class="px-4 py-3">الشهادات المقبولة</th>
-        <th class="px-4 py-3 text-center">التفاصيل</th>
-        <th class="px-4 py-3 text-center">نوع التقديم</th>
-        <th class="px-4 py-3 text-center">الترتيب المحلي</th>
-    </tr>
-</thead>
-<tbody>
-    @forelse($quotas as $index => $quota)
-        @php
-            $isExpired = $quota->registration_end && \Carbon\Carbon::parse($quota->registration_end)->isPast();
-        @endphp
-        <tr class="border-b hover:bg-gray-50 transition {{ $isExpired ? 'deadline-ended' : '' }}">
-            <td class="px-3 py-3 text-center font-bold text-gray-700">
-                {{ $quota->competition_number ?? ($quotas->firstItem() + $index) }}
-            </td>
-            <td class="px-4 py-3 font-semibold text-gray-800">{{ $quota->university_name_tr ?? '—' }}</td>
-            <td class="px-4 py-3 text-gray-600">{{ $quota->university_name_ar ?? '—' }}</td>
-            
-            {{-- عمود البرنامج/المعهد يظهر فقط للدراسات العليا --}}
-           
-@if($viewType == 'postgraduate')
-    <td class="px-4 py-3 text-gray-600">{{ $quota->institute ?? '—' }}</td>
-@endif
-            
-            <td class="px-4 py-3 text-center">
-                <span class="{{ $quota->fee == 'مجانا' ? 'text-green-600 font-bold' : 'text-gray-700' }}">
-                    {{ $quota->fee ?? '—' }}
-                </span>
-            </td>
-            <td class="px-4 py-3 text-center">{{ $quota->city ?? '—' }}</td>
-            <td class="px-4 py-3 text-center">
-                @if($quota->registration_start)
-                    <span class="bg-blue-50 text-blue-700 px-2 py-1 rounded text-sm">
-                        {{ \Carbon\Carbon::parse($quota->registration_start)->format('d/m/Y') }}
-                    </span>
-                @else
-                    <span class="text-gray-400">—</span>
-                @endif
-            </td>
-            <td class="px-4 py-3 text-center">
-                @if($quota->registration_end)
-                    <span class="bg-red-50 text-red-600 px-2 py-1 rounded text-sm font-semibold">
-                        {{ \Carbon\Carbon::parse($quota->registration_end)->format('d/m/Y') }}
-                    </span>
-                @else
-                    <span class="text-gray-400">—</span>
-                @endif
-            </td>
-            <td class="px-4 py-3 text-center">
-                @if($quota->results_date)
-                    {{ \Carbon\Carbon::parse($quota->results_date)->format('d/m/Y') }}
-                @else
-                    <span class="text-gray-400">—</span>
-                @endif
-            </td>
-            <td class="px-4 py-3">
-                <div class="flex flex-wrap gap-1">
-                    @if($quota->accepted_certificates)
-                        @php
-                            $certs = is_string($quota->accepted_certificates) ? json_decode($quota->accepted_certificates, true) : $quota->accepted_certificates;
-                            if (is_array($certs)) {
-                                foreach ($certs as $cert) {
-                                    echo '<span class="bg-gray-100 text-gray-600 px-2 py-1 rounded text-xs">' . trim($cert) . '</span>';
-                                }
-                            } else {
-                                echo '<span class="bg-gray-100 text-gray-600 px-2 py-1 rounded text-xs">' . $quota->accepted_certificates . '</span>';
-                            }
-                        @endphp
-                    @else
-                        <span class="text-gray-400">—</span>
-                    @endif
-                </div>
-            </td>
-            <td class="px-4 py-3 text-center">
-                @if($quota->university_id)
-                    <a href="{{ route('universities.show', $quota->university_id) }}"
-                        class="text-yellow-600 hover:text-yellow-700 font-semibold inline-flex items-center gap-1">
-                        التفاصيل
-                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
-                        </svg>
-                    </a>
-                @elseif($quota->details)
-                    <button onclick="showDetails('{{ addslashes($quota->details) }}')"
-                        class="text-yellow-600 hover:text-yellow-700">📋 عرض</button>
-                @else
-                    <span class="text-gray-400">—</span>
-                @endif
-            </td>
-            <td class="px-4 py-3 text-center">{{ $quota->application_method ?? '—' }}</td>
-            <td class="px-4 py-3 text-center">
-                @if($quota->local_rank && $quota->local_rank != '**')
-                    <span class="bg-yellow-100 text-yellow-700 px-2 py-1 rounded-full text-sm font-semibold">
-                        {{ $quota->local_rank }}
-                    </span>
-                @else
-                    <span class="text-gray-400">{{ $quota->local_rank ?? '—' }}</span>
-                @endif
-            </td>
-        </tr>
-    @empty
-        <tr>
-            <td colspan="{{ $viewType == 'postgraduate' ? 12 : 11 }}" class="text-center py-16 text-gray-500">
-                <div class="text-lg">📭 لا توجد بيانات حالياً</div>
-                {{-- <div class="text-sm mt-2">
-                    @if($viewType == 'postgraduate')
-                        قم بتشغيل الأمر: <code class="bg-gray-100 px-2 py-1 rounded">php artisan import:postgraduate-quotas</code>
-                    @else
-                        قم بتشغيل الأمر: <code class="bg-gray-100 px-2 py-1 rounded">php artisan import:university-quotas</code>
-                    @endif
-                </div> --}}
-            </td>
-        </tr>
-    @endforelse
-</tbody>
+                    <thead>
+                        <tr class="table-header text-white">
+                            <th class="px-3 py-3 text-center w-20">#</th>
+                            <th class="px-4 py-3 text-right">اسم الجامعة</th>
+                            <th class="px-4 py-3 text-right">اسم الجامعة (عربي)</th>
+
+                            {{-- عمود البرنامج/المعهد يظهر فقط للدراسات العليا --}}
+                            @if($viewType == 'postgraduate')
+                                <th class="px-4 py-3 text-right">البرنامج / المعهد</th>
+                            @endif
+
+                            <th class="px-4 py-3 text-center">الرسوم</th>
+                            <th class="px-4 py-3 text-center">المدينة</th>
+                            <th class="px-4 py-3 text-center">بدء التسجيل</th>
+                            <th class="px-4 py-3 text-center">انتهاء التسجيل</th>
+                            <th class="px-4 py-3 text-center">النتائج</th>
+                            <th class="px-4 py-3">الشهادات المقبولة</th>
+                            <th class="px-4 py-3 text-center">التفاصيل</th>
+                            <th class="px-4 py-3 text-center">نوع التقديم</th>
+                            <th class="px-4 py-3 text-center">الترتيب المحلي</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @forelse($quotas as $index => $quota)
+                            @php
+                                $isExpired = $quota->registration_end && \Carbon\Carbon::parse($quota->registration_end)->isPast();
+                            @endphp
+                            <tr class="border-b hover:bg-gray-50 transition {{ $isExpired ? 'deadline-ended' : '' }}">
+                                <td class="px-3 py-3 text-center font-bold text-gray-700">
+                                    {{ $quota->competition_number ?? ($quotas->firstItem() + $index) }}
+                                </td>
+                                <td class="px-4 py-3 font-semibold text-gray-800">{{ $quota->university_name_tr ?? '—' }}
+                                </td>
+                                <td class="px-4 py-3 text-gray-600">{{ $quota->university_name_ar ?? '—' }}</td>
+
+                                {{-- عمود البرنامج/المعهد يظهر فقط للدراسات العليا --}}
+
+                                @if($viewType == 'postgraduate')
+                                    <td class="px-4 py-3 text-gray-600">{{ $quota->institute ?? '—' }}</td>
+                                @endif
+
+                                <td class="px-4 py-3 text-center">
+                                    <span
+                                        class="{{ $quota->fee == 'مجانا' ? 'text-green-600 font-bold' : 'text-gray-700' }}">
+                                        {{ $quota->fee ?? '—' }}
+                                    </span>
+                                </td>
+                                <td class="px-4 py-3 text-center">{{ $quota->city ?? '—' }}</td>
+                                <td class="px-4 py-3 text-center">
+                                    @if($quota->registration_start)
+                                        <span class="bg-blue-50 text-blue-700 px-2 py-1 rounded text-sm">
+                                            {{ \Carbon\Carbon::parse($quota->registration_start)->format('d/m/Y') }}
+                                        </span>
+                                    @else
+                                        <span class="text-gray-400">—</span>
+                                    @endif
+                                </td>
+                                <td class="px-4 py-3 text-center">
+                                    @if($quota->registration_end)
+                                        <span class="bg-red-50 text-red-600 px-2 py-1 rounded text-sm font-semibold">
+                                            {{ \Carbon\Carbon::parse($quota->registration_end)->format('d/m/Y') }}
+                                        </span>
+                                    @else
+                                        <span class="text-gray-400">—</span>
+                                    @endif
+                                </td>
+                                <td class="px-4 py-3 text-center">
+                                    @if($quota->results_date)
+                                        {{ \Carbon\Carbon::parse($quota->results_date)->format('d/m/Y') }}
+                                    @else
+                                        <span class="text-gray-400">—</span>
+                                    @endif
+                                </td>
+                                <td class="px-4 py-3">
+                                    <div class="flex flex-wrap gap-1">
+                                        @if($quota->accepted_certificates)
+                                            @php
+                                                $certs = is_string($quota->accepted_certificates) ? json_decode($quota->accepted_certificates, true) : $quota->accepted_certificates;
+                                                if (is_array($certs)) {
+                                                    foreach ($certs as $cert) {
+                                                        echo '<span class="bg-gray-100 text-gray-600 px-2 py-1 rounded text-xs">' . trim($cert) . '</span>';
+                                                    }
+                                                } else {
+                                                    echo '<span class="bg-gray-100 text-gray-600 px-2 py-1 rounded text-xs">' . $quota->accepted_certificates . '</span>';
+                                                }
+                                            @endphp
+                                        @else
+                                            <span class="text-gray-400">—</span>
+                                        @endif
+                                    </div>
+                                </td>
+                                <td class="px-4 py-3 text-center">
+                                    @if($quota->university_id)
+                                        <a href="{{ route('universities.show', $quota->university_id) }}"
+                                            class="text-yellow-600 hover:text-yellow-700 font-semibold inline-flex items-center gap-1">
+                                            التفاصيل
+                                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                    d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
+                                            </svg>
+                                        </a>
+                                    @elseif($quota->details)
+                                        <button onclick="showDetails('{{ addslashes($quota->details) }}')"
+                                            class="text-yellow-600 hover:text-yellow-700">📋 عرض</button>
+                                    @else
+                                        <span class="text-gray-400">—</span>
+                                    @endif
+                                </td>
+                                <td class="px-4 py-3 text-center">{{ $quota->application_method ?? '—' }}</td>
+                                <td class="px-4 py-3 text-center">
+                                    @if($quota->local_rank && $quota->local_rank != '**')
+                                        <span
+                                            class="bg-yellow-100 text-yellow-700 px-2 py-1 rounded-full text-sm font-semibold">
+                                            {{ $quota->local_rank }}
+                                        </span>
+                                    @else
+                                        <span class="text-gray-400">{{ $quota->local_rank ?? '—' }}</span>
+                                    @endif
+                                </td>
+                            </tr>
+                        @empty
+                            <tr>
+                                <td colspan="{{ $viewType == 'postgraduate' ? 12 : 11 }}"
+                                    class="text-center py-16 text-gray-500">
+                                    <div class="text-lg">📭 لا توجد بيانات حالياً</div>
+
+                                </td>
+                            </tr>
+                        @endforelse
+                    </tbody>
                 </table>
             </div>
             <div class="p-4 border-t bg-gray-50">
-                {{ $quotas->links() }}
+                {{ $quotas->appends(request()->except('page'))->links()}}
             </div>
         </div>
 
@@ -283,7 +284,8 @@
                 <button onclick="closeModal()" class="text-gray-500 hover:text-gray-700 text-2xl">&times;</button>
             </div>
             <div id="detailsContent" class="text-gray-600 leading-relaxed"></div>
-            <button onclick="closeModal()" class="mt-6 w-full bg-yellow-500 text-white py-2 rounded-lg hover:bg-yellow-600 transition">إغلاق</button>
+            <button onclick="closeModal()"
+                class="mt-6 w-full bg-yellow-500 text-white py-2 rounded-lg hover:bg-yellow-600 transition">إغلاق</button>
         </div>
     </div>
 

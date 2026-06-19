@@ -14,7 +14,7 @@ class UniversityQuotaController extends Controller
     
 public function index(Request $request)
 {
-    // تحديد نوع التقويم (افتراضي: undergraduate)
+    // تحديد نوع التقويم
     $type = $request->get('type', 'undergraduate');
     
     // اختيار الجدول المناسب
@@ -35,7 +35,7 @@ public function index(Request $request)
         $query->where('city', 'LIKE', '%' . $request->city . '%');
     }
 
-    // فلترة حسب الكلية (للمفاضلات العادية فقط)
+    // فلترة حسب الكلية
     if ($viewType == 'undergraduate' && $request->filled('college')) {
         $collegeName = $request->college;
         $query->whereHas('university.colleges', function($q) use ($collegeName) {
@@ -43,7 +43,7 @@ public function index(Request $request)
         });
     }
 
-    // فلترة حسب المعهد (للمفاضلات العادية فقط)
+    // فلترة حسب المعهد
     if ($viewType == 'undergraduate' && $request->filled('institute')) {
         $instituteName = $request->institute;
         $query->whereHas('university.institutes', function($q) use ($instituteName) {
@@ -60,21 +60,26 @@ public function index(Request $request)
         });
     }
 
+    // ✅ إخفاء المفاضلات المنتهية (من request أو session)
+    $hideExpired = ($request->has('hide_expired') && $request->hide_expired == 'true') ? 'true' : 'false';
     
-    
-    // جلب الكليات والمعاهد للقوائم المنسدلة (للمفاضلات العادية فقط)
-    $colleges = College::orderBy('name_ar')->get();
-    $institutes = Institute::orderBy('name_ar')->get();
-    $cities = UniversityQuota::distinct('city')->whereNotNull('city')->pluck('city');
-// إخفاء المفاضلات المنتهية
-if ($request->has('hide_expired') && $request->hide_expired == 'true') {
+  session(['hide_expired' => $hideExpired]);
+
+if ($hideExpired == 'true') {
     $query->where(function($q) {
         $q->whereNull('registration_end')
           ->orWhere('registration_end', '>=', now());
     });
 }
-$quotas = $query->orderBy('registration_end', 'asc')->paginate(20);
-    return view('university-quotas.index', compact('quotas', 'cities', 'colleges', 'institutes', 'title', 'description', 'viewType'));
+
+    // جلب الكليات والمعاهد
+    $colleges = College::orderBy('name_ar')->get();
+    $institutes = Institute::orderBy('name_ar')->get();
+    $cities = UniversityQuota::distinct('city')->whereNotNull('city')->pluck('city');
+
+    $quotas = $query->orderBy('registration_end', 'asc')->paginate(20);
+
+    return view('university-quotas.index', compact('quotas', 'cities', 'colleges', 'institutes', 'title', 'description', 'viewType','hideExpired'));
 }
 public function postgraduate(Request $request)
 {
