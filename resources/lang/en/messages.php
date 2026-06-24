@@ -1,0 +1,28 @@
+<?php
+
+return [
+    'home' => 'Home',
+    'about' => 'About',
+    'universities' => 'Universities',
+    'all_universities' => 'All Universities',
+    'public_universities' => 'Public Universities',
+    'private_universities' => 'Private Universities',
+    'ranking' => 'University Ranking',
+    'recognitions' => 'Recognized Universities',
+    'quotas' => 'Admission Calendar',
+    'quotas_undergraduate' => 'Admission Calendar',
+    'quotas_postgraduate' => 'Postgraduate Calendar',
+    'articles' => 'Articles',
+    'study_in_turkey' => 'Study in Turkey',
+    'all_articles' => 'All Articles',
+    'exams' => 'Entrance Exams',
+    'scholarships' => 'Scholarships',
+    'certificates' => 'Key Certificates',
+    'testimonials' => 'Success Stories',
+    'contact' => 'Contact Us',
+    'login' => 'Login',
+    'register' => 'Register',
+    'dashboard' => 'Dashboard',
+    'logout' => 'Logout',
+    'my_dashboard' => 'My Dashboard',
+];

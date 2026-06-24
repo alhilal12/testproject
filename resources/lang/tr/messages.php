@@ -1,0 +1,28 @@
+<?php
+
+return [
+    'home' => 'Ana Sayfa',
+    'about' => 'Hakkımızda',
+    'universities' => 'Üniversiteler',
+    'all_universities' => 'Tüm Üniversiteler',
+    'public_universities' => 'Devlet Üniversiteleri',
+    'private_universities' => 'Özel Üniversiteler',
+    'ranking' => 'Üniversite Sıralaması',
+    'recognitions' => 'Tanınan Üniversiteler',
+    'quotas' => 'Kabul Takvimi',
+    'quotas_undergraduate' => 'Kabul Takvimi',
+    'quotas_postgraduate' => 'Lisansüstü Takvimi',
+    'articles' => 'Makaleler',
+    'study_in_turkey' => 'Türkiye\'de Eğitim',
+    'all_articles' => 'Tüm Makaleler',
+    'exams' => 'Giriş Sınavları',
+    'scholarships' => 'Burslar',
+    'certificates' => 'Önemli Sertifikalar',
+    'testimonials' => 'Başarı Hikayeleri',
+    'contact' => 'İletişim',
+    'login' => 'Giriş',
+    'register' => 'Kayıt Ol',
+    'dashboard' => 'Kontrol Paneli',
+    'logout' => 'Çıkış',
+    'my_dashboard' => 'Panom',
+];

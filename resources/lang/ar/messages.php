@@ -1,0 +1,28 @@
+<?php
+
+return [
+    'home' => 'الرئيسية',
+    'about' => 'من نحن',
+    'universities' => 'الجامعات',
+    'all_universities' => 'جميع الجامعات',
+    'public_universities' => 'جامعات حكومية',
+    'private_universities' => 'جامعات خاصة',
+    'ranking' => 'ترتيب الجامعات',
+    'recognitions' => 'الجامعات المعترف بها',
+    'quotas' => 'تقويم المفاضلات',
+    'quotas_undergraduate' => 'تقويم المفاضلات',
+    'quotas_postgraduate' => 'تقويم الدراسات العليا',
+    'articles' => 'المقالات',
+    'study_in_turkey' => 'الدراسة في تركيا',
+    'all_articles' => 'جميع المقالات',
+    'exams' => 'اختبارات القبول',
+    'scholarships' => 'المنح الدراسية',
+    'certificates' => 'أهم الشهادات',
+    'testimonials' => 'قصص النجاح',
+    'contact' => 'اتصل بنا',
+    'login' => 'تسجيل الدخول',
+    'register' => 'إنشاء حساب',
+    'dashboard' => 'لوحة التحكم',
+    'logout' => 'تسجيل خروج',
+    'my_dashboard' => 'لوحتي',
+];
