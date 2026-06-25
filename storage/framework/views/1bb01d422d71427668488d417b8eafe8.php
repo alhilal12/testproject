@@ -169,7 +169,7 @@
                     </div>
                     <span class="text-xl font-bold text-gray-800">الهلال</span>
                 </div>
-                <a href="{{ route('login') }}" class="text-gray-600 hover:text-yellow-600 transition">تسجيل الدخول</a>
+                <a href="<?php echo e(route('login')); ?>" class="text-gray-600 hover:text-yellow-600 transition">تسجيل الدخول</a>
             </div>
         </div>
     </nav>
@@ -186,43 +186,92 @@
 
             <!-- Form -->
             <div class="p-8">
-                <form method="POST" action="{{ route('register') }}" id="registerForm">
-                    @csrf
+                <form method="POST" action="<?php echo e(route('register')); ?>" id="registerForm">
+                    <?php echo csrf_field(); ?>
 
                     <!-- الاسم الكامل -->
                     <div class="input-group">
-                        <input type="text" id="name" name="name" placeholder=" " value="{{ old('name') }}" required
-                            autofocus class="w-full @error('name') border-red-500 @enderror">
+                        <input type="text" id="name" name="name" placeholder=" " value="<?php echo e(old('name')); ?>" required
+                            autofocus class="w-full <?php $__errorArgs = ['name'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?> border-red-500 <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>">
                         <label for="name">الاسم الكامل</label>
-                        @error('name')
-                            <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
-                        @enderror
+                        <?php $__errorArgs = ['name'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?>
+                            <p class="text-red-500 text-xs mt-1"><?php echo e($message); ?></p>
+                        <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>
                     </div>
 
                     <!-- البريد الإلكتروني -->
                     <div class="input-group">
-                        <input type="email" id="email" name="email" placeholder=" " value="{{ old('email') }}" required
-                            class="w-full @error('email') border-red-500 @enderror">
+                        <input type="email" id="email" name="email" placeholder=" " value="<?php echo e(old('email')); ?>" required
+                            class="w-full <?php $__errorArgs = ['email'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?> border-red-500 <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>">
                         <label for="email">البريد الإلكتروني</label>
-                        @error('email')
-                            <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
-                        @enderror
+                        <?php $__errorArgs = ['email'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?>
+                            <p class="text-red-500 text-xs mt-1"><?php echo e($message); ?></p>
+                        <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>
                     </div>
 
                     <!-- رقم الهاتف (اختياري) -->
                     <div class="input-group">
-                        <input type="tel" id="phone" name="phone" placeholder=" " value="{{ old('phone') }}"
-                            class="w-full @error('phone') border-red-500 @enderror">
+                        <input type="tel" id="phone" name="phone" placeholder=" " value="<?php echo e(old('phone')); ?>"
+                            class="w-full <?php $__errorArgs = ['phone'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?> border-red-500 <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>">
                         <label for="phone">رقم الهاتف (اختياري)</label>
-                        @error('phone')
-                            <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
-                        @enderror
+                        <?php $__errorArgs = ['phone'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?>
+                            <p class="text-red-500 text-xs mt-1"><?php echo e($message); ?></p>
+                        <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>
                     </div>
 
                     <!-- كلمة المرور -->
                     <div class="input-group relative">
                         <input type="password" id="password" name="password" placeholder=" " required
-                            class="w-full pl-10 @error('password') border-red-500 @enderror">
+                            class="w-full pl-10 <?php $__errorArgs = ['password'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?> border-red-500 <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>">
                         <label for="password">كلمة المرور</label>
                         <button type="button" onclick="togglePassword('password')"
                             class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-yellow-600 transition">
@@ -235,9 +284,16 @@
                                 </path>
                             </svg>
                         </button>
-                        @error('password')
-                            <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
-                        @enderror
+                        <?php $__errorArgs = ['password'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?>
+                            <p class="text-red-500 text-xs mt-1"><?php echo e($message); ?></p>
+                        <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>
                     </div>
 
                     <!-- تأكيد كلمة المرور -->
@@ -269,7 +325,7 @@
                 <div class="text-center mt-6">
                     <p class="text-gray-500 text-sm">
                         لديك حساب بالفعل؟
-                        <a href="{{ route('login') }}"
+                        <a href="<?php echo e(route('login')); ?>"
                             class="text-yellow-600 hover:text-yellow-700 font-semibold hover:underline">
                             تسجيل الدخول
                         </a>
@@ -314,4 +370,4 @@
     </script>
 </body>
 
-</html>
+</html><?php /**PATH C:\laragon\www\testProject\resources\views/auth/register.blade.php ENDPATH**/ ?>

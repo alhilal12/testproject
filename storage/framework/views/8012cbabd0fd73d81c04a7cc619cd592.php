@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ $article->title }} - الهلال للاستشارات التعليمية</title>
+    <title><?php echo e($article->title); ?> - الهلال للاستشارات التعليمية</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
@@ -136,31 +136,52 @@
 
 <body class="bg-gray-50">
 
-    <x-navbar />
+    <?php if (isset($component)) { $__componentOriginala591787d01fe92c5706972626cdf7231 = $component; } ?>
+<?php if (isset($attributes)) { $__attributesOriginala591787d01fe92c5706972626cdf7231 = $attributes; } ?>
+<?php $component = Illuminate\View\AnonymousComponent::resolve(['view' => 'components.navbar','data' => []] + (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag ? $attributes->all() : [])); ?>
+<?php $component->withName('navbar'); ?>
+<?php if ($component->shouldRender()): ?>
+<?php $__env->startComponent($component->resolveView(), $component->data()); ?>
+<?php if (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag): ?>
+<?php $attributes = $attributes->except(\Illuminate\View\AnonymousComponent::ignoredParameterNames()); ?>
+<?php endif; ?>
+<?php $component->withAttributes([]); ?>
+<?php echo $__env->renderComponent(); ?>
+<?php endif; ?>
+<?php if (isset($__attributesOriginala591787d01fe92c5706972626cdf7231)): ?>
+<?php $attributes = $__attributesOriginala591787d01fe92c5706972626cdf7231; ?>
+<?php unset($__attributesOriginala591787d01fe92c5706972626cdf7231); ?>
+<?php endif; ?>
+<?php if (isset($__componentOriginala591787d01fe92c5706972626cdf7231)): ?>
+<?php $component = $__componentOriginala591787d01fe92c5706972626cdf7231; ?>
+<?php unset($__componentOriginala591787d01fe92c5706972626cdf7231); ?>
+<?php endif; ?>
 
     <!-- Article Header -->
     <div class="relative bg-gradient-to-r from-gray-900 via-gray-800 to-gray-900 py-16 mt-20">
         <div class="container mx-auto px-4 text-center">
             <div class="flex justify-center gap-2 mb-4 flex-wrap">
                 <span
-                    class="bg-yellow-500 text-white text-sm px-3 py-1 rounded-full">{{ $article->category_name }}</span>
+                    class="bg-yellow-500 text-white text-sm px-3 py-1 rounded-full"><?php echo e($article->category_name); ?></span>
                 <span class="bg-gray-700 text-gray-300 text-sm px-3 py-1 rounded-full">⏱️
-                    {{ $article->read_time ?? '5' }} دقائق</span>
+                    <?php echo e($article->read_time ?? '5'); ?> دقائق</span>
                 <span
-                    class="bg-gray-700 text-gray-300 text-sm px-3 py-1 rounded-full">{{ $article->difficulty_name ?? 'مبتدئ' }}</span>
+                    class="bg-gray-700 text-gray-300 text-sm px-3 py-1 rounded-full"><?php echo e($article->difficulty_name ?? 'مبتدئ'); ?></span>
             </div>
-            <h1 class="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4 leading-tight">{{ $article->title }}
+            <h1 class="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4 leading-tight"><?php echo e($article->title); ?>
+
             </h1>
             <div class="flex items-center justify-center gap-4 text-gray-300 flex-wrap">
                 <div class="flex items-center gap-2">
                     <div
                         class="w-8 h-8 bg-yellow-500 rounded-full flex items-center justify-center text-white text-sm font-bold">
-                        {{ mb_substr($article->author->name, 0, 1) }}
+                        <?php echo e(mb_substr($article->author->name, 0, 1)); ?>
+
                     </div>
-                    <span>{{ $article->author->name }}</span>
+                    <span><?php echo e($article->author->name); ?></span>
                 </div>
-                <span>📅 {{ $article->created_at->format('d/m/Y') }}</span>
-                <span>👁️ {{ number_format($article->views) }} مشاهدة</span>
+                <span>📅 <?php echo e($article->created_at->format('d/m/Y')); ?></span>
+                <span>👁️ <?php echo e(number_format($article->views)); ?> مشاهدة</span>
             </div>
         </div>
     </div>
@@ -170,15 +191,15 @@
         <div class="max-w-4xl mx-auto">
 
             <!-- Featured Image -->
-            @if($article->image)
+            <?php if($article->image): ?>
                 <div class="mb-8 rounded-2xl overflow-hidden shadow-lg">
-                    <img src="{{ asset('storage/' . $article->image) }}" alt="{{ $article->title }}"
+                    <img src="<?php echo e(asset('storage/' . $article->image)); ?>" alt="<?php echo e($article->title); ?>"
                         class="w-full h-auto object-cover">
                 </div>
-            @endif
+            <?php endif; ?>
 
             <!-- Table of Contents (إذا كان المقال طويلاً) -->
-            @if(strlen(strip_tags($article->content)) > 2000)
+            <?php if(strlen(strip_tags($article->content)) > 2000): ?>
                 <div class="bg-gray-100 rounded-xl p-5 mb-8 border-r-4 border-yellow-500">
                     <h3 class="text-lg font-bold text-gray-800 mb-3 flex items-center gap-2">
                         <svg class="w-5 h-5 text-yellow-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -188,20 +209,21 @@
                         محتويات المقال
                     </h3>
                     <div class="flex flex-wrap gap-2">
-                        @php
+                        <?php
                             $headers = [];
                             preg_match_all('/<h2>(.*?)<\/h2>/', $article->content, $headers);
-                        @endphp
-                        @foreach($headers[1] as $header)
-                            <a href="#" class="text-sm text-gray-600 hover:text-yellow-600 transition">• {{ $header }}</a>
-                        @endforeach
+                        ?>
+                        <?php $__currentLoopData = $headers[1]; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $header): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                            <a href="#" class="text-sm text-gray-600 hover:text-yellow-600 transition">• <?php echo e($header); ?></a>
+                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                     </div>
                 </div>
-            @endif
+            <?php endif; ?>
 
             <!-- Content -->
             <div class="article-content bg-white rounded-2xl p-6 md:p-8 shadow-lg">
-                {!! $article->content !!}
+                <?php echo $article->content; ?>
+
             </div>
 
             <!-- Tags (إذا كانت موجودة) -->
@@ -223,10 +245,11 @@
                 class="mt-8 bg-gray-50 rounded-xl p-6 flex flex-col md:flex-row gap-4 items-center md:items-start border-r-4 border-yellow-500">
                 <div
                     class="w-16 h-16 bg-gradient-to-br from-yellow-400 to-yellow-600 rounded-full flex items-center justify-center text-white text-2xl font-bold flex-shrink-0">
-                    {{ mb_substr($article->author->name, 0, 1) }}
+                    <?php echo e(mb_substr($article->author->name, 0, 1)); ?>
+
                 </div>
                 <div class="text-center md:text-right">
-                    <h4 class="font-bold text-gray-800 text-lg">{{ $article->author->name }}</h4>
+                    <h4 class="font-bold text-gray-800 text-lg"><?php echo e($article->author->name); ?></h4>
                     <p class="text-gray-500 text-sm mb-2">كاتب ومستشار تعليمي</p>
                     <p class="text-gray-600 text-sm">متخصص في مجال التعليم العالي والاستشارات الأكاديمية للطلاب الراغبين
                         في الدراسة في تركيا.</p>
@@ -234,34 +257,34 @@
             </div>
 
             <!-- Related Articles -->
-            @if(isset($relatedArticles) && $relatedArticles->count() > 0)
+            <?php if(isset($relatedArticles) && $relatedArticles->count() > 0): ?>
                 <div class="mt-12">
                     <h3
                         class="text-xl font-bold text-gray-800 mb-6 text-center border-b-2 border-yellow-500 inline-block pb-2 w-full">
                         📖 مقالات ذات صلة</h3>
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-6">
-                        @foreach($relatedArticles as $related)
+                        <?php $__currentLoopData = $relatedArticles; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $related): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                             <div class="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition group">
                                 <div class="p-4">
-                                    <div class="text-xs text-gray-400 mb-2">{{ $related->created_at->format('d/m/Y') }}</div>
+                                    <div class="text-xs text-gray-400 mb-2"><?php echo e($related->created_at->format('d/m/Y')); ?></div>
                                     <h4
                                         class="font-bold text-gray-800 mb-2 group-hover:text-yellow-600 transition line-clamp-2">
-                                        <a href="{{ route('articles.show', $related->slug) }}">{{ $related->title }}</a>
+                                        <a href="<?php echo e(route('articles.show', $related->slug)); ?>"><?php echo e($related->title); ?></a>
                                     </h4>
-                                    <a href="{{ route('articles.show', $related->slug) }}"
+                                    <a href="<?php echo e(route('articles.show', $related->slug)); ?>"
                                         class="text-yellow-600 text-sm font-semibold hover:underline">اقرأ المزيد →</a>
                                 </div>
                             </div>
-                        @endforeach
+                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                     </div>
                 </div>
-            @endif
+            <?php endif; ?>
 
             <!-- Share Buttons -->
             <div class="mt-12 text-center">
                 <p class="text-gray-600 mb-3">هل أعجبك المقال؟ شاركه مع أصدقائك</p>
                 <div class="flex justify-center gap-3 flex-wrap">
-                    <a href="https://wa.me/?text={{ urlencode($article->title . ' - ' . route('articles.show', $article->slug)) }}"
+                    <a href="https://wa.me/?text=<?php echo e(urlencode($article->title . ' - ' . route('articles.show', $article->slug))); ?>"
                         target="_blank"
                         class="bg-green-500 hover:bg-green-600 text-white px-5 py-2 rounded-lg transition flex items-center gap-2">
                         <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
@@ -270,7 +293,7 @@
                         </svg>
                         واتس اب
                     </a>
-                    <a href="https://www.facebook.com/sharer/sharer.php?u={{ urlencode(route('articles.show', $article->slug)) }}"
+                    <a href="https://www.facebook.com/sharer/sharer.php?u=<?php echo e(urlencode(route('articles.show', $article->slug))); ?>"
                         target="_blank"
                         class="bg-blue-600 hover:bg-blue-700 text-white px-5 py-2 rounded-lg transition flex items-center gap-2">
                         <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
@@ -279,7 +302,7 @@
                         </svg>
                         فيسبوك
                     </a>
-                    <a href="https://twitter.com/intent/tweet?text={{ urlencode($article->title) }}&url={{ urlencode(route('articles.show', $article->slug)) }}"
+                    <a href="https://twitter.com/intent/tweet?text=<?php echo e(urlencode($article->title)); ?>&url=<?php echo e(urlencode(route('articles.show', $article->slug))); ?>"
                         target="_blank"
                         class="bg-sky-500 hover:bg-sky-600 text-white px-5 py-2 rounded-lg transition flex items-center gap-2">
                         <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
@@ -302,7 +325,26 @@
             overflow: hidden;
         }
     </style>
-    <x-floating-whatsapp />
+    <?php if (isset($component)) { $__componentOriginal67d5d5978c3922da5619d6ebcc86c174 = $component; } ?>
+<?php if (isset($attributes)) { $__attributesOriginal67d5d5978c3922da5619d6ebcc86c174 = $attributes; } ?>
+<?php $component = Illuminate\View\AnonymousComponent::resolve(['view' => 'components.floating-whatsapp','data' => []] + (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag ? $attributes->all() : [])); ?>
+<?php $component->withName('floating-whatsapp'); ?>
+<?php if ($component->shouldRender()): ?>
+<?php $__env->startComponent($component->resolveView(), $component->data()); ?>
+<?php if (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag): ?>
+<?php $attributes = $attributes->except(\Illuminate\View\AnonymousComponent::ignoredParameterNames()); ?>
+<?php endif; ?>
+<?php $component->withAttributes([]); ?>
+<?php echo $__env->renderComponent(); ?>
+<?php endif; ?>
+<?php if (isset($__attributesOriginal67d5d5978c3922da5619d6ebcc86c174)): ?>
+<?php $attributes = $__attributesOriginal67d5d5978c3922da5619d6ebcc86c174; ?>
+<?php unset($__attributesOriginal67d5d5978c3922da5619d6ebcc86c174); ?>
+<?php endif; ?>
+<?php if (isset($__componentOriginal67d5d5978c3922da5619d6ebcc86c174)): ?>
+<?php $component = $__componentOriginal67d5d5978c3922da5619d6ebcc86c174; ?>
+<?php unset($__componentOriginal67d5d5978c3922da5619d6ebcc86c174); ?>
+<?php endif; ?>
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             const toggle = document.getElementById('darkModeToggle');
@@ -324,4 +366,4 @@
     </script>
 </body>
 
-</html>
+</html><?php /**PATH C:\laragon\www\testProject\resources\views/articles/show.blade.php ENDPATH**/ ?>

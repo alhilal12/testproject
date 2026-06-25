@@ -145,6 +145,23 @@
                     <span
                         class="absolute bottom-0 right-0 w-0 h-1 bg-yellow-600 group-hover:w-full transition-all duration-300"></span>
                 </a>
+                <button id="darkModeToggle"
+                    class="p-2 rounded-lg hover:bg-gray-100 transition relative w-10 h-10 flex items-center justify-center">
+                    <!-- أيقونة الشمس (تظهر في الوضع الفاتح) -->
+                    <svg id="sunIcon" class="w-6 h-6 text-yellow-500 absolute transition-all duration-300" fill="none"
+                        stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+                    </svg>
+
+                    <!-- أيقونة القمر (تظهر في الوضع الغامق) -->
+                    <svg id="moonIcon"
+                        class="w-6 h-6 text-gray-200 absolute transition-all duration-300 opacity-0 rotate-90"
+                        fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+                    </svg>
+                </button>
             </div>
 
             <!-- Auth Buttons (Desktop) -->
@@ -298,18 +315,39 @@
 </nav>
 
 <script>
-    document.getElementById('mobile-menu-btn')?.addEventListener('click', function () {
-        const menu = document.getElementById('mobile-menu');
-        menu.classList.toggle('hidden');
-    });
+    document.addEventListener('DOMContentLoaded', function () {
+        const toggle = document.getElementById('darkModeToggle');
+        const sunIcon = document.getElementById('sunIcon');
+        const moonIcon = document.getElementById('moonIcon');
 
-    document.querySelectorAll('#mobile-menu a').forEach(link => {
-        link.addEventListener('click', function () {
-            document.getElementById('mobile-menu').classList.add('hidden');
-        });
+        if (localStorage.getItem('darkMode') === 'true') {
+            document.body.classList.add('dark');
+            sunIcon.style.opacity = '0';
+            sunIcon.style.transform = 'rotate(-90deg) scale(0.5)';
+            moonIcon.style.opacity = '1';
+            moonIcon.style.transform = 'rotate(0deg) scale(1)';
+        }
+
+        if (toggle) {
+            toggle.addEventListener('click', function () {
+                const isDark = document.body.classList.toggle('dark');
+                localStorage.setItem('darkMode', isDark);
+
+                if (isDark) {
+                    sunIcon.style.opacity = '0';
+                    sunIcon.style.transform = 'rotate(-90deg) scale(0.5)';
+                    moonIcon.style.opacity = '1';
+                    moonIcon.style.transform = 'rotate(0deg) scale(1)';
+                } else {
+                    sunIcon.style.opacity = '1';
+                    sunIcon.style.transform = 'rotate(0deg) scale(1)';
+                    moonIcon.style.opacity = '0';
+                    moonIcon.style.transform = 'rotate(90deg) scale(0.5)';
+                }
+            });
+        }
     });
 </script>
-
 <style>
     [dir="rtl"] {
         direction: rtl;
@@ -329,5 +367,61 @@
         nav {
             padding: 0.5rem 0;
         }
+    }
+
+    /* Dark Mode */
+    .dark {
+        background-color: #1a202c;
+        color: #e2e8f0;
+        /* لون النص الأساسي في الوضع الغامق */
+    }
+
+    /* جميع عناصر النص */
+    .dark h1,
+    .dark h2,
+    .dark h3,
+    .dark h4,
+    .dark h5,
+    .dark h6,
+    .dark p,
+    .dark span,
+    .dark div,
+    .dark a,
+    .dark li,
+    .dark label,
+    .dark .text-gray-800,
+    .dark .text-gray-700,
+    .dark .text-gray-600 {
+        color: #e2e8f0 !important;
+    }
+
+    /* استثناء للروابط */
+    .dark a {
+        color: #63b3ed !important;
+    }
+
+    .dark a:hover {
+        color: #90cdf4 !important;
+    }
+
+    /* خلفيات العناصر */
+    .dark .bg-white {
+        background-color: #2d3748 !important;
+    }
+
+    .dark .bg-gray-50 {
+        background-color: #1a202c !important;
+    }
+
+    .dark .bg-gray-100 {
+        background-color: #2d3748 !important;
+    }
+
+    .dark .border-gray-200 {
+        border-color: #4a5568 !important;
+    }
+
+    .dark .shadow-md {
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3) !important;
     }
 </style><?php /**PATH C:\laragon\www\testProject\resources\views/components/navbar.blade.php ENDPATH**/ ?>

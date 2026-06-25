@@ -155,7 +155,7 @@
                     </div>
                     <span class="text-xl font-bold text-gray-800">الهلال</span>
                 </div>
-                <a href="{{ route('register') }}" class="text-gray-600 hover:text-yellow-600 transition">إنشاء حساب</a>
+                <a href="<?php echo e(route('register')); ?>" class="text-gray-600 hover:text-yellow-600 transition">إنشاء حساب</a>
             </div>
         </div>
     </nav>
@@ -172,23 +172,44 @@
 
             <!-- Form -->
             <div class="p-8">
-                <form method="POST" action="{{ route('login') }}" id="loginForm">
-                    @csrf
+                <form method="POST" action="<?php echo e(route('login')); ?>" id="loginForm">
+                    <?php echo csrf_field(); ?>
 
                     <!-- البريد الإلكتروني -->
                     <div class="input-group">
-                        <input type="email" id="email" name="email" placeholder=" " value="{{ old('email') }}" required
-                            autofocus class="w-full @error('email') border-red-500 @enderror">
+                        <input type="email" id="email" name="email" placeholder=" " value="<?php echo e(old('email')); ?>" required
+                            autofocus class="w-full <?php $__errorArgs = ['email'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?> border-red-500 <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>">
                         <label for="email">البريد الإلكتروني</label>
-                        @error('email')
-                            <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
-                        @enderror
+                        <?php $__errorArgs = ['email'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?>
+                            <p class="text-red-500 text-xs mt-1"><?php echo e($message); ?></p>
+                        <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>
                     </div>
 
                     <!-- كلمة المرور -->
                     <div class="input-group relative">
                         <input type="password" id="password" name="password" placeholder=" " required
-                            class="w-full pl-10 @error('password') border-red-500 @enderror">
+                            class="w-full pl-10 <?php $__errorArgs = ['password'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?> border-red-500 <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>">
                         <label for="password">كلمة المرور</label>
                         <button type="button" onclick="togglePassword('password')"
                             class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-yellow-600 transition">
@@ -201,25 +222,33 @@
                                 </path>
                             </svg>
                         </button>
-                        @error('password')
-                            <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
-                        @enderror
+                        <?php $__errorArgs = ['password'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?>
+                            <p class="text-red-500 text-xs mt-1"><?php echo e($message); ?></p>
+                        <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>
                     </div>
 
                     <!-- Remember Me -->
                     <div class="flex items-center justify-between mb-6">
                         <label class="flex items-center gap-2 cursor-pointer">
-                            <input type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}
+                            <input type="checkbox" name="remember" id="remember" <?php echo e(old('remember') ? 'checked' : ''); ?>
+
                                 class="w-4 h-4 rounded border-gray-300 text-yellow-500 focus:ring-yellow-500 cursor-pointer">
                             <span class="text-sm text-gray-600">تذكرني</span>
                         </label>
 
-                        @if (Route::has('password.request'))
-                            <a href="{{ route('password.request') }}"
+                        <?php if(Route::has('password.request')): ?>
+                            <a href="<?php echo e(route('password.request')); ?>"
                                 class="text-sm text-yellow-600 hover:text-yellow-700 hover:underline">
                                 نسيت كلمة المرور؟
                             </a>
-                        @endif
+                        <?php endif; ?>
                     </div>
 
                     <!-- Submit Button -->
@@ -233,7 +262,7 @@
                 <div class="text-center mt-6">
                     <p class="text-gray-500 text-sm">
                         ليس لديك حساب؟
-                        <a href="{{ route('register') }}"
+                        <a href="<?php echo e(route('register')); ?>"
                             class="text-yellow-600 hover:text-yellow-700 font-semibold hover:underline">
                             إنشاء حساب جديد
                         </a>
@@ -260,13 +289,13 @@
         }
 
         // Error shake effect
-        @if($errors->any())
+        <?php if($errors->any()): ?>
             const errorInputs = document.querySelectorAll('.border-red-500');
             errorInputs.forEach(input => {
                 input.classList.add('error-shake');
                 setTimeout(() => input.classList.remove('error-shake'), 300);
             });
-        @endif
+        <?php endif; ?>
 
         // Prevent multiple submissions
         const form = document.getElementById('loginForm');
@@ -283,4 +312,4 @@
     </script>
 </body>
 
-</html>
+</html><?php /**PATH C:\laragon\www\testProject\resources\views/auth/login.blade.php ENDPATH**/ ?>

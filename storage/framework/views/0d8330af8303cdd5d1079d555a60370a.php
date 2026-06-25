@@ -152,9 +152,76 @@
         .animate-ping {
             animation: ping 1.5s cubic-bezier(0, 0, 0.2, 1) infinite;
         }
+
+        /* Dark Mode */
+        .dark {
+            background-color: #1a202c;
+            color: #e2e8f0;
+        }
+
+        .dark .bg-white {
+            background-color: #2d3748 !important;
+        }
+
+        .dark .bg-gray-50 {
+            background-color: #1a202c !important;
+        }
+
+        .dark .bg-gray-100 {
+            background-color: #2d3748 !important;
+        }
+
+        .dark .text-gray-800 {
+            color: #e2e8f0 !important;
+        }
+
+        .dark .text-gray-700 {
+            color: #cbd5e0 !important;
+        }
+
+        .dark .text-gray-600 {
+            color: #a0aec0 !important;
+        }
+
+        .dark .border-gray-200 {
+            border-color: #4a5568 !important;
+        }
+
+        .dark .shadow-md {
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3) !important;
+        }
+
+        .dark .hover\:bg-gray-50:hover {
+            background-color: #4a5568 !important;
+        }
+
+        .dark .hover\:bg-gray-100:hover {
+            background-color: #4a5568 !important;
+        }
     </style>
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-<?php echo $__env->yieldPushContent('scripts'); ?>
+    <?php echo $__env->yieldPushContent('scripts'); ?>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const toggle = document.getElementById('darkModeToggle');
+            const icon = document.getElementById('darkModeIcon');
+
+            // 1. استعادة الوضع المخزن
+            if (localStorage.getItem('darkMode') === 'true') {
+                document.documentElement.classList.add('dark');
+                if (icon) icon.textContent = '☀️';
+            }
+
+            // 2. تبديل الوضع عند الضغط
+            if (toggle) {
+                toggle.addEventListener('click', function () {
+                    const isDark = document.documentElement.classList.toggle('dark');
+                    localStorage.setItem('darkMode', isDark);
+                    if (icon) icon.textContent = isDark ? '☀️' : '🌙';
+                });
+            }
+        });
+    </script>
 </body>
 
 </html><?php /**PATH C:\laragon\www\testProject\resources\views/layouts/app.blade.php ENDPATH**/ ?>

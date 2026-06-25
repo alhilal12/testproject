@@ -8,9 +8,9 @@
     <meta name="keywords" content="الجامعات المعترف بها في السعودية, الجامعات المعترف بها في مصر, الجامعات المعترف بها في الأردن, الجامعات التركية المعترف بها">
     <meta property="og:title" content="الجامعات التركية المعترف بها | الهلال للاستشارات التعليمية">
     <meta property="og:description" content="اكتشف الجامعات التركية المعترف بها في مختلف الدول العربية">
-    <meta property="og:image" content="{{ asset('images/logo.png') }}">
-    <meta property="og:url" content="{{ url()->current() }}">
-    <link rel="canonical" href="{{ url()->current() }}">
+    <meta property="og:image" content="<?php echo e(asset('images/logo.png')); ?>">
+    <meta property="og:url" content="<?php echo e(url()->current()); ?>">
+    <link rel="canonical" href="<?php echo e(url()->current()); ?>">
     <title>الجامعات المعترف بها حسب الدولة - الهلال للاستشارات التعليمية</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -43,7 +43,26 @@
 
 <body>
 
-    <x-navbar />
+    <?php if (isset($component)) { $__componentOriginala591787d01fe92c5706972626cdf7231 = $component; } ?>
+<?php if (isset($attributes)) { $__attributesOriginala591787d01fe92c5706972626cdf7231 = $attributes; } ?>
+<?php $component = Illuminate\View\AnonymousComponent::resolve(['view' => 'components.navbar','data' => []] + (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag ? $attributes->all() : [])); ?>
+<?php $component->withName('navbar'); ?>
+<?php if ($component->shouldRender()): ?>
+<?php $__env->startComponent($component->resolveView(), $component->data()); ?>
+<?php if (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag): ?>
+<?php $attributes = $attributes->except(\Illuminate\View\AnonymousComponent::ignoredParameterNames()); ?>
+<?php endif; ?>
+<?php $component->withAttributes([]); ?>
+<?php echo $__env->renderComponent(); ?>
+<?php endif; ?>
+<?php if (isset($__attributesOriginala591787d01fe92c5706972626cdf7231)): ?>
+<?php $attributes = $__attributesOriginala591787d01fe92c5706972626cdf7231; ?>
+<?php unset($__attributesOriginala591787d01fe92c5706972626cdf7231); ?>
+<?php endif; ?>
+<?php if (isset($__componentOriginala591787d01fe92c5706972626cdf7231)): ?>
+<?php $component = $__componentOriginala591787d01fe92c5706972626cdf7231; ?>
+<?php unset($__componentOriginala591787d01fe92c5706972626cdf7231); ?>
+<?php endif; ?>
 
     <div class="container mx-auto px-4 py-8 max-w-5xl">
 
@@ -55,23 +74,24 @@
 
         <!-- Filter Section -->
         <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-5 mb-8">
-            <form method="GET" action="{{ route('universities.recognitions') }}" class="flex flex-wrap gap-4 items-end">
+            <form method="GET" action="<?php echo e(route('universities.recognitions')); ?>" class="flex flex-wrap gap-4 items-end">
                 <div class="flex-1 min-w-[200px]">
                     <label class="block text-sm font-semibold text-gray-700 mb-1">🇸🇦 اختر الدولة</label>
                     <select name="country" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:border-yellow-500 focus:outline-none">
                         <option value="">جميع الدول</option>
-                        @foreach($countries as $country)
-                            <option value="{{ $country['country_code'] }}" {{ request('country') == $country['country_code'] ? 'selected' : '' }}>
-                                {{ $country['country_name_ar'] }}
+                        <?php $__currentLoopData = $countries; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $country): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                            <option value="<?php echo e($country['country_code']); ?>" <?php echo e(request('country') == $country['country_code'] ? 'selected' : ''); ?>>
+                                <?php echo e($country['country_name_ar']); ?>
+
                             </option>
-                        @endforeach
+                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                     </select>
                 </div>
                 <div class="flex items-end gap-2">
                     <button type="submit" class="bg-yellow-500 hover:bg-yellow-600 text-white px-6 py-2 rounded-lg transition">
                         🔍 بحث
                     </button>
-                    <a href="{{ route('universities.recognitions') }}" class="bg-gray-200 hover:bg-gray-300 text-gray-700 px-4 py-2 rounded-lg transition">
+                    <a href="<?php echo e(route('universities.recognitions')); ?>" class="bg-gray-200 hover:bg-gray-300 text-gray-700 px-4 py-2 rounded-lg transition">
                         إعادة تعيين
                     </a>
                 </div>
@@ -80,70 +100,72 @@
 
         <!-- Countries Grid -->
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-            @forelse($countries as $country)
-                <div class="country-card bg-white rounded-2xl shadow-md overflow-hidden border border-gray-100 " data-country-code="{{ $country['country_code'] }}">
+            <?php $__empty_1 = true; $__currentLoopData = $countries; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $country): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); $__empty_1 = false; ?>
+                <div class="country-card bg-white rounded-2xl shadow-md overflow-hidden border border-gray-100 " data-country-code="<?php echo e($country['country_code']); ?>">
                     
                     <!-- Country Header (قابل للنقر - أبيض مع إطار) -->
-                    <div onclick="toggleCountry({{ $loop->index }})" 
+                    <div onclick="toggleCountry(<?php echo e($loop->index); ?>)" 
                          class="px-5 py-3 flex items-center gap-3 cursor-pointer border-b border-gray-200 hover:bg-gray-50 transition">
                         <span class="text-2xl">
-                            @switch($country['country_code'])
-                                @case('SA') 🇸🇦 @break
-                                @case('EG') 🇪🇬 @break
-                                @case('JO') 🇯🇴 @break
-                                @case('AE') 🇦🇪 @break
-                                @case('QA') 🇶🇦 @break
-                                @case('KW') 🇰🇼 @break
-                                @case('SY') 🇸🇾 @break
-                                @case('IQ') 🇮🇶 @break
-                                @case('LB') 🇱🇧 @break
-                                @case('PS') 🇵🇸 @break
-                                @default 🌍
-                            @endswitch
+                            <?php switch($country['country_code']):
+                                case ('SA'): ?> 🇸🇦 <?php break; ?>
+                                <?php case ('EG'): ?> 🇪🇬 <?php break; ?>
+                                <?php case ('JO'): ?> 🇯🇴 <?php break; ?>
+                                <?php case ('AE'): ?> 🇦🇪 <?php break; ?>
+                                <?php case ('QA'): ?> 🇶🇦 <?php break; ?>
+                                <?php case ('KW'): ?> 🇰🇼 <?php break; ?>
+                                <?php case ('SY'): ?> 🇸🇾 <?php break; ?>
+                                <?php case ('IQ'): ?> 🇮🇶 <?php break; ?>
+                                <?php case ('LB'): ?> 🇱🇧 <?php break; ?>
+                                <?php case ('PS'): ?> 🇵🇸 <?php break; ?>
+                                <?php default: ?> 🌍
+                            <?php endswitch; ?>
                         </span>
-                        <h2 class="text-xl font-bold text-gray-800">{{ $country['country_name_ar'] }}</h2>
+                        <h2 class="text-xl font-bold text-gray-800"><?php echo e($country['country_name_ar']); ?></h2>
                         <span class="mr-auto bg-yellow-100 text-yellow-700 text-sm px-2.5 py-0.5 rounded-full font-semibold">
-                            {{ $country['universities']->count() }}
+                            <?php echo e($country['universities']->count()); ?>
+
                         </span>
-                        <svg id="arrow-{{ $loop->index }}" class="w-5 h-5 text-gray-400 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <svg id="arrow-<?php echo e($loop->index); ?>" class="w-5 h-5 text-gray-400 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
                         </svg>
                     </div>
 
                     <!-- Universities List (قابل للطي) -->
-                    <div id="country-content-{{ $loop->index }}" class="country-content">
+                    <div id="country-content-<?php echo e($loop->index); ?>" class="country-content">
                         <div class="p-4 space-y-2">
-                            @forelse($country['universities'] as $university)
-                                <a href="{{ route('universities.show', $university->id) }}" 
+                            <?php $__empty_2 = true; $__currentLoopData = $country['universities']; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $university): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); $__empty_2 = false; ?>
+                                <a href="<?php echo e(route('universities.show', $university->id)); ?>" 
                                    class="university-item block px-3 py-2 rounded-lg hover:bg-yellow-50 transition flex items-center gap-3 border-b border-gray-50 last:border-0">
-                                    @if($university->logo)
-                                        <img src="{{ asset('storage/' . $university->logo) }}" loading="lazy" class="w-8 h-8 rounded-full object-cover">
-                                    @else
+                                    <?php if($university->logo): ?>
+                                        <img src="<?php echo e(asset('storage/' . $university->logo)); ?>" loading="lazy" class="w-8 h-8 rounded-full object-cover">
+                                    <?php else: ?>
                                         <div class="w-8 h-8 rounded-full bg-gray-200 flex items-center justify-center text-gray-500 text-xs font-bold">
-                                            {{ mb_substr($university->name_ar, 0, 1) }}
+                                            <?php echo e(mb_substr($university->name_ar, 0, 1)); ?>
+
                                         </div>
-                                    @endif
+                                    <?php endif; ?>
                                     <div>
-                                        <div class="font-semibold text-gray-800 text-sm">{{ $university->name_ar }}</div>
-                                        <div class="text-xs text-gray-400">📍 {{ $university->city ?? '—' }}</div>
+                                        <div class="font-semibold text-gray-800 text-sm"><?php echo e($university->name_ar); ?></div>
+                                        <div class="text-xs text-gray-400">📍 <?php echo e($university->city ?? '—'); ?></div>
                                     </div>
                                     <svg class="mr-auto w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
                                     </svg>
                                 </a>
-                            @empty
+                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); if ($__empty_2): ?>
                                 <div class="text-center text-gray-400 text-sm py-4">لا توجد جامعات معترف بها في هذه الدولة</div>
-                            @endforelse
+                            <?php endif; ?>
                         </div>
                     </div>
                 </div>
-            @empty
+            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); if ($__empty_1): ?>
                 <div class="col-span-full text-center py-16 bg-white rounded-2xl shadow-md">
                     <div class="text-6xl mb-4">🌍</div>
                     <p class="text-gray-500 text-lg">لا توجد دول لديها جامعات معترف بها حالياً</p>
                     <p class="text-gray-400 text-sm mt-2">سيتم إضافة المزيد قريباً</p>
                 </div>
-            @endforelse
+            <?php endif; ?>
         </div>
 
         <!-- Update Info -->
@@ -152,7 +174,26 @@
         </div>
     </div>
 
-    <x-floating-whatsapp />
+    <?php if (isset($component)) { $__componentOriginal67d5d5978c3922da5619d6ebcc86c174 = $component; } ?>
+<?php if (isset($attributes)) { $__attributesOriginal67d5d5978c3922da5619d6ebcc86c174 = $attributes; } ?>
+<?php $component = Illuminate\View\AnonymousComponent::resolve(['view' => 'components.floating-whatsapp','data' => []] + (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag ? $attributes->all() : [])); ?>
+<?php $component->withName('floating-whatsapp'); ?>
+<?php if ($component->shouldRender()): ?>
+<?php $__env->startComponent($component->resolveView(), $component->data()); ?>
+<?php if (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag): ?>
+<?php $attributes = $attributes->except(\Illuminate\View\AnonymousComponent::ignoredParameterNames()); ?>
+<?php endif; ?>
+<?php $component->withAttributes([]); ?>
+<?php echo $__env->renderComponent(); ?>
+<?php endif; ?>
+<?php if (isset($__attributesOriginal67d5d5978c3922da5619d6ebcc86c174)): ?>
+<?php $attributes = $__attributesOriginal67d5d5978c3922da5619d6ebcc86c174; ?>
+<?php unset($__attributesOriginal67d5d5978c3922da5619d6ebcc86c174); ?>
+<?php endif; ?>
+<?php if (isset($__componentOriginal67d5d5978c3922da5619d6ebcc86c174)): ?>
+<?php $component = $__componentOriginal67d5d5978c3922da5619d6ebcc86c174; ?>
+<?php unset($__componentOriginal67d5d5978c3922da5619d6ebcc86c174); ?>
+<?php endif; ?>
 
     <script>
         function toggleCountry(index) {
@@ -208,4 +249,4 @@
     });
     </script>
 </body>
-</html>8
+</html>8<?php /**PATH C:\laragon\www\testProject\resources\views/universities/recognitions.blade.php ENDPATH**/ ?>

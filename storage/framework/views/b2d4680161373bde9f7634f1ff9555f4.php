@@ -84,7 +84,26 @@
 
 <body class="bg-gray-50">
     <!-- Navbar -->
-    <x-navbar />
+    <?php if (isset($component)) { $__componentOriginala591787d01fe92c5706972626cdf7231 = $component; } ?>
+<?php if (isset($attributes)) { $__attributesOriginala591787d01fe92c5706972626cdf7231 = $attributes; } ?>
+<?php $component = Illuminate\View\AnonymousComponent::resolve(['view' => 'components.navbar','data' => []] + (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag ? $attributes->all() : [])); ?>
+<?php $component->withName('navbar'); ?>
+<?php if ($component->shouldRender()): ?>
+<?php $__env->startComponent($component->resolveView(), $component->data()); ?>
+<?php if (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag): ?>
+<?php $attributes = $attributes->except(\Illuminate\View\AnonymousComponent::ignoredParameterNames()); ?>
+<?php endif; ?>
+<?php $component->withAttributes([]); ?>
+<?php echo $__env->renderComponent(); ?>
+<?php endif; ?>
+<?php if (isset($__attributesOriginala591787d01fe92c5706972626cdf7231)): ?>
+<?php $attributes = $__attributesOriginala591787d01fe92c5706972626cdf7231; ?>
+<?php unset($__attributesOriginala591787d01fe92c5706972626cdf7231); ?>
+<?php endif; ?>
+<?php if (isset($__componentOriginala591787d01fe92c5706972626cdf7231)): ?>
+<?php $component = $__componentOriginala591787d01fe92c5706972626cdf7231; ?>
+<?php unset($__componentOriginala591787d01fe92c5706972626cdf7231); ?>
+<?php endif; ?>
 
     <!-- Hero Section -->
     <div class="bg-gradient-to-r from-gray-900 via-gray-800 to-gray-900 py-16 mt-20">
@@ -108,13 +127,13 @@
                     البحث والتصفية المتقدم
                 </h2>
 
-                <form action="{{ route('universities.index') }}" method="GET" id="filterForm">
+                <form action="<?php echo e(route('universities.index')); ?>" method="GET" id="filterForm">
                     <!-- الصف الأول: اسم الجامعة + نوع الجامعة + المدينة -->
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-5 mb-6">
                         <!-- البحث بالاسم (دعم البحث الجزئي) -->
                         <div>
                             <label class="block text-gray-700 font-semibold mb-2 text-sm">🏫 اسم الجامعة</label>
-                            <input type="text" name="search" value="{{ request('search') }}"
+                            <input type="text" name="search" value="<?php echo e(request('search')); ?>"
                                 placeholder="اكتب اسم الجامعة (مثال: اسطنبول)"
                                 class="w-full px-4 py-2.5 border border-gray-300 rounded-xl focus:border-yellow-500 focus:ring-2 focus:ring-yellow-200 focus:outline-none transition">
                             <p class="text-xs text-gray-400 mt-1">يمكنك البحث بجزء من الاسم</p>
@@ -126,9 +145,9 @@
                             <select name="type"
                                 class="w-full px-4 py-2.5 border border-gray-300 rounded-xl focus:border-yellow-500 focus:ring-2 focus:ring-yellow-200 focus:outline-none transition">
                                 <option value="">الكل</option>
-                                <option value="public" {{ request('type') == 'public' ? 'selected' : '' }}>🏛️ حكومية
+                                <option value="public" <?php echo e(request('type') == 'public' ? 'selected' : ''); ?>>🏛️ حكومية
                                 </option>
-                                <option value="private" {{ request('type') == 'private' ? 'selected' : '' }}>🏢 خاصة
+                                <option value="private" <?php echo e(request('type') == 'private' ? 'selected' : ''); ?>>🏢 خاصة
                                 </option>
                             </select>
                         </div>
@@ -136,13 +155,13 @@
                         <!-- المدينة (مع دعم البحث الجزئي) -->
                         <div>
                             <label class="block text-gray-700 font-semibold mb-2 text-sm">📍 المدينة</label>
-                            <input type="text" name="city" value="{{ request('city') }}"
+                            <input type="text" name="city" value="<?php echo e(request('city')); ?>"
                                 placeholder="اكتب اسم المدينة (مثال: اسطنبول)" list="citySuggestions"
                                 class="w-full px-4 py-2.5 border border-gray-300 rounded-xl focus:border-yellow-500 focus:ring-2 focus:ring-yellow-200 focus:outline-none transition">
                             <datalist id="citySuggestions">
-                                @foreach($cities as $city)
-                                    <option value="{{ $city }}">
-                                @endforeach
+                                <?php $__currentLoopData = $cities; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $city): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                    <option value="<?php echo e($city); ?>">
+                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                             </datalist>
                             <p class="text-xs text-gray-400 mt-1">يمكنك البحث بجزء من الاسم أو الاختيار من القائمة</p>
                         </div>
@@ -157,67 +176,78 @@
                                 class="flex flex-wrap gap-2 p-3 bg-gray-50 rounded-xl border border-gray-200 max-h-32 overflow-y-auto">
                                 <label
                                     class="flex items-center gap-1.5 cursor-pointer hover:bg-yellow-50 px-2 py-1 rounded transition">
-                                    <input type="checkbox" name="language[]" value="turkish" {{ in_array('turkish', (array) request('language', [])) ? 'checked' : '' }}
+                                    <input type="checkbox" name="language[]" value="turkish" <?php echo e(in_array('turkish', (array) request('language', [])) ? 'checked' : ''); ?>
+
                                         class="rounded border-gray-300 text-yellow-500">
                                     <span class="text-sm">🇹🇷 تركية</span>
                                 </label>
                                 <label
                                     class="flex items-center gap-1.5 cursor-pointer hover:bg-yellow-50 px-2 py-1 rounded transition">
-                                    <input type="checkbox" name="language[]" value="english" {{ in_array('english', (array) request('language', [])) ? 'checked' : '' }}
+                                    <input type="checkbox" name="language[]" value="english" <?php echo e(in_array('english', (array) request('language', [])) ? 'checked' : ''); ?>
+
                                         class="rounded border-gray-300 text-yellow-500">
                                     <span class="text-sm">🇬🇧 إنجليزية</span>
                                 </label>
                                 <label
                                     class="flex items-center gap-1.5 cursor-pointer hover:bg-yellow-50 px-2 py-1 rounded transition">
-                                    <input type="checkbox" name="language[]" value="arabic" {{ in_array('arabic', (array) request('language', [])) ? 'checked' : '' }}
+                                    <input type="checkbox" name="language[]" value="arabic" <?php echo e(in_array('arabic', (array) request('language', [])) ? 'checked' : ''); ?>
+
                                         class="rounded border-gray-300 text-yellow-500">
                                     <span class="text-sm">🇸🇦 عربية</span>
                                 </label>
                                 <label
                                     class="flex items-center gap-1.5 cursor-pointer hover:bg-yellow-50 px-2 py-1 rounded transition">
-                                    <input type="checkbox" name="language[]" value="german" {{ in_array('german', (array) request('language', [])) ? 'checked' : '' }}
+                                    <input type="checkbox" name="language[]" value="german" <?php echo e(in_array('german', (array) request('language', [])) ? 'checked' : ''); ?>
+
                                         class="rounded border-gray-300 text-yellow-500">
                                     <span class="text-sm">🇩🇪 ألمانية</span>
                                 </label>
                                 <label
                                     class="flex items-center gap-1.5 cursor-pointer hover:bg-yellow-50 px-2 py-1 rounded transition">
-                                    <input type="checkbox" name="language[]" value="french" {{ in_array('french', (array) request('language', [])) ? 'checked' : '' }}
+                                    <input type="checkbox" name="language[]" value="french" <?php echo e(in_array('french', (array) request('language', [])) ? 'checked' : ''); ?>
+
                                         class="rounded border-gray-300 text-yellow-500">
                                     <span class="text-sm">🇫🇷 فرنسية</span>
                                 </label>
                                 <label
                                     class="flex items-center gap-1.5 cursor-pointer hover:bg-yellow-50 px-2 py-1 rounded transition">
-                                    <input type="checkbox" name="language[]" value="spanish" {{ in_array('spanish', (array) request('language', [])) ? 'checked' : '' }}
+                                    <input type="checkbox" name="language[]" value="spanish" <?php echo e(in_array('spanish', (array) request('language', [])) ? 'checked' : ''); ?>
+
                                         class="rounded border-gray-300 text-yellow-500">
                                     <span class="text-sm">🇪🇸 إسبانية</span>
                                 </label>
                                 <label
                                     class="flex items-center gap-1.5 cursor-pointer hover:bg-yellow-50 px-2 py-1 rounded transition">
-                                    <input type="checkbox" name="language[]" value="italian" {{ in_array('italian', (array) request('language', [])) ? 'checked' : '' }}
+                                    <input type="checkbox" name="language[]" value="italian" <?php echo e(in_array('italian', (array) request('language', [])) ? 'checked' : ''); ?>
+
                                         class="rounded border-gray-300 text-yellow-500">
                                     <span class="text-sm">🇮🇹 إيطالية</span>
                                 </label>
                                 <label
                                     class="flex items-center gap-1.5 cursor-pointer hover:bg-yellow-50 px-2 py-1 rounded transition">
-                                    <input type="checkbox" name="language[]" value="russian" {{ in_array('russian', (array) request('language', [])) ? 'checked' : '' }}
+                                    <input type="checkbox" name="language[]" value="russian" <?php echo e(in_array('russian', (array) request('language', [])) ? 'checked' : ''); ?>
+
                                         class="rounded border-gray-300 text-yellow-500">
                                     <span class="text-sm">🇷🇺 روسية</span>
                                 </label>
                                 <label
                                     class="flex items-center gap-1.5 cursor-pointer hover:bg-yellow-50 px-2 py-1 rounded transition">
-                                    <input type="checkbox" name="language[]" value="russian" {{ in_array('russian', (array) request('language', [])) ? 'checked' : '' }}
+                                    <input type="checkbox" name="language[]" value="russian" <?php echo e(in_array('russian', (array) request('language', [])) ? 'checked' : ''); ?>
+
                                         class="rounded border-gray-300 text-yellow-500">
                                     <span class="text-sm"> KRكوريا</span>
                                 </label>
                                 <label
                                     class="flex items-center gap-1.5 cursor-pointer hover:bg-yellow-50 px-2 py-1 rounded transition">
-                                    <input type="checkbox" name="language[]" value="russian" {{ in_array('russian', (array) request('language', [])) ? 'checked' : '' }}
+                                    <input type="checkbox" name="language[]" value="russian" <?php echo e(in_array('russian', (array) request('language', [])) ? 'checked' : ''); ?>
+
                                         class="rounded border-gray-300 text-yellow-500">
                                     <span class="text-sm">CH صينية</span>
                                 </label>
                                 <label
                                     class="flex items-center gap-1.5 cursor-pointer hover:bg-yellow-50 px-2 py-1 rounded transition">
-                                    <input type="checkbox" name="language[]" value="russian" {{ in_array('russian', (array) request('language', [])) ? 'checked' : '' }}
+                                    <input type="checkbox" name="language[]" value="russian" <?php echo e(in_array('russian', (array) request('language', [])) ? 'checked' : ''); ?>
+
                                         class="rounded border-gray-300 text-yellow-500">
                                     <span class="text-sm">AM أرمينية </span>
                                 </label>
@@ -227,13 +257,13 @@
                         <!-- الكلية (مع دعم البحث الجزئي) -->
                         <div>
                             <label class="block text-gray-700 font-semibold mb-2 text-sm">🎓 الكلية</label>
-                            <input type="text" name="college" value="{{ request('college') }}"
+                            <input type="text" name="college" value="<?php echo e(request('college')); ?>"
                                 placeholder="اكتب اسم الكلية" list="collegeSuggestions"
                                 class="w-full px-4 py-2.5 border border-gray-300 rounded-xl focus:border-yellow-500 focus:ring-2 focus:ring-yellow-200 focus:outline-none transition">
                             <datalist id="collegeSuggestions">
-                                @foreach($colleges as $college)
-                                    <option value="{{ $college->name_ar }}">
-                                @endforeach
+                                <?php $__currentLoopData = $colleges; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $college): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                    <option value="<?php echo e($college->name_ar); ?>">
+                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                             </datalist>
                             <p class="text-xs text-gray-400 mt-1">يمكنك البحث بجزء من الاسم</p>
                         </div>
@@ -241,13 +271,13 @@
                         <!-- المعهد (مع دعم البحث الجزئي) -->
                         <div>
                             <label class="block text-gray-700 font-semibold mb-2 text-sm">📚 المعهد</label>
-                            <input type="text" name="institute" value="{{ request('institute') }}"
+                            <input type="text" name="institute" value="<?php echo e(request('institute')); ?>"
                                 placeholder="اكتب اسم المعهد" list="instituteSuggestions"
                                 class="w-full px-4 py-2.5 border border-gray-300 rounded-xl focus:border-yellow-500 focus:ring-2 focus:ring-yellow-200 focus:outline-none transition">
                             <datalist id="instituteSuggestions">
-                                @foreach($institutes as $institute)
-                                    <option value="{{ $institute->name_ar }}">
-                                @endforeach
+                                <?php $__currentLoopData = $institutes; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $institute): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                    <option value="<?php echo e($institute->name_ar); ?>">
+                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                             </datalist>
                             <p class="text-xs text-gray-400 mt-1">يمكنك البحث بجزء من الاسم</p>
                         </div>
@@ -260,9 +290,9 @@
                             <label class="block text-gray-700 font-semibold mb-2 text-sm">📊 الترتيب حسب</label>
                             <select name="sort"
                                 class="w-full px-4 py-2.5 border border-gray-300 rounded-xl focus:border-yellow-500 focus:ring-2 focus:ring-yellow-200 focus:outline-none transition">
-                                <option value="rank_local" {{ request('sort') == 'rank_local' ? 'selected' : '' }}>📈
+                                <option value="rank_local" <?php echo e(request('sort') == 'rank_local' ? 'selected' : ''); ?>>📈
                                     الترتيب المحلي</option>
-                                <option value="name_ar" {{ request('sort') == 'name_ar' ? 'selected' : '' }}>🔤 الاسم
+                                <option value="name_ar" <?php echo e(request('sort') == 'name_ar' ? 'selected' : ''); ?>>🔤 الاسم
                                     (أ-ي)</option>
                             </select>
                         </div>
@@ -272,10 +302,10 @@
                             <label class="block text-gray-700 font-semibold mb-2 text-sm">🔢 عدد النتائج</label>
                             <select name="per_page"
                                 class="w-full px-4 py-2.5 border border-gray-300 rounded-xl focus:border-yellow-500 focus:ring-2 focus:ring-yellow-200 focus:outline-none transition">
-                                <option value="12" {{ request('per_page') == '12' ? 'selected' : '' }}>12 جامعة</option>
-                                <option value="24" {{ request('per_page') == '24' ? 'selected' : '' }}>24 جامعة</option>
-                                <option value="48" {{ request('per_page') == '48' ? 'selected' : '' }}>48 جامعة</option>
-                                <option value="all" {{ request('per_page') == 'all' ? 'selected' : '' }}>جميع الجامعات
+                                <option value="12" <?php echo e(request('per_page') == '12' ? 'selected' : ''); ?>>12 جامعة</option>
+                                <option value="24" <?php echo e(request('per_page') == '24' ? 'selected' : ''); ?>>24 جامعة</option>
+                                <option value="48" <?php echo e(request('per_page') == '48' ? 'selected' : ''); ?>>48 جامعة</option>
+                                <option value="all" <?php echo e(request('per_page') == 'all' ? 'selected' : ''); ?>>جميع الجامعات
                                 </option>
                             </select>
                         </div>
@@ -287,7 +317,7 @@
                             class="flex-1 bg-gradient-to-r from-yellow-500 to-yellow-600 hover:from-yellow-600 hover:to-yellow-700 text-white font-bold py-3 rounded-xl transition duration-300 shadow-md hover:shadow-lg">
                             🔍 بحث
                         </button>
-                        <a href="{{ route('universities.index') }}"
+                        <a href="<?php echo e(route('universities.index')); ?>"
                             class="flex-1 bg-gray-100 hover:bg-gray-200 text-gray-700 font-bold py-3 rounded-xl text-center transition duration-300 border border-gray-200">
                             🔄 إعادة تعيين
                         </a>
@@ -412,9 +442,9 @@
                 }
             </style>
             <!-- Universities Grid -->
-            @if($universities->count() > 0)
+            <?php if($universities->count() > 0): ?>
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
-                    @foreach($universities as $university)
+                    <?php $__currentLoopData = $universities; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $university): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                         <div
                             class="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
 
@@ -423,24 +453,25 @@
                                 <div class="relative group">
                                     <div
                                         class="w-24 h-24 rounded-full bg-white shadow-md overflow-hidden flex items-center justify-center border-2 border-gray-100">
-                                        @if($university->logo)
-                                            <img src="{{ asset('storage/' . $university->logo) }}" loading="lazy"
-                                                alt="{{ $university->name_ar }}"
+                                        <?php if($university->logo): ?>
+                                            <img src="<?php echo e(asset('storage/' . $university->logo)); ?>" loading="lazy"
+                                                alt="<?php echo e($university->name_ar); ?>"
                                                 class="w-full h-full object-cover group-hover:scale-110 transition duration-300">
-                                        @else
+                                        <?php else: ?>
                                             <div
                                                 class="w-full h-full bg-gradient-to-br from-yellow-400 to-yellow-500 flex items-center justify-center">
                                                 <span
-                                                    class="text-white text-xl font-bold">{{ mb_substr($university->name_ar, 0, 2) }}</span>
+                                                    class="text-white text-xl font-bold"><?php echo e(mb_substr($university->name_ar, 0, 2)); ?></span>
                                             </div>
-                                        @endif
+                                        <?php endif; ?>
                                     </div>
 
                                     <!-- Type Badge (أسفل الشعار مباشرة) -->
                                     <div class="absolute -bottom-3 left-1/2 transform -translate-x-1/2 whitespace-nowrap">
                                         <span
-                                            class="px-2 py-0.5 rounded-full text-white text-xs font-bold shadow-md {{ $university->type == 'public' ? 'bg-blue-500' : 'bg-purple-500' }}">
-                                            {{ $university->type == 'public' ? '🏛️ حكومية' : '🏢 خاصة' }}
+                                            class="px-2 py-0.5 rounded-full text-white text-xs font-bold shadow-md <?php echo e($university->type == 'public' ? 'bg-blue-500' : 'bg-purple-500'); ?>">
+                                            <?php echo e($university->type == 'public' ? '🏛️ حكومية' : '🏢 خاصة'); ?>
+
                                         </span>
                                     </div>
                                 </div>
@@ -450,9 +481,10 @@
                             <div class="p-4 pt-6">
                                 <!-- University Name -->
                                 <h3 class="text-md font-bold text-gray-800 text-center line-clamp-2 leading-tight">
-                                    {{ $university->name_ar }}
+                                    <?php echo e($university->name_ar); ?>
+
                                 </h3>
-                                <p class="text-gray-500 text-xs text-center mt-1">{{ $university->name_tr }}</p>
+                                <p class="text-gray-500 text-xs text-center mt-1"><?php echo e($university->name_tr); ?></p>
 
                                 <!-- Divider -->
                                 <div class="border-t border-gray-100 my-3"></div>
@@ -465,57 +497,58 @@
                                                 d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z"
                                                 clip-rule="evenodd"></path>
                                         </svg>
-                                        <span>{{ $university->city }}</span>
+                                        <span><?php echo e($university->city); ?></span>
                                     </div>
-                                    @if($university->rank_local)
+                                    <?php if($university->rank_local): ?>
                                         <div class="flex items-center gap-1">
                                             <svg class="w-3 h-3 text-yellow-500" fill="currentColor" viewBox="0 0 20 20">
                                                 <path
                                                     d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z">
                                                 </path>
                                             </svg>
-                                            <span>#{{ $university->rank_local }}</span>
+                                            <span>#<?php echo e($university->rank_local); ?></span>
                                         </div>
-                                    @endif
+                                    <?php endif; ?>
                                 </div>
 
                                 <!-- Languages Badges (مختصرة) -->
-                                @php
+                                <?php
                                     $langs = is_array($university->languages) ? $university->languages : json_decode($university->languages, true);
                                     $langMap = ['turkish' => '🇹🇷', 'english' => '🇬🇧', 'arabic' => '🇸🇦', 'german' => '🇩🇪', 'french' => '🇫🇷', 'spanish' => '🇪🇸', 'italian' => '🇮🇹', 'russian' => '🇷🇺'];
-                                @endphp
-                                @if(is_array($langs) && count($langs) > 0)
+                                ?>
+                                <?php if(is_array($langs) && count($langs) > 0): ?>
                                     <div class="flex justify-center gap-1 mb-3">
-                                        @foreach(array_slice($langs, 0, 4) as $lang)
+                                        <?php $__currentLoopData = array_slice($langs, 0, 4); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $lang): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                             <span
-                                                class="text-xs bg-gray-100 rounded-full px-2 py-0.5">{{ $langMap[$lang] ?? substr($lang, 0, 2) }}</span>
-                                        @endforeach
+                                                class="text-xs bg-gray-100 rounded-full px-2 py-0.5"><?php echo e($langMap[$lang] ?? substr($lang, 0, 2)); ?></span>
+                                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                     </div>
-                                @endif
+                                <?php endif; ?>
 
                                 <!-- Action Buttons -->
                                 <div class="flex gap-2 mt-2">
-                                    <a href="{{ route('universities.show', $university->id) }}"
+                                    <a href="<?php echo e(route('universities.show', $university->id)); ?>"
                                         class="flex-1 bg-yellow-500 hover:bg-yellow-600 text-white font-semibold py-1.5 px-3 rounded-lg text-xs text-center transition duration-300">
                                         التفاصيل
                                     </a>
-                                    @if($university->website)
-                                        <a href="{{ $university->website }}" target="_blank"
+                                    <?php if($university->website): ?>
+                                        <a href="<?php echo e($university->website); ?>" target="_blank"
                                             class="flex-1 bg-gray-100 hover:bg-gray-200 text-gray-600 font-semibold py-1.5 px-3 rounded-lg text-xs text-center transition duration-300">
                                             🌐 الموقع
                                         </a>
-                                    @endif
+                                    <?php endif; ?>
                                 </div>
                             </div>
                         </div>
-                    @endforeach
+                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                 </div>
 
                 <!-- Pagination -->
                 <div class="flex justify-center mb-12">
-                    {{ $universities->appends(request()->all())->links() }}
+                    <?php echo e($universities->appends(request()->all())->links()); ?>
+
                 </div>
-            @else
+            <?php else: ?>
                 <!-- No Results -->
                 <div class="bg-white rounded-lg shadow-lg p-12 text-center">
                     <svg class="w-24 h-24 mx-auto text-gray-400 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -524,12 +557,12 @@
                     </svg>
                     <h3 class="text-2xl font-bold text-gray-800 mb-2">لم يتم العثور على جامعات</h3>
                     <p class="text-gray-600 mb-6">جرب تغيير معايير البحث والتصفية</p>
-                    <a href="{{ route('universities.index') }}"
+                    <a href="<?php echo e(route('universities.index')); ?>"
                         class="inline-block bg-gradient-to-r from-yellow-500 to-yellow-600 hover:from-yellow-600 hover:to-yellow-700 text-white font-bold py-2 px-6 rounded-lg transition">
                         إعادة تعيين الفلاتر
                     </a>
                 </div>
-            @endif
+            <?php endif; ?>
         </div>
     </div>
 
@@ -539,7 +572,26 @@
             <p>&copy; 2026 الهلال للاستشارات التعليمية. جميع الحقوق محفوظة.</p>
         </div>
     </footer>
-    <x-floating-whatsapp />
+    <?php if (isset($component)) { $__componentOriginal67d5d5978c3922da5619d6ebcc86c174 = $component; } ?>
+<?php if (isset($attributes)) { $__attributesOriginal67d5d5978c3922da5619d6ebcc86c174 = $attributes; } ?>
+<?php $component = Illuminate\View\AnonymousComponent::resolve(['view' => 'components.floating-whatsapp','data' => []] + (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag ? $attributes->all() : [])); ?>
+<?php $component->withName('floating-whatsapp'); ?>
+<?php if ($component->shouldRender()): ?>
+<?php $__env->startComponent($component->resolveView(), $component->data()); ?>
+<?php if (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag): ?>
+<?php $attributes = $attributes->except(\Illuminate\View\AnonymousComponent::ignoredParameterNames()); ?>
+<?php endif; ?>
+<?php $component->withAttributes([]); ?>
+<?php echo $__env->renderComponent(); ?>
+<?php endif; ?>
+<?php if (isset($__attributesOriginal67d5d5978c3922da5619d6ebcc86c174)): ?>
+<?php $attributes = $__attributesOriginal67d5d5978c3922da5619d6ebcc86c174; ?>
+<?php unset($__attributesOriginal67d5d5978c3922da5619d6ebcc86c174); ?>
+<?php endif; ?>
+<?php if (isset($__componentOriginal67d5d5978c3922da5619d6ebcc86c174)): ?>
+<?php $component = $__componentOriginal67d5d5978c3922da5619d6ebcc86c174; ?>
+<?php unset($__componentOriginal67d5d5978c3922da5619d6ebcc86c174); ?>
+<?php endif; ?>
 </body>
 
-</html>
+</html><?php /**PATH C:\laragon\www\testProject\resources\views/universities/index.blade.php ENDPATH**/ ?>
