@@ -54,7 +54,9 @@
     <!-- ✅ Favicon -->
     <link rel="icon" type="image/png" href="{{ asset('favicon.ico') }}">
     <link rel="apple-touch-icon" href="{{ asset('images/logo.png') }}">
+    <!-- Swiper CSS -->
 
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
     <!-- ✅ CSS & Fonts -->
     @vite(['resources/css/app.css', 'resources/js/app.js'], 'build')
     <script src="https://cdn.tailwindcss.com"></script>
@@ -113,6 +115,8 @@
             animation: ping 1.5s cubic-bezier(0, 0, 0.2, 1) infinite;
         }
     </style>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+@stack('scripts')
 </body>
 
 </html>

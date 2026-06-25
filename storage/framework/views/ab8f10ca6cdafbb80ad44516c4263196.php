@@ -18,7 +18,7 @@
                     <span
                         class="absolute bottom-0 right-0 w-0 h-1 bg-yellow-600 group-hover:w-full transition-all duration-300"></span>
                 </a>
-                <a href="#about"
+                <a href="<?php echo e(url('/#about')); ?>"
                     class="text-gray-700 hover:text-yellow-600 font-semibold transition-colors duration-300 relative group"
                     style="font-family: 'Cairo', 'Segoe UI', sans-serif;">
                     من نحن
@@ -138,7 +138,7 @@
                     </div>
                 </div>
 
-                <a href="#contact"
+                <a href="<?php echo e(url('/#contact')); ?>"
                     class="text-gray-700 hover:text-yellow-600 font-semibold transition-colors duration-300 relative group"
                     style="font-family: 'Cairo', 'Segoe UI', sans-serif;">
                     اتصل بنا

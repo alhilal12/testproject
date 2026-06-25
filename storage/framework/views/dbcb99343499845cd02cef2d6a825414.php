@@ -21,6 +21,26 @@
 <?php $component = $__componentOriginala038281ce129721dd88a49670137597b; ?>
 <?php unset($__componentOriginala038281ce129721dd88a49670137597b); ?>
 <?php endif; ?>
+    <?php if (isset($component)) { $__componentOriginalc2030428a07c75ace9f222ae7a4b2722 = $component; } ?>
+<?php if (isset($attributes)) { $__attributesOriginalc2030428a07c75ace9f222ae7a4b2722 = $attributes; } ?>
+<?php $component = App\View\Components\AnnouncementsSlider::resolve([] + (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag ? $attributes->all() : [])); ?>
+<?php $component->withName('announcements-slider'); ?>
+<?php if ($component->shouldRender()): ?>
+<?php $__env->startComponent($component->resolveView(), $component->data()); ?>
+<?php if (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag): ?>
+<?php $attributes = $attributes->except(\App\View\Components\AnnouncementsSlider::ignoredParameterNames()); ?>
+<?php endif; ?>
+<?php $component->withAttributes([]); ?>
+<?php echo $__env->renderComponent(); ?>
+<?php endif; ?>
+<?php if (isset($__attributesOriginalc2030428a07c75ace9f222ae7a4b2722)): ?>
+<?php $attributes = $__attributesOriginalc2030428a07c75ace9f222ae7a4b2722; ?>
+<?php unset($__attributesOriginalc2030428a07c75ace9f222ae7a4b2722); ?>
+<?php endif; ?>
+<?php if (isset($__componentOriginalc2030428a07c75ace9f222ae7a4b2722)): ?>
+<?php $component = $__componentOriginalc2030428a07c75ace9f222ae7a4b2722; ?>
+<?php unset($__componentOriginalc2030428a07c75ace9f222ae7a4b2722); ?>
+<?php endif; ?>
     <?php if (isset($component)) { $__componentOriginal2f906c7b72b7f488716a138bd805a1ae = $component; } ?>
 <?php if (isset($attributes)) { $__attributesOriginal2f906c7b72b7f488716a138bd805a1ae = $attributes; } ?>
 <?php $component = Illuminate\View\AnonymousComponent::resolve(['view' => 'components.about-section','data' => []] + (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag ? $attributes->all() : [])); ?>

@@ -40,7 +40,7 @@
                                     <td class="py-3 px-4"><?php echo e($article->id); ?></td>
                                     <td class="py-3 px-4">
                                         <?php if($article->image): ?>
-                                            <img src="<?php echo e(asset('storage/' . $article->image)); ?>"
+                                            <img src="<?php echo e(asset('storage/' . $article->image)); ?>" loading="lazy"
                                                 class="w-12 h-12 rounded-lg object-cover">
                                         <?php else: ?>
                                             <div

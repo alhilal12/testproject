@@ -18,7 +18,7 @@ use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\UniversityQuotaController;
 use App\Http\Controllers\Admin\CountryRecognitionController;
 use App\Models\Setting;
-
+use App\Http\Controllers\Admin\AnnouncementController;
 // ========================
 // الصفحة الرئيسية
 // ========================
@@ -81,18 +81,19 @@ Route::middleware(['auth'])->group(function () {
 Route::middleware(['auth', 'role:admin,super_admin'])->prefix('consultant')->group(function () {
     // dashboard
     Route::get('/dashboard', [ConsultantController::class, 'dashboard'])->name('consultant.dashboard');
-    
     // الاستشارات والردود
     Route::get('/consultation/{id}/reply', [ConsultantController::class, 'showReplyForm'])->name('consultant.reply.form');
     Route::post('/consultation/{id}/reply', [ConsultantController::class, 'reply'])->name('consultant.reply');
     Route::put('/consultation/{id}/status', [ConsultantController::class, 'updateStatus'])->name('consultant.update-status');
-    
+    // الاعلانات 
+    Route::get('announcements', [AnnouncementController::class, 'index'])->name('admin.announcements.index');
     // المستندات والتقارير
     Route::get('/students-documents', [ConsultantController::class, 'studentsDocuments'])->name('consultant.students-documents');
     Route::post('/documents/{id}/verify', [ConsultantController::class, 'verifyDocument'])->name('consultant.verify-document');
     Route::delete('/documents/{id}', [ConsultantController::class, 'deleteDocument'])->name('consultant.delete-document');
     Route::get('/contact-messages', [ConsultantController::class, 'contactMessages'])->name('consultant.contact-messages');
     Route::get('/reports', [ConsultantController::class, 'reports'])->name('consultant.reports');
+   
     
     //  إعدادات التواصل -   
     Route::get('/contact-config', function () {
@@ -137,6 +138,7 @@ Route::get('/universities/{id}/recognitions', [CountryRecognitionController::cla
     
     Route::delete('/universities/{id}/recognitions/{recognitionId}', [CountryRecognitionController::class, 'destroy'])
         ->name('universities.recognitions.destroy');
+
 });
 
 // ========================
@@ -197,6 +199,17 @@ Route::get('/storage-link', function () {
     }
     symlink($target, $link);
     return 'Storage link created successfully!';
+});
+// ========================
+// إدارة الإعلانات (Announcements) - حل نهائي
+// ========================
+Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () {
+    Route::get('announcements', [App\Http\Controllers\Admin\AnnouncementController::class, 'index'])->name('announcements.index');
+    Route::get('announcements/create', [App\Http\Controllers\Admin\AnnouncementController::class, 'create'])->name('announcements.create');
+    Route::post('announcements', [App\Http\Controllers\Admin\AnnouncementController::class, 'store'])->name('announcements.store');
+    Route::get('announcements/{announcement}/edit', [App\Http\Controllers\Admin\AnnouncementController::class, 'edit'])->name('announcements.edit');
+    Route::put('announcements/{announcement}', [App\Http\Controllers\Admin\AnnouncementController::class, 'update'])->name('announcements.update');
+    Route::delete('announcements/{announcement}', [App\Http\Controllers\Admin\AnnouncementController::class, 'destroy'])->name('announcements.destroy');
 });
 
 require __DIR__.'/auth.php';

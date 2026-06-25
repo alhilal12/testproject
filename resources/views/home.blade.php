@@ -5,6 +5,7 @@
 
 @section('content')
     <x-hero-section />
+    <x-announcements-slider />
     <x-about-section />
     <x-universities-cards-section :universities="$universities ?? []" :showViewAllButton="true" />
     {{-- <x-team-section /> --}}

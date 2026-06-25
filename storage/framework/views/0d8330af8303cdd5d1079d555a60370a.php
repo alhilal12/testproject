@@ -54,7 +54,9 @@
     <!-- ✅ Favicon -->
     <link rel="icon" type="image/png" href="<?php echo e(asset('favicon.ico')); ?>">
     <link rel="apple-touch-icon" href="<?php echo e(asset('images/logo.png')); ?>">
+    <!-- Swiper CSS -->
 
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
     <!-- ✅ CSS & Fonts -->
     <?php echo app('Illuminate\Foundation\Vite')(['resources/css/app.css', 'resources/js/app.js'], 'build'); ?>
     <script src="https://cdn.tailwindcss.com"></script>
@@ -151,6 +153,8 @@
             animation: ping 1.5s cubic-bezier(0, 0, 0.2, 1) infinite;
         }
     </style>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+<?php echo $__env->yieldPushContent('scripts'); ?>
 </body>
 
 </html><?php /**PATH C:\laragon\www\testProject\resources\views/layouts/app.blade.php ENDPATH**/ ?>
