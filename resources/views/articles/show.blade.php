@@ -113,6 +113,27 @@
             background-color: #f3f4f6;
             font-weight: 700;
         }
+<<<<<<< HEAD
+=======
+
+        /*  */
+        .dark {
+            background-color: #1a202c;
+            color: #e2e8f0;
+        }
+
+        .dark .bg-white {
+            background-color: #2d3748 !important;
+        }
+
+        .dark .text-gray-800 {
+            color: #e2e8f0 !important;
+        }
+
+        .dark .border-gray-200 {
+            border-color: #4a5568 !important;
+        }
+>>>>>>> 802ca6c7c538885cf52bd2da882caf0c2e0fea4a
     </style>
 </head>
 
@@ -285,6 +306,28 @@
         }
     </style>
     <x-floating-whatsapp />
+<<<<<<< HEAD
+=======
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const toggle = document.getElementById('darkModeToggle');
+            const icon = document.getElementById('darkModeIcon');
+
+            if (localStorage.getItem('darkMode') === 'true') {
+                document.documentElement.classList.add('dark');
+                if (icon) icon.textContent = '☀️';
+            }
+
+            if (toggle) {
+                toggle.addEventListener('click', function () {
+                    const isDark = document.documentElement.classList.toggle('dark');
+                    localStorage.setItem('darkMode', isDark);
+                    if (icon) icon.textContent = isDark ? '☀️' : '🌙';
+                });
+            }
+        });
+    </script>
+>>>>>>> 802ca6c7c538885cf52bd2da882caf0c2e0fea4a
 </body>
 
 </html>

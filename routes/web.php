@@ -31,6 +31,10 @@ Route::get('/lang/{locale}', function ($locale) {
     return redirect()->back();
 })->name('lang.switch');
 
+use App\Http\Controllers\Admin\AnnouncementController;
+// ========================
+// الصفحة الرئيسية
+// ========================
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
 // ========================
@@ -70,15 +74,15 @@ Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 // صفحات المستخدم المسجل (Auth Required)
 // ========================
 Route::middleware(['auth'])->group(function () {
-    
+
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
-    
-  
-    
+
+
+
     Route::get('/consultation/start', function () {
         return view('consultation.start');
     })->name('consultation.start');
-    
+
     Route::get('/consultation/create', [ConsultationController::class, 'create'])->name('consultation.create');
     Route::post('/consultation/store', [ConsultationController::class, 'store'])->name('consultation.store');
     Route::get('/consultation/{id}', [ConsultationController::class, 'show'])->name('consultation.show');
@@ -90,27 +94,39 @@ Route::middleware(['auth'])->group(function () {
 Route::middleware(['auth', 'role:admin,super_admin'])->prefix('consultant')->group(function () {
     // dashboard
     Route::get('/dashboard', [ConsultantController::class, 'dashboard'])->name('consultant.dashboard');
-    
+<<<<<<< HEAD
+
+=======
+>>>>>>> 802ca6c7c538885cf52bd2da882caf0c2e0fea4a
     // الاستشارات والردود
     Route::get('/consultation/{id}/reply', [ConsultantController::class, 'showReplyForm'])->name('consultant.reply.form');
     Route::post('/consultation/{id}/reply', [ConsultantController::class, 'reply'])->name('consultant.reply');
     Route::put('/consultation/{id}/status', [ConsultantController::class, 'updateStatus'])->name('consultant.update-status');
-    
+<<<<<<< HEAD
+
+=======
+    // الاعلانات
+    Route::get('announcements', [AnnouncementController::class, 'index'])->name('admin.announcements.index');
+>>>>>>> 802ca6c7c538885cf52bd2da882caf0c2e0fea4a
     // المستندات والتقارير
     Route::get('/students-documents', [ConsultantController::class, 'studentsDocuments'])->name('consultant.students-documents');
     Route::post('/documents/{id}/verify', [ConsultantController::class, 'verifyDocument'])->name('consultant.verify-document');
     Route::delete('/documents/{id}', [ConsultantController::class, 'deleteDocument'])->name('consultant.delete-document');
     Route::get('/contact-messages', [ConsultantController::class, 'contactMessages'])->name('consultant.contact-messages');
     Route::get('/reports', [ConsultantController::class, 'reports'])->name('consultant.reports');
-    
-    //  إعدادات التواصل -   
+<<<<<<< HEAD
+=======
+
+>>>>>>> 802ca6c7c538885cf52bd2da882caf0c2e0fea4a
+
+    //  إعدادات التواصل -
     Route::get('/contact-config', function () {
         return view('consultant.settings');
     })->name('consultant.contact.config');
-    
+
    Route::post('/contact-config', function () {
     $data = request()->except('_token');
-    
+
     foreach ($data as $key => $value) {
         // ✅ فقط إذا كانت القيمة غير فارغة
         if ($value !== null && $value !== '') {
@@ -120,12 +136,12 @@ Route::middleware(['auth', 'role:admin,super_admin'])->prefix('consultant')->gro
             );
         }
     }
-    
+
     return back()->with('success', 'تم تحديث معلومات الاتصال بنجاح');
 })->name('consultant.contact.config.update');
-  
-    
-}); 
+
+
+});
 // ========================
 // صفحات إدارة الجامعات (للمدير فقط)
 // ========================
@@ -140,12 +156,16 @@ Route::middleware(['auth', 'role:admin,super_admin'])->prefix('admin')->name('ad
     // ✅ أضف هذه Routes للدول المعترف بها
 Route::get('/universities/{id}/recognitions', [CountryRecognitionController::class, 'index'])
         ->name('universities.recognitions');
-    
+
     Route::post('/universities/{id}/recognitions', [CountryRecognitionController::class, 'store'])
         ->name('universities.recognitions.store');
-    
+
     Route::delete('/universities/{id}/recognitions/{recognitionId}', [CountryRecognitionController::class, 'destroy'])
         ->name('universities.recognitions.destroy');
+<<<<<<< HEAD
+=======
+
+>>>>>>> 802ca6c7c538885cf52bd2da882caf0c2e0fea4a
 });
 
 // ========================
@@ -170,13 +190,13 @@ Route::middleware(['auth'])->group(function () {
 });
 
 // ========================
-// المستندات 
+// المستندات
 // ========================
 Route::middleware(['auth'])->group(function () {
     Route::get('/my-documents', [DocumentController::class, 'index'])->name('documents.index');
     Route::post('/my-documents/upload', [DocumentController::class, 'upload'])->name('documents.upload');
     Route::delete('/my-documents/{id}', [DocumentController::class, 'destroy'])->name('documents.destroy');
-    
+
 });
 
 // ========================
@@ -197,7 +217,7 @@ Route::post('/universities/{id}/colleges', [App\Http\Controllers\Admin\Universit
 Route::post('/universities/{id}/institutes', [App\Http\Controllers\Admin\UniversityManagementController::class, 'saveInstitutes']);
 Route::delete('/colleges/{collegeId}/majors/{majorId}', [App\Http\Controllers\Admin\UniversityManagementController::class, 'removeMajorFromCollege']);
 Route::delete('/institutes/{instituteId}/majors/{majorId}', [App\Http\Controllers\Admin\UniversityManagementController::class, 'removeMajorFromInstitute']);
-// 
+//
 Route::get('/storage-link', function () {
     $target = storage_path('app/public');
     $link = public_path('storage');
@@ -207,5 +227,19 @@ Route::get('/storage-link', function () {
     symlink($target, $link);
     return 'Storage link created successfully!';
 });
+<<<<<<< HEAD
+=======
+// ========================
+// إدارة الإعلانات (Announcements) - حل نهائي
+// ========================
+Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () {
+    Route::get('announcements', [App\Http\Controllers\Admin\AnnouncementController::class, 'index'])->name('announcements.index');
+    Route::get('announcements/create', [App\Http\Controllers\Admin\AnnouncementController::class, 'create'])->name('announcements.create');
+    Route::post('announcements', [App\Http\Controllers\Admin\AnnouncementController::class, 'store'])->name('announcements.store');
+    Route::get('announcements/{announcement}/edit', [App\Http\Controllers\Admin\AnnouncementController::class, 'edit'])->name('announcements.edit');
+    Route::put('announcements/{announcement}', [App\Http\Controllers\Admin\AnnouncementController::class, 'update'])->name('announcements.update');
+    Route::delete('announcements/{announcement}', [App\Http\Controllers\Admin\AnnouncementController::class, 'destroy'])->name('announcements.destroy');
+});
+>>>>>>> 802ca6c7c538885cf52bd2da882caf0c2e0fea4a
 
 require __DIR__.'/auth.php';

@@ -14,6 +14,7 @@
                 <a href="{{ route('home') }}"
                     class="text-gray-700 hover:text-yellow-600 font-semibold transition-colors duration-300 relative group"
                     style="font-family: 'Cairo', 'Segoe UI', sans-serif;">
+<<<<<<< HEAD
                     {{ __('messages.home') }}
                     <span
                         class="absolute bottom-0 right-0 w-0 h-1 bg-yellow-600 group-hover:w-full transition-all duration-300"></span>
@@ -22,6 +23,16 @@
                     class="text-gray-700 hover:text-yellow-600 font-semibold transition-colors duration-300 relative group"
                     style="font-family: 'Cairo', 'Segoe UI', sans-serif;">
                     {{ __('messages.about') }}
+=======
+                    الرئيسية
+                    <span
+                        class="absolute bottom-0 right-0 w-0 h-1 bg-yellow-600 group-hover:w-full transition-all duration-300"></span>
+                </a>
+                <a href="{{ url('/#about') }}"
+                    class="text-gray-700 hover:text-yellow-600 font-semibold transition-colors duration-300 relative group"
+                    style="font-family: 'Cairo', 'Segoe UI', sans-serif;">
+                    من نحن
+>>>>>>> 802ca6c7c538885cf52bd2da882caf0c2e0fea4a
                     <span
                         class="absolute bottom-0 right-0 w-0 h-1 bg-yellow-600 group-hover:w-full transition-all duration-300"></span>
                 </a>
@@ -29,7 +40,11 @@
                 <div class="relative group">
                     <button
                         class="text-gray-700 hover:text-yellow-600 font-semibold transition-colors duration-300 flex items-center gap-1">
+<<<<<<< HEAD
                         {{ __('messages.universities') }}
+=======
+                        الجامعات
+>>>>>>> 802ca6c7c538885cf52bd2da882caf0c2e0fea4a
                         <svg class="w-4 h-4 transition-transform group-hover:rotate-180" fill="none"
                             stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7">
@@ -42,7 +57,11 @@
                         <!-- ✅ جميع الجامعات -->
                         <a href="{{ route('universities.index') }}"
                             class="block px-4 py-2 text-gray-700 hover:bg-yellow-50 hover:text-yellow-600 rounded-t-lg transition">
+<<<<<<< HEAD
                             {{ __('messages.all_universities') }}
+=======
+                            جميع الجامعات
+>>>>>>> 802ca6c7c538885cf52bd2da882caf0c2e0fea4a
                         </a>
 
                         <!-- خط فاصل -->
@@ -50,12 +69,20 @@
 
                         <a href="{{ route('universities.index', ['type' => 'public']) }}"
                             class="block px-4 py-2 text-gray-700 hover:bg-yellow-50 hover:text-yellow-600 transition">
+<<<<<<< HEAD
                             {{ __('messages.public_universities') }}
+=======
+                            جامعات حكومية
+>>>>>>> 802ca6c7c538885cf52bd2da882caf0c2e0fea4a
                         </a>
 
                         <a href="{{ route('universities.index', ['type' => 'private']) }}"
                             class="block px-4 py-2 text-gray-700 hover:bg-yellow-50 hover:text-yellow-600 transition">
+<<<<<<< HEAD
                             {{ __('messages.private_universities') }}
+=======
+                            جامعات خاصة
+>>>>>>> 802ca6c7c538885cf52bd2da882caf0c2e0fea4a
                         </a>
 
                         <!-- خط فاصل -->
@@ -63,12 +90,20 @@
 
                         <a href="{{ route('universities.ranking') }}"
                             class="block px-4 py-2 text-gray-700 hover:bg-yellow-50 hover:text-yellow-600 transition">
+<<<<<<< HEAD
                             {{ __('messages.ranking') }}
+=======
+                            ترتيب الجامعات
+>>>>>>> 802ca6c7c538885cf52bd2da882caf0c2e0fea4a
                         </a>
 
                         <a href="{{ route('universities.recognitions') }}"
                             class="block px-4 py-2 text-gray-700 hover:bg-yellow-50 hover:text-yellow-600 rounded-b-lg transition">
+<<<<<<< HEAD
                             {{ __('messages.recognitions') }}
+=======
+                            الجامعات المعترف بها
+>>>>>>> 802ca6c7c538885cf52bd2da882caf0c2e0fea4a
                         </a>
 
                     </div>
@@ -79,7 +114,11 @@
                 <div class="relative group">
                     <button
                         class="text-gray-700 hover:text-yellow-600 font-semibold transition-colors duration-300 flex items-center gap-1">
+<<<<<<< HEAD
                         {{ __('messages.quotas') }}
+=======
+                        التقويم الأكاديمي
+>>>>>>> 802ca6c7c538885cf52bd2da882caf0c2e0fea4a
                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7">
                             </path>
@@ -89,11 +128,19 @@
                         class="absolute right-0 mt-2 w-56 bg-white rounded-lg shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50">
                         <a href="{{ route('university-quotas.index', ['type' => 'undergraduate']) }}"
                             class="block px-4 py-2 text-gray-700 hover:bg-yellow-50 hover:text-yellow-600 rounded-t-lg">
+<<<<<<< HEAD
                             {{ __('messages.quotas_undergraduate') }}
                         </a>
                         <a href="{{ route('university-quotas.index', ['type' => 'postgraduate']) }}"
                             class="block px-4 py-2 text-gray-700 hover:bg-yellow-50 hover:text-yellow-600 rounded-b-lg">
                             {{ __('messages.quotas_postgraduate') }}
+=======
+                            تقويم المفاضلات
+                        </a>
+                        <a href="{{ route('university-quotas.index', ['type' => 'postgraduate']) }}"
+                            class="block px-4 py-2 text-gray-700 hover:bg-yellow-50 hover:text-yellow-600 rounded-b-lg">
+                            تقويم الدراسات العليا
+>>>>>>> 802ca6c7c538885cf52bd2da882caf0c2e0fea4a
                         </a>
                     </div>
                 </div>
@@ -102,7 +149,11 @@
                 <div class="relative group">
                     <button
                         class="text-gray-700 hover:text-yellow-600 font-semibold transition-colors duration-300 flex items-center gap-1">
+<<<<<<< HEAD
                         {{ __('messages.articles') }}
+=======
+                        المقالات
+>>>>>>> 802ca6c7c538885cf52bd2da882caf0c2e0fea4a
                         <svg class="w-4 h-4 transition-transform group-hover:rotate-180" fill="none"
                             stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7">
@@ -113,6 +164,7 @@
                         class="absolute right-0 mt-2 w-56 bg-white rounded-lg shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50">
                         <a href="{{ route('articles.index') }}?category=all"
                             class="block px-4 py-2 text-gray-700 hover:bg-yellow-50 hover:text-yellow-600 rounded-t-lg transition">
+<<<<<<< HEAD
                             {{ __('messages.all_articles') }}
                         </a>
                         <a href="{{ route('articles.index') }}?category=turkey-studies"
@@ -134,10 +186,34 @@
                         <a href="{{ route('articles.index') }}?category=testimonials"
                             class="block px-4 py-2 text-gray-700 hover:bg-yellow-50 hover:text-yellow-600 rounded-b-lg transition">
                             {{ __('messages.testimonials') }}
+=======
+                            جميع المقالات
+                        </a>
+                        <a href="{{ route('articles.index') }}?category=turkey-studies"
+                            class="block px-4 py-2 text-gray-700 hover:bg-yellow-50 hover:text-yellow-600 transition">
+                            الدراسة في تركيا
+                        </a>
+                        <a href="{{ route('articles.index') }}?category=exams"
+                            class="block px-4 py-2 text-gray-700 hover:bg-yellow-50 hover:text-yellow-600 transition">
+                            اختبارات القبول
+                        </a>
+                        <a href="{{ route('articles.index') }}?category=scholarships"
+                            class="block px-4 py-2 text-gray-700 hover:bg-yellow-50 hover:text-yellow-600 transition">
+                            المنح الدراسية
+                        </a>
+                        <a href="{{ route('articles.index') }}?category=certificates"
+                            class="block px-4 py-2 text-gray-700 hover:bg-yellow-50 hover:text-yellow-600 transition">
+                            أهم الشهادات
+                        </a>
+                        <a href="{{ route('articles.index') }}?category=testimonials"
+                            class="block px-4 py-2 text-gray-700 hover:bg-yellow-50 hover:text-yellow-600 rounded-b-lg transition">
+                            قصص النجاح
+>>>>>>> 802ca6c7c538885cf52bd2da882caf0c2e0fea4a
                         </a>
                     </div>
                 </div>
 
+<<<<<<< HEAD
                 <a href="#contact"
                     class="text-gray-700 hover:text-yellow-600 font-semibold transition-colors duration-300 relative group"
                     style="font-family: 'Cairo', 'Segoe UI', sans-serif;">
@@ -145,6 +221,32 @@
                     <span
                         class="absolute bottom-0 right-0 w-0 h-1 bg-yellow-600 group-hover:w-full transition-all duration-300"></span>
                 </a>
+=======
+                <a href="{{ url('/#contact') }}"
+                    class="text-gray-700 hover:text-yellow-600 font-semibold transition-colors duration-300 relative group"
+                    style="font-family: 'Cairo', 'Segoe UI', sans-serif;">
+                    اتصل بنا
+                    <span
+                        class="absolute bottom-0 right-0 w-0 h-1 bg-yellow-600 group-hover:w-full transition-all duration-300"></span>
+                </a>
+                <button id="darkModeToggle"
+                    class="p-2 rounded-lg hover:bg-gray-100 transition relative w-10 h-10 flex items-center justify-center">
+                    <!-- أيقونة الشمس (تظهر في الوضع الفاتح) -->
+                    <svg id="sunIcon" class="w-6 h-6 text-yellow-500 absolute transition-all duration-300" fill="none"
+                        stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+                    </svg>
+
+                    <!-- أيقونة القمر (تظهر في الوضع الغامق) -->
+                    <svg id="moonIcon"
+                        class="w-6 h-6 text-gray-200 absolute transition-all duration-300 opacity-0 rotate-90"
+                        fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+                    </svg>
+                </button>
+>>>>>>> 802ca6c7c538885cf52bd2da882caf0c2e0fea4a
             </div>
 
             <!-- Auth Buttons (Desktop) -->
@@ -204,7 +306,11 @@
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                             d="M4 4v16h16V4H4zm2 2h12v12H6V6zm2 2h8v2H8V8zm0 4h8v2H8v-2zm0 4h8v2H8v-2z"></path>
                                     </svg>
+<<<<<<< HEAD
                                     {{ __('messages.dashboard') }}
+=======
+                                    لوحة التحكم
+>>>>>>> 802ca6c7c538885cf52bd2da882caf0c2e0fea4a
                                 </a>
                             @else
                                 <a href="{{ route('dashboard') }}"
@@ -213,7 +319,11 @@
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                             d="M4 4v16h16V4H4zm2 2h12v12H6V6zm2 2h8v2H8V8zm0 4h8v2H8v-2zm0 4h8v2H8v-2z"></path>
                                     </svg>
+<<<<<<< HEAD
                                     {{ __('messages.dashboard') }}
+=======
+                                    لوحة التحكم
+>>>>>>> 802ca6c7c538885cf52bd2da882caf0c2e0fea4a
                                 </a>
                             @endif
 
@@ -226,7 +336,11 @@
                                             d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1">
                                         </path>
                                     </svg>
+<<<<<<< HEAD
                                     {{ __('messages.logout') }}
+=======
+                                    تسجيل خروج
+>>>>>>> 802ca6c7c538885cf52bd2da882caf0c2e0fea4a
                                 </button>
                             </form>
                         </div>
@@ -235,11 +349,19 @@
                     <div class="hidden md:flex items-center gap-4">
                         <a href="{{ route('login') }}"
                             class="px-6 py-2 text-yellow-600 border-2 border-yellow-600 hover:bg-yellow-50 font-bold rounded-lg transition">
+<<<<<<< HEAD
                             {{ __('messages.login') }}
                         </a>
                         <a href="{{ route('register') }}"
                             class="px-6 py-2 bg-yellow-600 hover:bg-yellow-700 text-white font-bold rounded-lg transition shadow-lg">
                             {{ __('messages.register') }}
+=======
+                            تسجيل الدخول
+                        </a>
+                        <a href="{{ route('register') }}"
+                            class="px-6 py-2 bg-yellow-600 hover:bg-yellow-700 text-white font-bold rounded-lg transition shadow-lg">
+                            إنشاء حساب
+>>>>>>> 802ca6c7c538885cf52bd2da882caf0c2e0fea4a
                         </a>
                     </div>
                 @endauth
@@ -251,13 +373,21 @@
                     <a href="{{ route('dashboard') }}"
                         class="px-4 py-2 bg-yellow-600 text-white rounded-lg font-semibold transition-all"
                         style="font-family: 'Cairo', 'Segoe UI', sans-serif;">
+<<<<<<< HEAD
                         {{ __('messages.my_dashboard') }}
+=======
+                        لوحتي
+>>>>>>> 802ca6c7c538885cf52bd2da882caf0c2e0fea4a
                     </a>
                 @else
                     <a href="{{ route('login') }}"
                         class="px-4 py-2 text-yellow-600 border-2 border-yellow-600 rounded-lg font-semibold"
                         style="font-family: 'Cairo', 'Segoe UI', sans-serif;">
+<<<<<<< HEAD
                         {{ __('messages.login') }}
+=======
+                        دخول
+>>>>>>> 802ca6c7c538885cf52bd2da882caf0c2e0fea4a
                     </a>
                 @endauth
 
@@ -273,6 +403,7 @@
         <!-- Mobile Menu -->
         <div id="mobile-menu" class="hidden md:hidden pb-4 space-y-2">
             <a href="{{ route('home') }}"
+<<<<<<< HEAD
                 class="block px-4 py-2 text-gray-700 hover:bg-yellow-50 hover:text-yellow-600 rounded transition-colors">{{ __('messages.home') }}</a>
             <a href="#about"
                 class="block px-4 py-2 text-gray-700 hover:bg-yellow-50 hover:text-yellow-600 rounded transition-colors">{{ __('messages.about') }}</a>
@@ -284,6 +415,22 @@
                 class="block px-4 py-2 text-gray-700 hover:bg-yellow-50 hover:text-yellow-600 rounded transition-colors">{{ __('messages.articles') }}</a>
             <a href="#contact"
                 class="block px-4 py-2 text-gray-700 hover:bg-yellow-50 hover:text-yellow-600 rounded transition-colors">{{ __('messages.contact') }}</a>
+=======
+                class="block px-4 py-2 text-gray-700 hover:bg-yellow-50 hover:text-yellow-600 rounded transition-colors">الرئيسية</a>
+            <a href="#about"
+                class="block px-4 py-2 text-gray-700 hover:bg-yellow-50 hover:text-yellow-600 rounded transition-colors">من
+                نحن</a>
+            <a href="{{ route('universities.index') }}"
+                class="block px-4 py-2 text-gray-700 hover:bg-yellow-50 hover:text-yellow-600 rounded transition-colors">الجامعات</a>
+            <a href="{{ route('university-quotas.index') }}"
+                class="block px-4 py-2 text-gray-700 hover:bg-yellow-50 hover:text-yellow-600 rounded transition-colors">تقويم
+                المفاضلات</a>
+            <a href="{{ route('articles.index') }}"
+                class="block px-4 py-2 text-gray-700 hover:bg-yellow-50 hover:text-yellow-600 rounded transition-colors">المقالات</a>
+            <a href="#contact"
+                class="block px-4 py-2 text-gray-700 hover:bg-yellow-50 hover:text-yellow-600 rounded transition-colors">اتصل
+                بنا</a>
+>>>>>>> 802ca6c7c538885cf52bd2da882caf0c2e0fea4a
             @auth
                 <form method="POST" action="{{ route('logout') }}" class="block">
                     @csrf
@@ -300,6 +447,7 @@
 </nav>
 
 <script>
+<<<<<<< HEAD
     document.getElementById('mobile-menu-btn')?.addEventListener('click', function () {
         const menu = document.getElementById('mobile-menu');
         menu.classList.toggle('hidden');
@@ -323,6 +471,41 @@
     })();
 </script>
 
+=======
+    document.addEventListener('DOMContentLoaded', function () {
+        const toggle = document.getElementById('darkModeToggle');
+        const sunIcon = document.getElementById('sunIcon');
+        const moonIcon = document.getElementById('moonIcon');
+
+        if (localStorage.getItem('darkMode') === 'true') {
+            document.body.classList.add('dark');
+            sunIcon.style.opacity = '0';
+            sunIcon.style.transform = 'rotate(-90deg) scale(0.5)';
+            moonIcon.style.opacity = '1';
+            moonIcon.style.transform = 'rotate(0deg) scale(1)';
+        }
+
+        if (toggle) {
+            toggle.addEventListener('click', function () {
+                const isDark = document.body.classList.toggle('dark');
+                localStorage.setItem('darkMode', isDark);
+
+                if (isDark) {
+                    sunIcon.style.opacity = '0';
+                    sunIcon.style.transform = 'rotate(-90deg) scale(0.5)';
+                    moonIcon.style.opacity = '1';
+                    moonIcon.style.transform = 'rotate(0deg) scale(1)';
+                } else {
+                    sunIcon.style.opacity = '1';
+                    sunIcon.style.transform = 'rotate(0deg) scale(1)';
+                    moonIcon.style.opacity = '0';
+                    moonIcon.style.transform = 'rotate(90deg) scale(0.5)';
+                }
+            });
+        }
+    });
+</script>
+>>>>>>> 802ca6c7c538885cf52bd2da882caf0c2e0fea4a
 <style>
     [dir="rtl"] {
         direction: rtl;
@@ -343,4 +526,63 @@
             padding: 0.5rem 0;
         }
     }
+<<<<<<< HEAD
+=======
+
+    /* Dark Mode */
+    .dark {
+        background-color: #1a202c;
+        color: #e2e8f0;
+        /* لون النص الأساسي في الوضع الغامق */
+    }
+
+    /* جميع عناصر النص */
+    .dark h1,
+    .dark h2,
+    .dark h3,
+    .dark h4,
+    .dark h5,
+    .dark h6,
+    .dark p,
+    .dark span,
+    .dark div,
+    .dark a,
+    .dark li,
+    .dark label,
+    .dark .text-gray-800,
+    .dark .text-gray-700,
+    .dark .text-gray-600 {
+        color: #e2e8f0 !important;
+    }
+
+    /* استثناء للروابط */
+    .dark a {
+        color: #63b3ed !important;
+    }
+
+    .dark a:hover {
+        color: #90cdf4 !important;
+    }
+
+    /* خلفيات العناصر */
+    .dark .bg-white {
+        background-color: #2d3748 !important;
+    }
+
+    .dark .bg-gray-50 {
+        background-color: #1a202c !important;
+    }
+
+    .dark .bg-gray-100 {
+        background-color: #2d3748 !important;
+    }
+
+    .dark .border-gray-200 {
+        border-color: #4a5568 !important;
+    }
+
+    .dark .shadow-md {
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3) !important;
+    }
+>>>>>>> 802ca6c7c538885cf52bd2da882caf0c2e0fea4a
 </style>

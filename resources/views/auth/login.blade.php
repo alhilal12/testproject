@@ -85,6 +85,59 @@
             color: #eab308;
             background: white;
             padding: 0 0.25rem;
+<<<<<<< HEAD
+=======
+
+            /* Dark Mode */
+            .dark {
+                background-color: #1a202c;
+                color: #e2e8f0;
+            }
+
+            .dark h1,
+            .dark h2,
+            .dark h3,
+            .dark h4,
+            .dark h5,
+            .dark h6,
+            .dark p,
+            .dark span,
+            .dark div,
+            .dark a,
+            .dark li,
+            .dark label,
+            .dark .text-gray-800,
+            .dark .text-gray-700,
+            .dark .text-gray-600 {
+                color: #e2e8f0 !important;
+            }
+
+            .dark a {
+                color: #63b3ed !important;
+            }
+
+            .dark .bg-white {
+                background-color: #2d3748 !important;
+            }
+
+            .dark .bg-gray-50 {
+                background-color: #1a202c !important;
+            }
+
+            .dark .bg-gray-100 {
+                background-color: #2d3748 !important;
+            }
+
+            .dark .border-gray-200 {
+                border-color: #4a5568 !important;
+            }
+
+            .
+        }
+
+        dark .shadow-md {
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3) !important;
+>>>>>>> 802ca6c7c538885cf52bd2da882caf0c2e0fea4a
         }
     </style>
 </head>
@@ -225,6 +278,14 @@
             submitBtn.disabled = true;
             submitBtn.innerHTML = '<div class="inline-block w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin mx-auto"></div>';
         });
+<<<<<<< HEAD
+=======
+        document.addEventListener('DOMContentLoaded', function () {
+            if (localStorage.getItem('darkMode') === 'true') {
+                document.body.classList.add('dark');
+            }
+        });
+>>>>>>> 802ca6c7c538885cf52bd2da882caf0c2e0fea4a
     </script>
 </body>
 

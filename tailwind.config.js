@@ -3,6 +3,11 @@ import forms from '@tailwindcss/forms';
 
 /** @type {import('tailwindcss').Config} */
 export default {
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> 802ca6c7c538885cf52bd2da882caf0c2e0fea4a
     content: [
         './vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php',
         './storage/framework/views/*.php',
@@ -18,4 +23,8 @@ export default {
     },
 
     plugins: [forms],
+<<<<<<< HEAD
 };
+=======
+};
+>>>>>>> 802ca6c7c538885cf52bd2da882caf0c2e0fea4a
