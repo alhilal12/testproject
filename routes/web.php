@@ -155,10 +155,7 @@ Route::get('/universities/{id}/recognitions', [CountryRecognitionController::cla
 
     Route::delete('/universities/{id}/recognitions/{recognitionId}', [CountryRecognitionController::class, 'destroy'])
         ->name('universities.recognitions.destroy');
-<<<<<<< HEAD
-=======
 
->>>>>>> 802ca6c7c538885cf52bd2da882caf0c2e0fea4a
 });
 
 // ========================
@@ -220,8 +217,6 @@ Route::get('/storage-link', function () {
     symlink($target, $link);
     return 'Storage link created successfully!';
 });
-<<<<<<< HEAD
-=======
 // ========================
 // إدارة الإعلانات (Announcements) - حل نهائي
 // ========================
@@ -233,6 +228,5 @@ Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () 
     Route::put('announcements/{announcement}', [App\Http\Controllers\Admin\AnnouncementController::class, 'update'])->name('announcements.update');
     Route::delete('announcements/{announcement}', [App\Http\Controllers\Admin\AnnouncementController::class, 'destroy'])->name('announcements.destroy');
 });
->>>>>>> 802ca6c7c538885cf52bd2da882caf0c2e0fea4a
 
 require __DIR__.'/auth.php';
