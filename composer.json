@@ -74,7 +74,6 @@
         ],
         "post-install-cmd": [
     "@php artisan storage:link",
-    "@php artisan migrate --force",
     "npm install --ignore-scripts",
     "npm run build",
     "@php artisan import:university-quotas",
