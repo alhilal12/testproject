@@ -94,30 +94,23 @@ Route::middleware(['auth'])->group(function () {
 Route::middleware(['auth', 'role:admin,super_admin'])->prefix('consultant')->group(function () {
     // dashboard
     Route::get('/dashboard', [ConsultantController::class, 'dashboard'])->name('consultant.dashboard');
-<<<<<<< HEAD
 
-=======
->>>>>>> 802ca6c7c538885cf52bd2da882caf0c2e0fea4a
+
+
     // الاستشارات والردود
     Route::get('/consultation/{id}/reply', [ConsultantController::class, 'showReplyForm'])->name('consultant.reply.form');
     Route::post('/consultation/{id}/reply', [ConsultantController::class, 'reply'])->name('consultant.reply');
     Route::put('/consultation/{id}/status', [ConsultantController::class, 'updateStatus'])->name('consultant.update-status');
-<<<<<<< HEAD
 
-=======
     // الاعلانات
     Route::get('announcements', [AnnouncementController::class, 'index'])->name('admin.announcements.index');
->>>>>>> 802ca6c7c538885cf52bd2da882caf0c2e0fea4a
     // المستندات والتقارير
     Route::get('/students-documents', [ConsultantController::class, 'studentsDocuments'])->name('consultant.students-documents');
     Route::post('/documents/{id}/verify', [ConsultantController::class, 'verifyDocument'])->name('consultant.verify-document');
     Route::delete('/documents/{id}', [ConsultantController::class, 'deleteDocument'])->name('consultant.delete-document');
     Route::get('/contact-messages', [ConsultantController::class, 'contactMessages'])->name('consultant.contact-messages');
     Route::get('/reports', [ConsultantController::class, 'reports'])->name('consultant.reports');
-<<<<<<< HEAD
-=======
 
->>>>>>> 802ca6c7c538885cf52bd2da882caf0c2e0fea4a
 
     //  إعدادات التواصل -
     Route::get('/contact-config', function () {
