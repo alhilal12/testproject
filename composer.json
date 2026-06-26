@@ -73,15 +73,13 @@
             "Illuminate\\Foundation\\ComposerScripts::prePackageUninstall"
         ],
         "post-install-cmd": [
-            "php artisan config:clear",
-            "php artisan cache:clear",
-            "php artisan view:clear",
-            "php artisan route:clear",
-            "php artisan optimize:clear",
-            "@php artisan storage:link",
-            "@php artisan import:university-quotas",
-            "@php artisan import:postgraduate-quotas"
-        ],
+    "@php artisan storage:link",
+    "@php artisan migrate --force",
+    "npm install --ignore-scripts",
+    "npm run build",
+    "@php artisan import:university-quotas",
+    "@php artisan import:postgraduate-quotas"
+],
         "postinstall": "php artisan optimize",
         "build": "vite build"
     },
