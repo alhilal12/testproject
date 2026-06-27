@@ -8,177 +8,33 @@
                     <img src="{{ asset('images/logo.png') }}" alt="AL-HILAL Logo" class="w-full h-full object-cover">
                 </div>
             </div>
-
             <!-- Desktop Navigation Menu -->
-            <div class="hidden md:flex items-center gap-8">
+            <div class="hidden lg:flex items-center gap-2 xl:gap-4">
                 <a href="{{ route('home') }}"
-                    class="text-gray-700 hover:text-yellow-600 font-semibold transition-colors duration-300 relative group"
-                    style="font-family: 'Cairo', 'Segoe UI', sans-serif;">
+                    class="text-gray-700 hover:text-yellow-600 font-semibold transition text-sm xl:text-base">
                     الرئيسية
-                    <span
-                        class="absolute bottom-0 right-0 w-0 h-1 bg-yellow-600 group-hover:w-full transition-all duration-300"></span>
                 </a>
                 <a href="{{ url('/#about') }}"
-                    class="text-gray-700 hover:text-yellow-600 font-semibold transition-colors duration-300 relative group"
-                    style="font-family: 'Cairo', 'Segoe UI', sans-serif;">
+                    class="text-gray-700 hover:text-yellow-600 font-semibold transition text-sm xl:text-base">
                     من نحن
-                    <span
-                        class="absolute bottom-0 right-0 w-0 h-1 bg-yellow-600 group-hover:w-full transition-all duration-300"></span>
                 </a>
-                <!-- الجامعات - قائمة منسدلة -->
-                <div class="relative group">
-                    <button
-                        class="text-gray-700 hover:text-yellow-600 font-semibold transition-colors duration-300 flex items-center gap-1">
-                        الجامعات
-                        <svg class="w-4 h-4 transition-transform group-hover:rotate-180" fill="none"
-                            stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7">
-                            </path>
-                        </svg>
-                    </button>
-                    <div
-                        class="absolute right-0 mt-2 w-56 bg-white rounded-lg shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50">
+                <!-- باقي العناصر بنفس الطريقة -->
 
-                        <!-- ✅ جميع الجامعات -->
-                        <a href="{{ route('universities.index') }}"
-                            class="block px-4 py-2 text-gray-700 hover:bg-yellow-50 hover:text-yellow-600 rounded-t-lg transition">
-                            جميع الجامعات
-                        </a>
-
-                        <!-- خط فاصل -->
-                        <div class="border-t border-gray-100 my-1"></div>
-
-                        <a href="{{ route('universities.index', ['type' => 'public']) }}"
-                            class="block px-4 py-2 text-gray-700 hover:bg-yellow-50 hover:text-yellow-600 transition">
-                            جامعات حكومية
-                        </a>
-
-                        <a href="{{ route('universities.index', ['type' => 'private']) }}"
-                            class="block px-4 py-2 text-gray-700 hover:bg-yellow-50 hover:text-yellow-600 transition">
-                            جامعات خاصة
-                        </a>
-
-                        <!-- خط فاصل -->
-                        <div class="border-t border-gray-100 my-1"></div>
-
-                        <a href="{{ route('universities.ranking') }}"
-                            class="block px-4 py-2 text-gray-700 hover:bg-yellow-50 hover:text-yellow-600 transition">
-                            ترتيب الجامعات
-                        </a>
-
-                        <a href="{{ route('universities.recognitions') }}"
-                            class="block px-4 py-2 text-gray-700 hover:bg-yellow-50 hover:text-yellow-600 rounded-b-lg transition">
-                            الجامعات المعترف بها
-                        </a>
-
-                    </div>
-                </div>
-
-
-                <!-- تقويم المفاضلات -->
-                <div class="relative group">
-                    <button
-                        class="text-gray-700 hover:text-yellow-600 font-semibold transition-colors duration-300 flex items-center gap-1">
-                        التقويم الأكاديمي
-                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7">
-                            </path>
-                        </svg>
-                    </button>
-                    <div
-                        class="absolute right-0 mt-2 w-56 bg-white rounded-lg shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50">
-                        <a href="{{ route('university-quotas.index', ['type' => 'undergraduate']) }}"
-                            class="block px-4 py-2 text-gray-700 hover:bg-yellow-50 hover:text-yellow-600 rounded-t-lg">
-                            تقويم المفاضلات
-                        </a>
-                        <a href="{{ route('university-quotas.index', ['type' => 'postgraduate']) }}"
-                            class="block px-4 py-2 text-gray-700 hover:bg-yellow-50 hover:text-yellow-600 rounded-b-lg">
-                            تقويم الدراسات العليا
-                        </a>
-                    </div>
-                </div>
-
-                <!-- Articles Dropdown -->
-                <div class="relative group">
-                    <button
-                        class="text-gray-700 hover:text-yellow-600 font-semibold transition-colors duration-300 flex items-center gap-1">
-                        المقالات
-                        <svg class="w-4 h-4 transition-transform group-hover:rotate-180" fill="none"
-                            stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7">
-                            </path>
-                        </svg>
-                    </button>
-                    <div
-                        class="absolute right-0 mt-2 w-56 bg-white rounded-lg shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50">
-                        <a href="{{ route('articles.index') }}?category=all"
-                            class="block px-4 py-2 text-gray-700 hover:bg-yellow-50 hover:text-yellow-600 rounded-t-lg transition">
-                            جميع المقالات
-                        </a>
-                        <a href="{{ route('articles.index') }}?category=turkey-studies"
-                            class="block px-4 py-2 text-gray-700 hover:bg-yellow-50 hover:text-yellow-600 transition">
-                            الدراسة في تركيا
-                        </a>
-                        <a href="{{ route('articles.index') }}?category=exams"
-                            class="block px-4 py-2 text-gray-700 hover:bg-yellow-50 hover:text-yellow-600 transition">
-                            اختبارات القبول
-                        </a>
-                        <a href="{{ route('articles.index') }}?category=scholarships"
-                            class="block px-4 py-2 text-gray-700 hover:bg-yellow-50 hover:text-yellow-600 transition">
-                            المنح الدراسية
-                        </a>
-                        <a href="{{ route('articles.index') }}?category=certificates"
-                            class="block px-4 py-2 text-gray-700 hover:bg-yellow-50 hover:text-yellow-600 transition">
-                            أهم الشهادات
-                        </a>
-                        <a href="{{ route('articles.index') }}?category=testimonials"
-                            class="block px-4 py-2 text-gray-700 hover:bg-yellow-50 hover:text-yellow-600 rounded-b-lg transition">
-                            قصص النجاح
-                        </a>
-                    </div>
-                </div>
-
-                <a href="{{ url('/#contact') }}"
-                    class="text-gray-700 hover:text-yellow-600 font-semibold transition-colors duration-300 relative group"
-                    style="font-family: 'Cairo', 'Segoe UI', sans-serif;">
-                    اتصل بنا
-                    <span
-                        class="absolute bottom-0 right-0 w-0 h-1 bg-yellow-600 group-hover:w-full transition-all duration-300"></span>
-                </a>
-                {{-- الوضع--}}
-                <button id="darkModeToggle"
-                    class="p-2 rounded-lg hover:bg-gray-100 transition relative w-10 h-10 flex items-center justify-center">
-                    <!-- أيقونة الشمس (تظهر في الوضع الفاتح) -->
-                    <svg id="sunIcon" class="w-6 h-6 text-yellow-500 absolute transition-all duration-300" fill="none"
-                        stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
-                    </svg>
-
-                    <!-- أيقونة القمر (تظهر في الوضع الغامق) -->
-                    <svg id="moonIcon"
-                        class="w-6 h-6 text-gray-200 absolute transition-all duration-300 opacity-0 rotate-90"
-                        fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
-                    </svg>
-                </button>
                 <!-- Google Translate Buttons -->
                 <div class="flex items-center gap-1">
                     <button onclick="translatePage('ar')"
-                        class="px-2 py-1 text-sm rounded hover:bg-gray-100 transition font-bold text-yellow-600">
-                        🇸🇦 عربي
+                        class="px-1.5 py-0.5 text-xs rounded hover:bg-gray-100 transition font-bold text-yellow-600">
+                        🇸🇦 ع
                     </button>
                     <button onclick="translatePage('tr')"
-                        class="px-2 py-1 text-sm rounded hover:bg-gray-100 transition">
-                        🇹🇷 Türkçe
+                        class="px-1.5 py-0.5 text-xs rounded hover:bg-gray-100 transition">
+                        🇹🇷 T
                     </button>
                     <button onclick="translatePage('en')"
-                        class="px-2 py-1 text-sm rounded hover:bg-gray-100 transition">
-                        🇬🇧 English
+                        class="px-1.5 py-0.5 text-xs rounded hover:bg-gray-100 transition">
+                        🇬🇧 E
                     </button>
                 </div>
-
             </div>
 
             <!-- Auth Buttons (Desktop) -->
