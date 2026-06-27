@@ -318,6 +318,7 @@
 
 <script>
     document.addEventListener('DOMContentLoaded', function () {
+        // Dark Mode Toggle
         const toggle = document.getElementById('darkModeToggle');
         const sunIcon = document.getElementById('sunIcon');
         const moonIcon = document.getElementById('moonIcon');
@@ -346,6 +347,16 @@
                     moonIcon.style.opacity = '0';
                     moonIcon.style.transform = 'rotate(90deg) scale(0.5)';
                 }
+            });
+        }
+
+        // ====== Mobile Menu Toggle (NEW) ======
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        if (mobileMenuBtn && mobileMenu) {
+            mobileMenuBtn.addEventListener('click', function () {
+                mobileMenu.classList.toggle('hidden');
             });
         }
     });
