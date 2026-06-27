@@ -145,7 +145,7 @@
                     <span
                         class="absolute bottom-0 right-0 w-0 h-1 bg-yellow-600 group-hover:w-full transition-all duration-300"></span>
                 </a>
-                {{-- --}}
+                {{-- الوضع--}}
                 <button id="darkModeToggle"
                     class="p-2 rounded-lg hover:bg-gray-100 transition relative w-10 h-10 flex items-center justify-center">
                     <!-- أيقونة الشمس (تظهر في الوضع الفاتح) -->
@@ -163,7 +163,21 @@
                             d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
                     </svg>
                 </button>
-
+                <!-- Google Translate Buttons -->
+                <div class="flex items-center gap-1">
+                    <button onclick="translatePage('ar')"
+                        class="px-2 py-1 text-sm rounded hover:bg-gray-100 transition font-bold text-yellow-600">
+                        🇸🇦 عربي
+                    </button>
+                    <button onclick="translatePage('tr')"
+                        class="px-2 py-1 text-sm rounded hover:bg-gray-100 transition">
+                        🇹🇷 Türkçe
+                    </button>
+                    <button onclick="translatePage('en')"
+                        class="px-2 py-1 text-sm rounded hover:bg-gray-100 transition">
+                        🇬🇧 English
+                    </button>
+                </div>
 
             </div>
 
@@ -316,6 +330,20 @@
     </div>
 </nav>
 
+<!-- Google Translate Script -->
+<script>
+    function googleTranslateElementInit() {
+        new google.translate.TranslateElement({
+            pageLanguage: 'ar',
+            includedLanguages: 'ar,tr,en',
+            autoDisplay: false,
+            layout: google.translate.TranslateElement.InlineLayout.SIMPLE
+        }, 'google_translate_element');
+    }
+</script>
+<script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+<div id="google_translate_element" style="display: none;"></div>
+
 <script>
     document.addEventListener('DOMContentLoaded', function () {
         // Dark Mode Toggle
@@ -350,7 +378,7 @@
             });
         }
 
-        // ====== Mobile Menu Toggle (NEW) ======
+        // Mobile Menu Toggle
         const mobileMenuBtn = document.getElementById('mobile-menu-btn');
         const mobileMenu = document.getElementById('mobile-menu');
 
@@ -359,8 +387,29 @@
                 mobileMenu.classList.toggle('hidden');
             });
         }
+
+        // Google Translate - تطبيق اللغة المخزنة
+        const urlParams = new URLSearchParams(window.location.search);
+        let lang = urlParams.get('lang') || localStorage.getItem('preferred_lang') || 'ar';
+
+        if (lang !== 'ar') {
+            setTimeout(() => {
+                const select = document.querySelector('.goog-te-combo');
+                if (select) {
+                    select.value = lang;
+                    select.dispatchEvent(new Event('change'));
+                }
+            }, 1500);
+        }
     });
+
+    // دالة الترجمة
+    function translatePage(lang) {
+        localStorage.setItem('preferred_lang', lang);
+        window.location.href = window.location.href + '?lang=' + lang;
+    }
 </script>
+
 <style>
     [dir="rtl"] {
         direction: rtl;
@@ -386,10 +435,8 @@
     .dark {
         background-color: #1a202c;
         color: #e2e8f0;
-        /* لون النص الأساسي في الوضع الغامق */
     }
 
-    /* جميع عناصر النص */
     .dark h1,
     .dark h2,
     .dark h3,
@@ -408,7 +455,6 @@
         color: #e2e8f0 !important;
     }
 
-    /* استثناء للروابط */
     .dark a {
         color: #63b3ed !important;
     }
@@ -417,7 +463,6 @@
         color: #90cdf4 !important;
     }
 
-    /* خلفيات العناصر */
     .dark .bg-white {
         background-color: #2d3748 !important;
     }
