@@ -94,6 +94,13 @@
         "optimize-autoloader": true,
         "preferred-install": "dist",
         "sort-packages": true,
+        "http": {
+            "protocols": [
+                "http",
+                "https"
+            ]
+        },
+        
         "allow-plugins": {
             "pestphp/pest-plugin": true,
             "php-http/discovery": true
