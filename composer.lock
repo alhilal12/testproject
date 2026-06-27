@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "836e1ae50c58c0fa004c262cee11c313",
+    "content-hash": "8c7f2230d88ebb7bac6f1531a6ae1e99",
     "packages": [
         {
             "name": "brick/math",
@@ -662,61 +662,6 @@
                 }
             ],
             "time": "2025-10-31T18:51:33+00:00"
-        },
-        {
-            "name": "edulazaro/laratext",
-            "version": "2.0.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/edulazaro/laratext.git",
-                "reference": "fe64824eaeb6964523200ff8832b46841f95f529"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/edulazaro/laratext/zipball/fe64824eaeb6964523200ff8832b46841f95f529",
-                "reference": "fe64824eaeb6964523200ff8832b46841f95f529",
-                "shasum": ""
-            },
-            "require": {
-                "laravel/framework": ">=10.0",
-                "php": "^8.2"
-            },
-            "require-dev": {
-                "orchestra/testbench": "^8.34",
-                "phpunit/phpunit": "^10.5"
-            },
-            "type": "library",
-            "extra": {
-                "laravel": {
-                    "providers": [
-                        "EduLazaro\\Laratext\\LaratextServiceProvider"
-                    ]
-                }
-            },
-            "autoload": {
-                "files": [
-                    "src/helpers.php"
-                ],
-                "psr-4": {
-                    "EduLazaro\\Laratext\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Edu Lazaro",
-                    "email": "edu@edulazaro.com"
-                }
-            ],
-            "description": "Laravel localization package",
-            "support": {
-                "issues": "https://github.com/edulazaro/laratext/issues",
-                "source": "https://github.com/edulazaro/laratext/tree/2.0.0"
-            },
-            "time": "2026-04-24T23:55:53+00:00"
         },
         {
             "name": "egulias/email-validator",
