@@ -1,4 +1,4 @@
-اريد منك فحص كود الناف من اجلي حيث انه عندما اقوم بفتحه على شاشة موبايل فان الزر الذي يجب ان يعرض لي الناف بار لا يعم
+
 <nav class="sticky top-0 z-50 bg-white shadow-lg border-b-2 border-yellow-600" dir="rtl">
     <div class="container mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex items-center justify-between h-20">
