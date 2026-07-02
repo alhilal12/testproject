@@ -343,7 +343,7 @@
     </div>
 </nav>
 
-{{-- ============ كود الترجمة كامل - معدل ============ --}}
+{{-- ============ كود الترجمة - حل مباشر ============ --}}
 <style>
     .language-switcher {
         display: flex;
@@ -380,70 +380,20 @@
         color: #e2e8f0;
     }
 
-    .dark .lang-btn:hover {
-        background-color: rgba(245, 158, 11, 0.2);
-        border-color: #f59e0b;
-        color: #fbbf24;
-    }
-
     .dark .lang-btn.active-lang {
         background-color: #f59e0b;
-        border-color: #fbbf24;
         color: white;
     }
 
     body {
         top: 0 !important;
     }
-
-    .goog-te-banner-frame {
-        display: none !important;
-    }
-
-    /* إخفاء أداة Google */
-    .skiptranslate {
-        display: none !important;
-    }
-
-    #google_translate_element {
-        position: fixed;
-        top: 0;
-        left: 0;
-        z-index: -1;
-        opacity: 0;
-        pointer-events: none;
-    }
 </style>
 
-<!-- Google Translate Widget مخفي -->
-<div id="google_translate_element"></div>
-<script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
-
 <script>
-    // تهيئة Google Translate
-    function googleTranslateElementInit() {
-        new google.translate.TranslateElement({
-            pageLanguage: 'ar',
-            includedLanguages: 'en,tr',
-            layout: google.translate.TranslateElement.InlineLayout.HORIZONTAL,
-            autoDisplay: false,
-            gaTrack: false
-        }, 'google_translate_element');
-    }
-
-    // دالة تغيير اللغة
     function changeLanguage(lang) {
         // حفظ اللغة
         localStorage.setItem('selectedLanguage', lang);
-
-        // تحديث اتجاه الصفحة
-        if (lang === 'ar') {
-            document.documentElement.dir = 'rtl';
-            document.documentElement.lang = 'ar';
-        } else {
-            document.documentElement.dir = 'ltr';
-            document.documentElement.lang = lang;
-        }
 
         // تحديث الأزرار
         document.querySelectorAll('.lang-btn').forEach(function (btn) {
@@ -453,90 +403,63 @@
             }
         });
 
-        // استخدام Google Translate API
-        var combo = document.querySelector('.goog-te-combo');
-        if (combo) {
-            combo.value = lang;
-            combo.dispatchEvent(new Event('change'));
+        if (lang === 'ar') {
+            // العودة للعربية
+            document.cookie = 'googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+            document.cookie = 'googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=.' + window.location.hostname;
+            location.reload();
         } else {
-            // إذا لم توجد الأداة، استخدم cookie
-            setCookie('googtrans', '/ar/' + lang, 1);
-            if (lang === 'ar') {
-                setCookie('googtrans', '', -1);
-                location.reload();
-            } else {
-                location.reload();
-            }
+            // تعيين كوكي الترجمة
+            document.cookie = 'googtrans=/ar/' + lang + '; path=/';
+            document.cookie = 'googtrans=/ar/' + lang + '; path=/; domain=.' + window.location.hostname;
+
+            // تغيير الاتجاه
+            document.documentElement.dir = 'ltr';
+            document.documentElement.lang = lang;
+
+            // إعادة تحميل لتطبيق الترجمة
+            location.reload();
         }
     }
-
-    // مساعد cookies
-    function setCookie(name, value, days) {
-        var expires = '';
-        if (days) {
-            var date = new Date();
-            date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
-            expires = '; expires=' + date.toUTCString();
-        }
-        document.cookie = name + '=' + (value || '') + expires + '; path=/';
-    }
-
-    function getCookie(name) {
-        var nameEQ = name + '=';
-        var ca = document.cookie.split(';');
-        for (var i = 0; i < ca.length; i++) {
-            var c = ca[i];
-            while (c.charAt(0) == ' ') c = c.substring(1, c.length);
-            if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length);
-        }
-        return null;
-    }
-
-    // مراقبة تغيير الترجمة
-    var observer = new MutationObserver(function (mutations) {
-        mutations.forEach(function (mutation) {
-            if (mutation.type === 'attributes' && mutation.attributeName === 'class') {
-                var body = document.body;
-                if (body.classList.contains('translated-ltr')) {
-                    document.documentElement.dir = 'ltr';
-                } else if (body.classList.contains('translated-rtl')) {
-                    document.documentElement.dir = 'rtl';
-                }
-            }
-        });
-    });
 
     // تحميل اللغة المحفوظة
     document.addEventListener('DOMContentLoaded', function () {
-        // مراقبة تغييرات body
-        observer.observe(document.body, { attributes: true });
-
         var savedLang = localStorage.getItem('selectedLanguage') || 'ar';
 
+        // تحديث الأزرار
+        document.querySelectorAll('.lang-btn').forEach(function (btn) {
+            btn.classList.remove('active-lang');
+            if (btn.getAttribute('data-lang') === savedLang) {
+                btn.classList.add('active-lang');
+            }
+        });
+
+        // إذا كانت لغة غير العربية، تأكد من تطبيق الترجمة
         if (savedLang !== 'ar') {
             document.documentElement.dir = 'ltr';
             document.documentElement.lang = savedLang;
 
-            document.querySelectorAll('.lang-btn').forEach(function (btn) {
-                btn.classList.remove('active-lang');
-                if (btn.getAttribute('data-lang') === savedLang) {
-                    btn.classList.add('active-lang');
-                }
-            });
-
-            // تعيين لغة الترجمة
-            setCookie('googtrans', '/ar/' + savedLang, 1);
-
-            // إعادة تحميل للترجمة
-            setTimeout(function () {
-                var combo = document.querySelector('.goog-te-combo');
-                if (combo) {
-                    combo.value = savedLang;
-                    combo.dispatchEvent(new Event('change'));
-                }
-            }, 500);
+            // تطبيق الكوكي إذا لم يكن موجوداً
+            if (!document.cookie.includes('googtrans')) {
+                document.cookie = 'googtrans=/ar/' + savedLang + '; path=/';
+                location.reload();
+            }
         }
     });
+</script>
+
+<!-- أداة Google Translate مخفية -->
+<div id="google_translate_element" style="display:none;"></div>
+<script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+<script>
+    function googleTranslateElementInit() {
+        new google.translate.TranslateElement({
+            pageLanguage: 'ar',
+            includedLanguages: 'en,tr',
+            layout: google.translate.TranslateElement.InlineLayout.HORIZONTAL,
+            autoDisplay: false
+        }, 'google_translate_element');
+    }
 </script>
 {{-- ============ نهاية كود الترجمة ============ --}}
 {{-- السكربتات الأساسية --}}
