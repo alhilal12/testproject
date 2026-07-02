@@ -344,6 +344,7 @@
 </nav>
 
 {{-- ============ كود الترجمة - حل مباشر ============ --}}
+{{-- ============ كود الترجمة - معدل ============ --}}
 <style>
     .language-switcher {
         display: flex;
@@ -388,12 +389,59 @@
     body {
         top: 0 !important;
     }
+
+    .goog-te-banner-frame {
+        display: none !important;
+    }
+
+    .goog-te-gadget-icon {
+        display: none !important;
+    }
+
+    #google_translate_element {
+        position: fixed;
+        top: 0;
+        left: 0;
+        opacity: 0;
+        pointer-events: none;
+        width: 0;
+        height: 0;
+        overflow: hidden;
+    }
 </style>
 
+<!-- Google Translate Widget مخفي -->
+<div id="google_translate_element"></div>
+<script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
 <script>
+    function googleTranslateElementInit() {
+        new google.translate.TranslateElement({
+            pageLanguage: 'ar',
+            includedLanguages: 'en,tr',
+            layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
+            autoDisplay: false
+        }, 'google_translate_element');
+    }
+
     function changeLanguage(lang) {
-        // حفظ اللغة
         localStorage.setItem('selectedLanguage', lang);
+
+        if (lang === 'ar') {
+            document.documentElement.dir = 'rtl';
+            document.documentElement.lang = 'ar';
+            // مسح الترجمة
+            document.cookie = 'googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+            document.cookie = 'googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=.' + window.location.hostname;
+            location.reload();
+        } else {
+            document.documentElement.dir = 'ltr';
+            document.documentElement.lang = lang;
+            // تعيين الترجمة
+            document.cookie = 'googtrans=/ar/' + lang + '; path=/';
+            document.cookie = 'googtrans=/ar/' + lang + '; path=/; domain=.' + window.location.hostname;
+            location.reload();
+        }
 
         // تحديث الأزرار
         document.querySelectorAll('.lang-btn').forEach(function (btn) {
@@ -402,31 +450,12 @@
                 btn.classList.add('active-lang');
             }
         });
-
-        if (lang === 'ar') {
-            // العودة للعربية
-            document.cookie = 'googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
-            document.cookie = 'googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=.' + window.location.hostname;
-            location.reload();
-        } else {
-            // تعيين كوكي الترجمة
-            document.cookie = 'googtrans=/ar/' + lang + '; path=/';
-            document.cookie = 'googtrans=/ar/' + lang + '; path=/; domain=.' + window.location.hostname;
-
-            // تغيير الاتجاه
-            document.documentElement.dir = 'ltr';
-            document.documentElement.lang = lang;
-
-            // إعادة تحميل لتطبيق الترجمة
-            location.reload();
-        }
     }
 
     // تحميل اللغة المحفوظة
     document.addEventListener('DOMContentLoaded', function () {
         var savedLang = localStorage.getItem('selectedLanguage') || 'ar';
 
-        // تحديث الأزرار
         document.querySelectorAll('.lang-btn').forEach(function (btn) {
             btn.classList.remove('active-lang');
             if (btn.getAttribute('data-lang') === savedLang) {
@@ -434,32 +463,11 @@
             }
         });
 
-        // إذا كانت لغة غير العربية، تأكد من تطبيق الترجمة
         if (savedLang !== 'ar') {
             document.documentElement.dir = 'ltr';
             document.documentElement.lang = savedLang;
-
-            // تطبيق الكوكي إذا لم يكن موجوداً
-            if (!document.cookie.includes('googtrans')) {
-                document.cookie = 'googtrans=/ar/' + savedLang + '; path=/';
-                location.reload();
-            }
         }
     });
-</script>
-
-<!-- أداة Google Translate مخفية -->
-<div id="google_translate_element" style="display:none;"></div>
-<script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
-<script>
-    function googleTranslateElementInit() {
-        new google.translate.TranslateElement({
-            pageLanguage: 'ar',
-            includedLanguages: 'en,tr',
-            layout: google.translate.TranslateElement.InlineLayout.HORIZONTAL,
-            autoDisplay: false
-        }, 'google_translate_element');
-    }
 </script>
 {{-- ============ نهاية كود الترجمة ============ --}}
 {{-- السكربتات الأساسية --}}
