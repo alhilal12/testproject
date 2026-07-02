@@ -345,7 +345,6 @@
 
 {{-- ============ كود الترجمة كامل ============ --}}
 <style>
-    /* تنسيقات أزرار الترجمة */
     .language-switcher {
         display: flex;
         align-items: center;
@@ -393,7 +392,6 @@
         color: white;
     }
 
-    /* إخفاء شريط Google */
     body {
         top: 0 !important;
     }
@@ -403,46 +401,47 @@
     }
 </style>
 
-<div id="google_translate_element" style="display:none;"></div>
-<script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
-
 <script>
-    // تهيئة ترجمة Google
-    function googleTranslateElementInit() {
-        new google.translate.TranslateElement({
-            pageLanguage: 'ar',
-            includedLanguages: 'en,tr',
-            layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
-            autoDisplay: false
-        }, 'google_translate_element');
-    }
-
-    // تغيير اللغة
+    // ============ دالة الترجمة المضمونة ============
     function changeLanguage(lang) {
+        // حفظ اللغة
         localStorage.setItem('selectedLanguage', lang);
-        document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
-        document.documentElement.lang = lang;
 
-        var selectField = document.querySelector('.goog-te-combo');
-        if (selectField) {
-            selectField.value = lang;
-            selectField.dispatchEvent(new Event('change'));
-        }
-
+        // تحديث الأزرار
         document.querySelectorAll('.lang-btn').forEach(function (btn) {
             btn.classList.remove('active-lang');
             if (btn.getAttribute('data-lang') === lang) {
                 btn.classList.add('active-lang');
             }
         });
+
+        if (lang === 'ar') {
+            // العودة للعربية
+            document.documentElement.dir = 'rtl';
+            document.documentElement.lang = 'ar';
+            location.reload();
+        } else {
+            // ترجمة للإنجليزية أو التركية
+            document.documentElement.dir = 'ltr';
+            document.documentElement.lang = lang;
+            var url = 'https://translate.google.com/translate?hl=' + lang + '&sl=ar&tl=' + lang + '&u=' + encodeURIComponent(window.location.href);
+            window.location.href = url;
+        }
     }
 
     // تحميل اللغة المحفوظة
     document.addEventListener('DOMContentLoaded', function () {
         var savedLang = localStorage.getItem('selectedLanguage') || 'ar';
-        setTimeout(function () {
-            changeLanguage(savedLang);
-        }, 1000);
+        if (savedLang !== 'ar') {
+            document.querySelectorAll('.lang-btn').forEach(function (btn) {
+                btn.classList.remove('active-lang');
+                if (btn.getAttribute('data-lang') === savedLang) {
+                    btn.classList.add('active-lang');
+                }
+            });
+            document.documentElement.dir = 'ltr';
+            document.documentElement.lang = savedLang;
+        }
     });
 </script>
 {{-- ============ نهاية كود الترجمة ============ --}}
