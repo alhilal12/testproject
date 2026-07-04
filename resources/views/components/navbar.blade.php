@@ -436,7 +436,6 @@
             expires = "; expires=" + date.toUTCString();
         }
         document.cookie = name + "=" + (value || "") + expires + "; path=/";
-        // تعيين الكوكيز للنطاق الحالي لضمان عملها
         document.cookie = name + "=" + (value || "") + expires + "; path=/; domain=" + window.location.hostname;
     }
 
@@ -454,7 +453,6 @@
             setCookie('googtrans', '/ar/' + lang);
         }
 
-        // تحديث الأزرار فوراً
         document.querySelectorAll('.lang-btn').forEach(function (btn) {
             btn.classList.remove('active-lang');
             if (btn.getAttribute('data-lang') === lang) {
@@ -462,11 +460,9 @@
             }
         });
 
-        // إعادة تحميل الصفحة لتطبيق الترجمة
         location.reload();
     }
 
-    // تحميل اللغة المحفوظة
     document.addEventListener('DOMContentLoaded', function () {
         var savedLang = localStorage.getItem('selectedLanguage') || 'ar';
 
