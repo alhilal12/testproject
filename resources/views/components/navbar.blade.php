@@ -232,15 +232,6 @@
                                     </svg>
                                     لوحة التحكم
                                 </a>
-                            @else
-                                <a href="{{ route('dashboard') }}"
-                                    class="block px-4 py-2 text-gray-700 hover:bg-yellow-50 hover:text-yellow-600 rounded-t-lg transition">
-                                    <svg class="inline w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                            d="M4 4v16h16V4H4zm2 2h12v12H6V6zm2 2h8v2H8V8zm0 4h8v2H8v-2zm0 4h8v2H8v-2z"></path>
-                                    </svg>
-                                    لوحة التحكم
-                                </a>
                             @endif
 
                             <form method="POST" action="{{ route('logout') }}" class="block">
@@ -343,72 +334,55 @@
     </div>
 </nav>
 
-{{-- ============ كود الترجمة كامل ============ --}}
+{{-- ============ كود الترجمة المصلح (داخلي وآمن) ============ --}}
 <style>
-    .language-switcher {
-        display: flex;
-        align-items: center;
-        gap: 4px;
-    }
-
-    .lang-btn {
-        padding: 4px 10px;
-        border: 2px solid transparent;
-        border-radius: 8px;
-        font-size: 13px;
-        font-weight: 600;
-        cursor: pointer;
-        background: transparent;
-        color: #4a5568;
-        transition: all 0.3s ease;
-        white-space: nowrap;
-    }
-
-    .lang-btn:hover {
-        background-color: #fef3c7;
-        border-color: #f59e0b;
-        color: #92400e;
-    }
-
-    .lang-btn.active-lang {
-        background-color: #f59e0b;
-        border-color: #d97706;
-        color: white;
-    }
-
-    .dark .lang-btn {
-        color: #e2e8f0;
-    }
-
-    .dark .lang-btn:hover {
-        background-color: rgba(245, 158, 11, 0.2);
-        border-color: #f59e0b;
-        color: #fbbf24;
-    }
-
-    .dark .lang-btn.active-lang {
-        background-color: #f59e0b;
-        border-color: #fbbf24;
-        color: white;
+    /* إخفاء عناصر جوجل الافتراضية */
+    .skiptranslate,
+    .goog-te-banner-frame,
+    #goog-gt-tt,
+    .goog-te-balloon-frame {
+        display: none !important;
     }
 
     body {
         top: 0 !important;
     }
 
-    .goog-te-banner-frame {
+    /* منع ظهور رسالة الأمان في النماذج */
+    .goog-te-spinner-pos {
         display: none !important;
+    }
+
+    /* تنسيق الأداة المخفية */
+    #google_translate_element {
+        position: fixed;
+        opacity: 0;
+        pointer-events: none;
+        width: 0;
+        height: 0;
     }
 </style>
 
+<div id="google_translate_element"></div>
+<script type="text/javascript">
+    function googleTranslateElementInit() {
+        new google.translate.TranslateElement({
+            pageLanguage: 'ar',
+            includedLanguages: 'en,tr',
+            layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
+            autoDisplay: false
+        }, 'google_translate_element');
+    }
+</script>
+<script type="text/javascript"
+    src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
 <script>
-    // ============ دالة الترجمة المضمونة ============
     function changeLanguage(lang) {
-        // حفظ اللغة
         localStorage.setItem('selectedLanguage', lang);
 
-        // تحديث الأزرار
-        document.querySelectorAll('.lang-btn').forEach(function (btn) {
+        // تحديث مظهر الأزرار
+        document.querySelectorAll('.lang-btn').forEach(btn => {
             btn.classList.remove('active-lang');
             if (btn.getAttribute('data-lang') === lang) {
                 btn.classList.add('active-lang');
@@ -416,29 +390,41 @@
         });
 
         if (lang === 'ar') {
-            // العودة للعربية
-            document.documentElement.dir = 'rtl';
-            document.documentElement.lang = 'ar';
+            // العودة للأصل ومسح كوكيز الترجمة
+            document.cookie = "googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+            document.cookie = "googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=" + window.location.hostname;
             location.reload();
         } else {
-            // ترجمة للإنجليزية أو التركية
-            document.documentElement.dir = 'ltr';
-            document.documentElement.lang = lang;
-            var url = 'https://translate.google.com/translate?hl=' + lang + '&sl=ar&tl=' + lang + '&u=' + encodeURIComponent(window.location.href);
-            window.location.href = url;
+            // الترجمة داخلياً عبر الكوكيز (أسرع وأكثر أماناً)
+            document.cookie = "googtrans=/ar/" + lang + "; path=/";
+            document.cookie = "googtrans=/ar/" + lang + "; path=/; domain=" + window.location.hostname;
+
+            // تفعيل الاختيار في القائمة المخفية لضمان التنفيذ
+            const select = document.querySelector('.goog-te-combo');
+            if (select) {
+                select.value = lang;
+                select.dispatchEvent(new Event('change'));
+            } else {
+                location.reload();
+            }
         }
     }
 
-    // تحميل اللغة المحفوظة
+    // تطبيق اللغة عند التحميل
     document.addEventListener('DOMContentLoaded', function () {
-        var savedLang = localStorage.getItem('selectedLanguage') || 'ar';
-        if (savedLang !== 'ar') {
-            document.querySelectorAll('.lang-btn').forEach(function (btn) {
+        const savedLang = localStorage.getItem('selectedLanguage') || 'ar';
+
+        // تحديث الأزرار
+        document.querySelectorAll('.lang-btn').forEach(btn => {
+            if (btn.getAttribute('data-lang') === savedLang) {
+                btn.classList.add('active-lang');
+            } else {
                 btn.classList.remove('active-lang');
-                if (btn.getAttribute('data-lang') === savedLang) {
-                    btn.classList.add('active-lang');
-                }
-            });
+            }
+        });
+
+        // ضبط الاتجاه
+        if (savedLang !== 'ar') {
             document.documentElement.dir = 'ltr';
             document.documentElement.lang = savedLang;
         }
@@ -446,7 +432,6 @@
 </script>
 {{-- ============ نهاية كود الترجمة ============ --}}
 
-{{-- السكربتات الأساسية --}}
 <script>
     document.addEventListener('DOMContentLoaded', function () {
         // Dark Mode Toggle
