@@ -237,222 +237,177 @@
                                     class="block px-4 py-2 text-gray-700 hover:bg-yellow-50 hover:text-yellow-600 rounded-t-lg transition">
                                     <svg class="inline w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                            d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6">
-                                        </path>
+                                            d="M4 4v16h16V4H4zm2 2h12v12H6V6zm2 2h8v2H8V8zm0 4h8v2H8v-2zm0 4h8v2H8v-2z"></path>
                                     </svg>
-                                    حسابي
+                                    لوحة التحكم
                                 </a>
                             @endif
 
-                            <div class="border-t border-gray-100"></div>
-
-                            <form method="POST" action="{{ route('logout') }}">
+                            <form method="POST" action="{{ route('logout') }}" class="block">
                                 @csrf
                                 <button type="submit"
-                                    class="w-full text-right px-4 py-2 text-red-600 hover:bg-red-50 rounded-b-lg transition">
+                                    class="w-full text-right px-4 py-2 text-gray-700 hover:bg-red-50 hover:text-red-600 rounded-b-lg transition">
                                     <svg class="inline w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                             d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1">
                                         </path>
                                     </svg>
-                                    تسجيل الخروج
+                                    تسجيل خروج
                                 </button>
                             </form>
                         </div>
                     </div>
                 @else
-                    <a href="{{ route('login') }}" class="text-gray-700 hover:text-yellow-600 font-semibold transition">
-                        تسجيل الدخول
-                    </a>
-                    <a href="{{ route('register') }}"
-                        class="px-6 py-2 bg-yellow-600 text-white rounded-full hover:bg-yellow-700 transition shadow-md hover:shadow-lg transform hover:-translate-y-0.5">
-                        إنشاء حساب
-                    </a>
+                    <div class="hidden md:flex items-center gap-4">
+                        <a href="{{ route('login') }}"
+                            class="px-6 py-2 text-yellow-600 border-2 border-yellow-600 hover:bg-yellow-50 font-bold rounded-lg transition">
+                            تسجيل الدخول
+                        </a>
+                        <a href="{{ route('register') }}"
+                            class="px-6 py-2 bg-yellow-600 hover:bg-yellow-700 text-white font-bold rounded-lg transition shadow-lg">
+                            إنشاء حساب
+                        </a>
+                    </div>
                 @endauth
             </div>
 
             <!-- Mobile Menu Button -->
             <div class="md:hidden flex items-center gap-4">
-                <button id="mobile-menu-btn" class="text-gray-700 hover:text-yellow-600 focus:outline-none">
-                    <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                @auth
+                    <a href="{{ route('dashboard') }}"
+                        class="px-4 py-2 bg-yellow-600 text-white rounded-lg font-semibold transition-all"
+                        style="font-family: 'Cairo', 'Segoe UI', sans-serif;">
+                        لوحتي
+                    </a>
+                @else
+                    <a href="{{ route('login') }}"
+                        class="px-4 py-2 text-yellow-600 border-2 border-yellow-600 rounded-lg font-semibold"
+                        style="font-family: 'Cairo', 'Segoe UI', sans-serif;">
+                        دخول
+                    </a>
+                @endauth
+
+                <button id="mobile-menu-btn" class="text-gray-700 hover:text-yellow-600 transition-colors">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M4 6h16M4 12h16m-7 6h7">
-                        </path>
+                            d="M4 6h16M4 12h16M4 18h16"></path>
                     </svg>
                 </button>
             </div>
         </div>
-    </div>
 
-    <!-- Mobile Menu -->
-    <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-gray-100 pb-6 shadow-xl">
-        <div class="px-4 pt-4 space-y-3">
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden pb-4 space-y-2">
             <a href="{{ route('home') }}"
-                class="block px-4 py-2 text-gray-700 font-semibold hover:bg-yellow-50 rounded-lg">
-                الرئيسية
-            </a>
-            <a href="{{ url('/#about') }}"
-                class="block px-4 py-2 text-gray-700 font-semibold hover:bg-yellow-50 rounded-lg">
-                من نحن
-            </a>
+                class="block px-4 py-2 text-gray-700 hover:bg-yellow-50 hover:text-yellow-600 rounded transition-colors">الرئيسية</a>
+            <a href="#about"
+                class="block px-4 py-2 text-gray-700 hover:bg-yellow-50 hover:text-yellow-600 rounded transition-colors">من
+                نحن</a>
             <a href="{{ route('universities.index') }}"
-                class="block px-4 py-2 text-gray-700 font-semibold hover:bg-yellow-50 rounded-lg">
-                الجامعات
-            </a>
+                class="block px-4 py-2 text-gray-700 hover:bg-yellow-50 hover:text-yellow-600 rounded transition-colors">الجامعات</a>
             <a href="{{ route('university-quotas.index') }}"
-                class="block px-4 py-2 text-gray-700 font-semibold hover:bg-yellow-50 rounded-lg">
-                تقويم المفاضلات
-            </a>
+                class="block px-4 py-2 text-gray-700 hover:bg-yellow-50 hover:text-yellow-600 rounded transition-colors">تقويم
+                المفاضلات</a>
             <a href="{{ route('articles.index') }}"
-                class="block px-4 py-2 text-gray-700 font-semibold hover:bg-yellow-50 rounded-lg">
-                المقالات
-            </a>
-            <a href="{{ url('/#contact') }}"
-                class="block px-4 py-2 text-gray-700 font-semibold hover:bg-yellow-50 rounded-lg">
-                اتصل بنا
-            </a>
+                class="block px-4 py-2 text-gray-700 hover:bg-yellow-50 hover:text-yellow-600 rounded transition-colors">المقالات</a>
+            <a href="#contact"
+                class="block px-4 py-2 text-gray-700 hover:bg-yellow-50 hover:text-yellow-600 rounded transition-colors">اتصل
+                بنا</a>
 
-            <div class="border-t border-gray-100 my-4"></div>
-
-            {{-- 🌍 أزرار تغيير اللغة - Mobile --}}
-            <div class="flex items-center gap-2 px-4 py-2 bg-gray-50 rounded-xl">
+            {{-- 🌍 أزرار الترجمة - Mobile --}}
+            <div class="flex justify-center gap-2 pt-3 border-t border-gray-200">
                 <button onclick="changeLanguage('ar')" data-lang="ar"
-                    class="lang-btn active-lang px-4 py-2 rounded-lg text-sm font-bold flex-1">
-                    🇸🇦 AR
+                    class="lang-btn active-lang px-4 py-2 rounded-lg text-sm">
+                    🇸🇦 العربية
                 </button>
-                <button onclick="changeLanguage('en')" data-lang="en"
-                    class="lang-btn px-4 py-2 rounded-lg text-sm flex-1">
-                    🇬🇧 EN
+                <button onclick="changeLanguage('en')" data-lang="en" class="lang-btn px-4 py-2 rounded-lg text-sm">
+                    🇬🇧 English
                 </button>
-                <button onclick="changeLanguage('tr')" data-lang="tr"
-                    class="lang-btn px-4 py-2 rounded-lg text-sm flex-1">
-                    🇹🇷 TR
+                <button onclick="changeLanguage('tr')" data-lang="tr" class="lang-btn px-4 py-2 rounded-lg text-sm">
+                    🇹🇷 Türkçe
                 </button>
             </div>
 
             @auth
-                <div class="pt-4 space-y-2">
-                    <a href="{{ route('dashboard') }}"
-                        class="block w-full text-center py-3 bg-gray-100 text-gray-700 rounded-xl font-bold">
-                        حسابي
-                    </a>
-                    <form method="POST" action="{{ route('logout') }}">
-                        @csrf
-                        <button type="submit" class="w-full py-3 bg-red-50 text-red-600 rounded-xl font-bold">
-                            تسجيل الخروج
-                        </button>
-                    </form>
-                </div>
+                <form method="POST" action="{{ route('logout') }}" class="block">
+                    @csrf
+                    <button type="submit"
+                        class="w-full text-right px-4 py-2 text-red-600 hover:bg-red-50 rounded transition-colors">تسجيل
+                        خروج</button>
+                </form>
             @else
-                <div class="pt-4 space-y-3">
-                    <a href="{{ route('login') }}"
-                        class="block w-full text-center py-3 border-2 border-yellow-600 text-yellow-600 rounded-xl font-bold">
-                        تسجيل الدخول
-                    </a>
-                    <a href="{{ route('register') }}"
-                        class="block w-full text-center py-3 bg-yellow-600 text-white rounded-xl font-bold shadow-lg">
-                        إنشاء حساب
-                    </a>
-                </div>
-            @endauth
+            <a href="{{ route('register') }}"
+                class="block px-4 py-2 bg-yellow-600 text-white rounded font-semibold text-center">إنشاء حساب</a>
+            @endif
         </div>
     </div>
 </nav>
 
+{{-- ============ كود الترجمة كامل ============ --}}
 <style>
     .language-switcher {
         display: flex;
-        gap: 0.5rem;
-        background: #f3f4f6;
-        padding: 0.25rem;
-        border-radius: 9999px;
-        border: 1px solid #e5e7eb;
+        align-items: center;
+        gap: 4px;
     }
 
     .lang-btn {
-        padding: 0.5rem 1rem;
-        border-radius: 9999px;
+        padding: 4px 10px;
+        border: 2px solid transparent;
+        border-radius: 8px;
+        font-size: 13px;
         font-weight: 600;
-        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        display: flex;
-        align-items: center;
-        gap: 0.5rem;
-        color: #4b5563;
+        cursor: pointer;
+        background: transparent;
+        color: #4a5568;
+        transition: all 0.3s ease;
+        white-space: nowrap;
     }
 
     .lang-btn:hover {
-        background: #ffffff;
-        color: #d97706;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        background-color: #fef3c7;
+        border-color: #f59e0b;
+        color: #92400e;
     }
 
-    .active-lang {
-        background: #ffffff !important;
-        color: #d97706 !important;
-        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06) !important;
+    .lang-btn.active-lang {
+        background-color: #f59e0b;
+        border-color: #d97706;
+        color: white;
     }
 
-    /* إخفاء شريط جوجل الافتراضي */
-    .skiptranslate,
-    .goog-te-banner-frame {
-        display: none !important;
+    .dark .lang-btn {
+        color: #e2e8f0;
+    }
+
+    .dark .lang-btn:hover {
+        background-color: rgba(245, 158, 11, 0.2);
+        border-color: #f59e0b;
+        color: #fbbf24;
+    }
+
+    .dark .lang-btn.active-lang {
+        background-color: #f59e0b;
+        border-color: #fbbf24;
+        color: white;
     }
 
     body {
         top: 0 !important;
     }
 
-    #google_translate_element {
-        position: fixed;
-        top: 0;
-        left: 0;
-        opacity: 0;
-        pointer-events: none;
-        width: 0;
-        height: 0;
-        overflow: hidden;
+    .goog-te-banner-frame {
+        display: none !important;
     }
 </style>
 
-<!-- Google Translate Widget مخفي -->
-<div id="google_translate_element"></div>
-<script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
-
 <script>
-    function googleTranslateElementInit() {
-        new google.translate.TranslateElement({
-            pageLanguage: 'ar',
-            includedLanguages: 'en,tr',
-            layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
-            autoDisplay: false
-        }, 'google_translate_element');
-    }
-
-    function setCookie(name, value, days) {
-        var expires = "";
-        if (days) {
-            var date = new Date();
-            date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
-            expires = "; expires=" + date.toUTCString();
-        }
-        document.cookie = name + "=" + (value || "") + expires + "; path=/";
-        document.cookie = name + "=" + (value || "") + expires + "; path=/; domain=" + window.location.hostname;
-    }
-
-    function eraseCookie(name) {
-        document.cookie = name + '=; Max-Age=-99999999; path=/;';
-        document.cookie = name + '=; Max-Age=-99999999; path=/; domain=' + window.location.hostname;
-    }
-
+    // ============ دالة الترجمة المضمونة ============
     function changeLanguage(lang) {
+        // حفظ اللغة
         localStorage.setItem('selectedLanguage', lang);
 
-        if (lang === 'ar') {
-            eraseCookie('googtrans');
-        } else {
-            setCookie('googtrans', '/ar/' + lang);
-        }
-
+        // تحديث الأزرار
         document.querySelectorAll('.lang-btn').forEach(function (btn) {
             btn.classList.remove('active-lang');
             if (btn.getAttribute('data-lang') === lang) {
@@ -460,29 +415,37 @@
             }
         });
 
-        location.reload();
-    }
-
-    document.addEventListener('DOMContentLoaded', function () {
-        var savedLang = localStorage.getItem('selectedLanguage') || 'ar';
-
-        document.querySelectorAll('.lang-btn').forEach(function (btn) {
-            btn.classList.remove('active-lang');
-            if (btn.getAttribute('data-lang') === savedLang) {
-                btn.classList.add('active-lang');
-            }
-        });
-
-        if (savedLang !== 'ar') {
-            document.documentElement.dir = 'ltr';
-            document.documentElement.lang = savedLang;
-        } else {
+        if (lang === 'ar') {
+            // العودة للعربية
             document.documentElement.dir = 'rtl';
             document.documentElement.lang = 'ar';
+            location.reload();
+        } else {
+            // ترجمة للإنجليزية أو التركية
+            document.documentElement.dir = 'ltr';
+            document.documentElement.lang = lang;
+            var url = 'https://translate.google.com/translate?hl=' + lang + '&sl=ar&tl=' + lang + '&u=' + encodeURIComponent(window.location.href);
+            window.location.href = url;
+        }
+    }
+
+    // تحميل اللغة المحفوظة
+    document.addEventListener('DOMContentLoaded', function () {
+        var savedLang = localStorage.getItem('selectedLanguage') || 'ar';
+        if (savedLang !== 'ar') {
+            document.querySelectorAll('.lang-btn').forEach(function (btn) {
+                btn.classList.remove('active-lang');
+                if (btn.getAttribute('data-lang') === savedLang) {
+                    btn.classList.add('active-lang');
+                }
+            });
+            document.documentElement.dir = 'ltr';
+            document.documentElement.lang = savedLang;
         }
     });
 </script>
 {{-- ============ نهاية كود الترجمة ============ --}}
+
 {{-- السكربتات الأساسية --}}
 <script>
     document.addEventListener('DOMContentLoaded', function () {
