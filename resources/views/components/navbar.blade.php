@@ -146,16 +146,19 @@
                         class="absolute bottom-0 right-0 w-0 h-1 bg-yellow-600 group-hover:w-full transition-all duration-300"></span>
                 </a>
 
-                {{-- 🌍 أزرار تغيير اللغة - Desktop --}}
-                <div class="language-switcher">
-                    <button onclick="changeLanguage('ar')" data-lang="ar" class="lang-btn active-lang" title="العربية">
-                        🇸🇦 <span class="hidden lg:inline">AR</span>
+                {{-- 🌍 أزرار تغيير اللغة المحسنة - Desktop --}}
+                <div class="flex items-center bg-gray-100 p-1 rounded-xl border border-gray-200 shadow-inner">
+                    <button onclick="changeLanguage('ar')" data-lang="ar"
+                        class="lang-btn-enhanced active-lang-enhanced px-3 py-1.5 rounded-lg text-xs font-bold transition-all duration-300 flex items-center gap-2">
+                        <span class="text-lg">🇸🇦</span> <span class="hidden lg:inline">العربية</span>
                     </button>
-                    <button onclick="changeLanguage('en')" data-lang="en" class="lang-btn" title="English">
-                        🇬🇧 <span class="hidden lg:inline">EN</span>
+                    <button onclick="changeLanguage('en')" data-lang="en"
+                        class="lang-btn-enhanced px-3 py-1.5 rounded-lg text-xs font-bold transition-all duration-300 flex items-center gap-2">
+                        <span class="text-lg">🇬🇧</span> <span class="hidden lg:inline">English</span>
                     </button>
-                    <button onclick="changeLanguage('tr')" data-lang="tr" class="lang-btn" title="Türkçe">
-                        🇹🇷 <span class="hidden lg:inline">TR</span>
+                    <button onclick="changeLanguage('tr')" data-lang="tr"
+                        class="lang-btn-enhanced px-3 py-1.5 rounded-lg text-xs font-bold transition-all duration-300 flex items-center gap-2">
+                        <span class="text-lg">🇹🇷</span> <span class="hidden lg:inline">Türkçe</span>
                     </button>
                 </div>
 
@@ -305,37 +308,77 @@
                 class="block px-4 py-2 text-gray-700 hover:bg-yellow-50 hover:text-yellow-600 rounded transition-colors">اتصل
                 بنا</a>
 
-            {{-- 🌍 أزرار الترجمة - Mobile --}}
-            <div class="flex justify-center gap-2 pt-3 border-t border-gray-200">
+            {{-- 🌍 أزرار الترجمة المحسنة - Mobile --}}
+            <div class="flex justify-center gap-2 pt-4 border-t border-gray-100 px-4">
                 <button onclick="changeLanguage('ar')" data-lang="ar"
-                    class="lang-btn active-lang px-4 py-2 rounded-lg text-sm">
-                    🇸🇦 العربية
+                    class="lang-btn-enhanced active-lang-enhanced px-4 py-2 rounded-xl text-sm font-bold flex-1 flex items-center justify-center gap-2">
+                    <span>🇸🇦</span> العربية
                 </button>
-                <button onclick="changeLanguage('en')" data-lang="en" class="lang-btn px-4 py-2 rounded-lg text-sm">
-                    🇬🇧 English
+                <button onclick="changeLanguage('en')" data-lang="en"
+                    class="lang-btn-enhanced px-4 py-2 rounded-xl text-sm font-bold flex-1 flex items-center justify-center gap-2">
+                    <span>🇬🇧</span> EN
                 </button>
-                <button onclick="changeLanguage('tr')" data-lang="tr" class="lang-btn px-4 py-2 rounded-lg text-sm">
-                    🇹🇷 Türkçe
+                <button onclick="changeLanguage('tr')" data-lang="tr"
+                    class="lang-btn-enhanced px-4 py-2 rounded-xl text-sm font-bold flex-1 flex items-center justify-center gap-2">
+                    <span>🇹🇷</span> TR
                 </button>
             </div>
 
             @auth
-                <form method="POST" action="{{ route('logout') }}" class="block">
+                <form method="POST" action="{{ route('logout') }}" class="block pt-4 px-4">
                     @csrf
                     <button type="submit"
-                        class="w-full text-right px-4 py-2 text-red-600 hover:bg-red-50 rounded transition-colors">تسجيل
+                        class="w-full py-3 bg-red-50 text-red-600 rounded-xl font-bold transition-colors">تسجيل
                         خروج</button>
                 </form>
             @else
-            <a href="{{ route('register') }}"
-                class="block px-4 py-2 bg-yellow-600 text-white rounded font-semibold text-center">إنشاء حساب</a>
+            <div class="pt-4 px-4">
+                <a href="{{ route('register') }}"
+                    class="block py-3 bg-yellow-600 text-white rounded-xl font-bold text-center shadow-md">إنشاء
+                    حساب</a>
+            </div>
             @endif
         </div>
     </div>
 </nav>
 
-{{-- ============ كود الترجمة المصلح (داخلي وآمن) ============ --}}
+{{-- ============ كود الترجمة المصلح والمحسن جمالياً ============ --}}
 <style>
+    /* تصميم أزرار اللغة الجديد */
+    .lang-btn-enhanced {
+        background: transparent;
+        color: #64748b;
+        cursor: pointer;
+        border: 1px solid transparent;
+    }
+
+    .lang-btn-enhanced:hover {
+        color: #d97706;
+        background: rgba(255, 255, 255, 0.5);
+    }
+
+    .active-lang-enhanced {
+        background: white !important;
+        color: #d97706 !important;
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06) !important;
+        border-color: #fde68a !important;
+    }
+
+    .dark .lang-btn-enhanced {
+        color: #94a3b8;
+    }
+
+    .dark .lang-btn-enhanced:hover {
+        color: #fbbf24;
+        background: rgba(255, 255, 255, 0.05);
+    }
+
+    .dark .active-lang-enhanced {
+        background: #334155 !important;
+        color: #fbbf24 !important;
+        border-color: #475569 !important;
+    }
+
     /* إخفاء عناصر جوجل الافتراضية */
     .skiptranslate,
     .goog-te-banner-frame,
@@ -348,12 +391,10 @@
         top: 0 !important;
     }
 
-    /* منع ظهور رسالة الأمان في النماذج */
     .goog-te-spinner-pos {
         display: none !important;
     }
 
-    /* تنسيق الأداة المخفية */
     #google_translate_element {
         position: fixed;
         opacity: 0;
@@ -381,25 +422,22 @@
     function changeLanguage(lang) {
         localStorage.setItem('selectedLanguage', lang);
 
-        // تحديث مظهر الأزرار
-        document.querySelectorAll('.lang-btn').forEach(btn => {
-            btn.classList.remove('active-lang');
+        // تحديث مظهر الأزرار فوراً
+        document.querySelectorAll('.lang-btn-enhanced').forEach(btn => {
+            btn.classList.remove('active-lang-enhanced');
             if (btn.getAttribute('data-lang') === lang) {
-                btn.classList.add('active-lang');
+                btn.classList.add('active-lang-enhanced');
             }
         });
 
         if (lang === 'ar') {
-            // العودة للأصل ومسح كوكيز الترجمة
             document.cookie = "googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
             document.cookie = "googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=" + window.location.hostname;
             location.reload();
         } else {
-            // الترجمة داخلياً عبر الكوكيز (أسرع وأكثر أماناً)
             document.cookie = "googtrans=/ar/" + lang + "; path=/";
             document.cookie = "googtrans=/ar/" + lang + "; path=/; domain=" + window.location.hostname;
 
-            // تفعيل الاختيار في القائمة المخفية لضمان التنفيذ
             const select = document.querySelector('.goog-te-combo');
             if (select) {
                 select.value = lang;
@@ -410,20 +448,17 @@
         }
     }
 
-    // تطبيق اللغة عند التحميل
     document.addEventListener('DOMContentLoaded', function () {
         const savedLang = localStorage.getItem('selectedLanguage') || 'ar';
 
-        // تحديث الأزرار
-        document.querySelectorAll('.lang-btn').forEach(btn => {
+        document.querySelectorAll('.lang-btn-enhanced').forEach(btn => {
             if (btn.getAttribute('data-lang') === savedLang) {
-                btn.classList.add('active-lang');
+                btn.classList.add('active-lang-enhanced');
             } else {
-                btn.classList.remove('active-lang');
+                btn.classList.remove('active-lang-enhanced');
             }
         });
 
-        // ضبط الاتجاه
         if (savedLang !== 'ar') {
             document.documentElement.dir = 'ltr';
             document.documentElement.lang = savedLang;
