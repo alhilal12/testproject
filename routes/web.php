@@ -229,4 +229,9 @@ Route::get('/storage-link', function () {
         return '❌ Error: ' . $e->getMessage();
     }
 });
+Route::get('/fix-permissions', function () {
+    exec('chmod -R 755 ' . public_path('storage'));
+    exec('chmod -R 755 ' . storage_path());
+    return '✅ Permissions fixed!';
+});
 require __DIR__.'/auth.php';
