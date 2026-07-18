@@ -19,6 +19,8 @@ use App\Http\Controllers\UniversityQuotaController;
 use App\Http\Controllers\Admin\CountryRecognitionController;
 use App\Models\Setting;
 use App\Http\Controllers\Admin\AnnouncementController;
+use Illuminate\Support\Facades\Artisan;
+
 // ========================
 // الصفحة الرئيسية
 // ========================
@@ -213,8 +215,10 @@ Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () 
 });
 use App\Http\Controllers\LocaleController;
 
-Route::get('/locale/{locale}', [LocaleController::class, 'switch'])->name('locale.switch');
+// Route::get('/locale/{locale}', [LocaleController::class, 'switch'])->name('locale.switch');
 //
+
+
 Route::get('/storage-link', function () {
     try {
         Artisan::call('storage:link');
