@@ -29,7 +29,7 @@
                 <!-- Subtitle/Description -->
                 <p class="text-lg sm:text-xl lg:text-2xl text-gray-100 mb-8 leading-relaxed font-light"
                     style="font-family: 'Cairo', 'Segoe UI', sans-serif;">
-                    {{ $subtitle ?? 'نقدم لك استشارات متكاملة وشاملة، نرافقك خطوة بخطوة من اختيار التخصص والجامعة حتى إتمام التسجيل وبدء رحلتك التعليمية في تركيا.' }}
+                    {{ $subtitle ?? 'نقدم لك استشارات متكاملة وشاملة، نرافقك خطوة بخطوة من اختيار التخصص والجامعة حتى إتمام التسجيل وبدء رحلتك التعليمية في الخارج  (تركيا , قبرص , كازخستان ).' }}
                 </p>
 
                 <!-- CTA Button -->

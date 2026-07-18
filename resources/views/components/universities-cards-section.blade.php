@@ -1,4 +1,4 @@
-@props(['universities' => [], 'title' => 'استكشف الجامعات التركية', 'subtitle' => 'اختر من بين أفضل الجامعات الحكومية والخاصة', 'showViewAllButton' => false])
+@props(['universities' => [], 'title' => 'استكشف الجامعات ', 'subtitle' => 'اختر من بين أفضل الجامعات الحكومية والخاصة', 'showViewAllButton' => false])
 
 <section class="py-16 lg:py-24 bg-gradient-to-b from-white to-gray-50" id="universities-cards">
     <div class="container mx-auto px-4 sm:px-6 lg:px-8">
@@ -28,7 +28,7 @@
                             <div class="relative group">
                                 <div class="w-24 h-24 rounded-full bg-white shadow-md overflow-hidden flex items-center justify-center border-2 border-gray-100">
                                     @if($university->logo)
-                               <img src="{{ asset('storage/' . $university->logo) }}" 
+                               <img src="{{ asset('storage/' . $university->logo) }}"
      loading="lazy"
      alt="{{ $university->name_ar }}"
      class="w-full h-full object-cover group-hover:scale-110 transition duration-300">
@@ -117,7 +117,7 @@
                 <div class="mt-12 text-center">
                     <a href="{{ route('universities.index') }}"
                         class="inline-flex items-center px-8 py-3 bg-yellow-600 hover:bg-yellow-700 text-white font-bold rounded-lg transition-all duration-300 transform hover:scale-105 hover:shadow-lg active:scale-95">
-                        عرض جميع الجامعات 
+                        عرض جميع الجامعات
                         <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
                         </svg>
