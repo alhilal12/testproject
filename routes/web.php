@@ -219,6 +219,8 @@ use App\Http\Controllers\LocaleController;
 //
 
 
+
+
 Route::get('/storage-link', function () {
     try {
         Artisan::call('storage:link');
